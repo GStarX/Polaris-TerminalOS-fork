@@ -14,7 +14,6 @@
 -->
 <manifest>
     <remote name="terminalos" fetch="https://github.com/GStarX/" />
-    <remote name="github" fetch="https://github.com/" />
 
     <project name="android_device_xiaomi_polaris"
              path="device/xiaomi/polaris"
@@ -31,14 +30,11 @@
 
     <project name="LineageOS/android_kernel_xiaomi_sdm845"
              path="kernel/xiaomi/sdm845"
-             remote="github"
              revision="aa8adfe9bf212c6e93238a86980b4024da4f819a" />
     <project name="TheMuppets/proprietary_vendor_xiaomi_polaris"
              path="vendor/xiaomi/polaris"
-             remote="github"
              revision="9e9707959acceea4b990cba733d259aab64c183e" />
     <project name="TheMuppets/proprietary_vendor_xiaomi_sdm845-common"
              path="vendor/xiaomi/sdm845-common"
-             remote="github"
              revision="b971b2ccd4cf66dede975cf645d01f4cbc203150" />
 </manifest>

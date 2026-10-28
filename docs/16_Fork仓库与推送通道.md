@@ -93,7 +93,7 @@ git push fork fork-work:main
 
 **内容已全部回收**：fork `910ca75` 收录 17 个文件，blob 与旧仓 `b1a50ad2` 逐一相同（含 3 张 PNG，字节保真），旧仓没有 fork 里不存在的内容。
 
-**失守路径**：那 4 个提交的 author/committer 是 `86114489+GStarX@users.noreply.github.com`，即**本机 git 凭据**推的，不是 bot 通道。对策（主机官执行）：本机 `C:\AiWork\Polaris-TerminalOS` 的 `origin` 改指 fork，旧仓挂成只读 remote `legacy`，之后 `git push` 只能进 fork。
+**失守路径（2026-10-29 复核修正）**：那 4 个提交的 author/committer 是 `86114489+GStarX@users.noreply.github.com`。**签名不能单独区分通道**：本机 clone 的 `git config user.name/email` 就是该身份，经 deploy key 的 SSH push 与 MCP/API 写仓产出的签名相同（主机官 2026-10-29 实测确认）。因此原记录"本机 git 凭据推的"**降为未定论**；E1 的事实部分（4 个提交、17 个文件、内容已回收）不变。对策（主机官执行）：本机旧 clone 的 `origin` 改指 fork、旧仓挂只读 remote `legacy`，并执行 §0 的写前/写后纪律。
 
 **4 个提交**
 
@@ -133,7 +133,7 @@ git push fork fork-work:main
 **事实**：E1 处置后，旧仓 `GStarX/Polaris-TerminalOS` 又收到 1 个提交 `15eb676`（2026-10-28T16:24:16Z，父提交 `b1a50ad2`，仅改 `docs/14_整包构建运行手册.md`，+62/-0，blob `243e3acd`，10086 字节）。旧仓 `main` 现为 `15eb676`；fork 当时仍是 `fd445b3`。
 
 **来源判定（已核实）**：
-- commit author/committer 均为 `GStarX <86114489+GStarX@users.noreply.github.com>`，`verification: unsigned`；
+- **辅助证据**：commit author/committer 均为 `GStarX <86114489+GStarX@users.noreply.github.com>`、`verification: unsigned`——但本机 clone 配置同身份，SSH push 与 API 写仓签名相同，**签名不能单独区分通道**；
 - `C:\AiWork` 下全部 clone（旧 clone、fork clone、tmp 下各 clone）都**没有**该 commit 对象；旧 clone 的 `legacy` push URL 仍是 `DISABLED` → 不是从这些 clone 经 SSH / legacy remote 推的；
 - 当前 token（用户 `GStarX`）对旧仓与 fork 都有 `admin`/`push` 权限（GitHub API `permissions` 实测），即 **API/MCP token 也能写旧仓**。
 - **通道已确认（主机官 2026-10-29）**：走团队共用的 GitHub MCP 写文件接口（`create_or_update_file` / `push_files`，即 contents API），token 用户 `GStarX`；不是 SSH、不是本地 clone、不是临时 clone + https。该通道向旧仓共写 3 个提交：`591ef1d`、`8d44fb7`（两者都是冻结基线 `93900546` 的祖先，属基线内历史，不构成新例外）和 `15eb676`（E2 本项）。**范围核验**：`93900546...15eb676` ahead_by=5 = E1 的 4 个 + E2 的 1 个，无额外缺口。
