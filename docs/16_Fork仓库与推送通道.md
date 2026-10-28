@@ -77,3 +77,45 @@ git push fork fork-work:main
 - 端到端推送证据（不是通道探测）：`3a97015`、`79123a4`、`433c1e4`（本文档修订）均在本机用 `git push` 经上述 SSH 通道推上云端，推送回显分别为 `[new branch] main -> main`、`79123a4..c12e1f1`、`7acb84e..433c1e4`；本地 `C:\AiWork\tmp\fork-seed` 的 reflog 可查。
 - 复验命令（任何人可跑）：`ssh -p 443 -i ~/.ssh/id_ed25519_dsh -T git@ssh.github.com`，应返回 `Hi GStarX/Polaris-TerminalOS-fork!`（deploy key 作用域只此一仓，旧仓会拒）。
 - `sync-check` / `build-rom`：workflow 已在仓库中且为 active；**`build-rom` 从未真正跑过整包**，云端目前只有 validate / sync-check 的绿，没有整包产物。
+## 6. 冻结后例外 E1（记录于 2026-10-29）
+
+**事实**：旧仓 `GStarX/Polaris-TerminalOS` 在冻结后（基线 `93900546`）仍收到 4 个提交，`main` 由 `93900546` 前进到 `b1a50ad2`，时间 2026-10-28T15:04Z–16:03Z，共 17 个文件变更。
+
+**处置（首席 2026-10-29 决定）**：保留，不重写历史（reset/force 会让公开引用失效、他人 clone 冲突、失去回退）。**冻结基线仍锁定 `93900546`**；`b1a50ad2` 只是偏移，今后任何核对一律对 `93900546`，不得拿 `b1a50ad2` 当基线。
+
+**内容已全部回收**：fork `910ca75` 收录 17 个文件，blob 与旧仓 `b1a50ad2` 逐一相同（含 3 张 PNG，字节保真），旧仓没有 fork 里不存在的内容。
+
+**失守路径**：那 4 个提交的 author/committer 是 `86114489+GStarX@users.noreply.github.com`，即**本机 git 凭据**推的，不是 bot 通道。对策（主机官执行）：本机 `C:\AiWork\Polaris-TerminalOS` 的 `origin` 改指 fork，旧仓挂成只读 remote `legacy`，之后 `git push` 只能进 fork。
+
+**4 个提交**
+
+| commit | 时间（UTC） | 主题 |
+| --- | --- | --- |
+| `7f61e63` | 2026-10-28T15:04:14Z | ci: add temporary fetch-firmware relay workflow |
+| `f50933f` | 2026-10-28T15:43:10Z | ci: build standalone TerminalHome/navbar-overlay/Termux APKs on a free runner |
+| `3c3bc43` | 2026-10-28T15:44:34Z | fix(ci): pass app resources positionally to aapt2 link |
+| `b1a50ad` | 2026-10-28T16:03:34Z | docs: record the real-device zero-build validation |
+
+**17 个文件（fork blob = 旧仓 blob）**
+
+| 文件 | blob |
+| --- | --- |
+| `.github/scripts/build-rro-overlay-apk.sh` | `22c5dd1b` |
+| `.github/scripts/build-terminalhome-apk.sh` | `229d1e37` |
+| `.github/workflows/build-apk.yml` | `555311e3` |
+| `.github/workflows/fetch-firmware.yml` | `90a01f86` |
+| `README.md` | `5a88b820` |
+| `acceptance/验收测试矩阵.md` | `c850b919` |
+| `apk-overlays/navbar/AndroidManifest.xml` | `a447a56f` |
+| `apk-overlays/navbar/res/values/config.xml` | `54a5f0cd` |
+| `docs/03_任务清单_Phase0_基线_内核.md` | `ceba111c` |
+| `docs/11_决策记录.md` | `bb7cdec1` |
+| `docs/15_真机零构建验证记录.md` | `646644b6` |
+| `evidence/2026-10-28/01_termux_running.png` | `e641f536` |
+| `evidence/2026-10-28/02_notification_shade_no_qs.png` | `952caeea` |
+| `evidence/2026-10-28/03_after_reboot_termux.png` | `7c09fe95` |
+| `evidence/2026-10-28/device_owner.txt` | `202baaf0` |
+| `evidence/2026-10-28/locktask_state.txt` | `06a4b9d7` |
+| `evidence/2026-10-28/terminalhome_logcat.txt` | `8d989069` |
+
+对应提交：fork `910ca75`（本记录为其文档化）。
