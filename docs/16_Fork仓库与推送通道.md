@@ -146,6 +146,12 @@ git push fork fork-work:main
 3. 推送纪律见 §0；口头限定不单独使用。
 - 归档与 token 轮换涉及用户 GitHub 账号，**待用户点头**后执行。
 
+**执行步骤（用户点头后由 GITHUB 执行，首席复核）**：
+1. **归档旧仓**：`PATCH /repos/GStarX/Polaris-TerminalOS` body `{"archived": true}` → 校验 `archived=true`；归档后旧仓对 API/网页/SSH 全部只读，写请求应返回 403；归档可逆（`archived=false`）。
+2. **新建 fork-scoped token**（用户操作）：fine-grained PAT，Repository access 只选 `Polaris-TerminalOS-fork`，权限 Contents=Read and write、Metadata=Read；先不删除旧 token，便于回滚。
+3. **切换凭据**：新 PAT 存为 DSH secret，更新 github MCP server 的 env 引用；用新 token 验证：`GET /user/repos` 只应列出 fork（无旧仓），旧仓写入应 403。
+4. **留痕**：docs/16 记执行时间、新 token 名称/范围、旧 token 作废时间；结果交首席复核。
+
 ### E2 关闭（2026-10-29）
 
 - **关闭条件已满足**：主机官已按首席要求在群里发出「【E2 通道说明 · 主机官，按首席要求提交】」——通道=团队共用 GitHub MCP contents API（`create_or_update_file`/`push_files`，token 用户 `GStarX`）；时间线=`591ef1d` 2026-10-27T17:00:12Z、`8d44fb7` 17:00:26Z、`93900546` 17:01:37Z（前两者为基线祖先）、`15eb676` 2026-10-28T16:24:16Z（唯一 E2 偏移）。
