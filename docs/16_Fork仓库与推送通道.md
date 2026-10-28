@@ -8,7 +8,7 @@
 | 仓库 | 角色 | 规则 |
 | --- | --- | --- |
 | `GStarX/Polaris-TerminalOS-fork` | **唯一写入口**：文档、CI、验收、评审、本地 manifest | 只在这里提交 |
-| `GStarX/Polaris-TerminalOS` | 旧项目仓（云端 `main` = `93900546`） | **冻结只读**，不再接受提交 |
+| `GStarX/Polaris-TerminalOS` | 旧项目仓（冻结基线 = `93900546`；当前 `main` 已偏移到 `15eb676`，见 §6/§7） | **冻结只读**，不再接受提交 |
 | `GStarX/android_device_xiaomi_polaris` | 设备树（LineageOS fork） | 只读引用，构建时按 manifest 拉取 |
 | `GStarX/android_vendor_terminalos` | vendor（Termux 预置） | 只读引用 |
 | `GStarX/android_packages_apps_TerminalHome` | TerminalHome 应用 | 只读引用 |
@@ -119,3 +119,19 @@ git push fork fork-work:main
 | `evidence/2026-10-28/terminalhome_logcat.txt` | `8d989069` |
 
 对应提交：fork `910ca75`（本记录为其文档化）。
+
+## 7. 冻结后例外 E2（记录于 2026-10-29）
+
+**事实**：E1 处置后，旧仓 `GStarX/Polaris-TerminalOS` 又收到 1 个提交 `15eb676`（2026-10-28T16:24:16Z，父提交 `b1a50ad2`，仅改 `docs/14_整包构建运行手册.md`，+62/-0，blob `243e3acd`，10086 字节）。旧仓 `main` 现为 `15eb676`；fork 当时仍是 `fd445b3`。
+
+**来源判定（已核实）**：
+- commit author/committer 均为 `GStarX <86114489+GStarX@users.noreply.github.com>`，`verification: unsigned`；
+- `C:\AiWork` 下全部 clone（旧 clone、fork clone、tmp 下各 clone）都**没有**该 commit 对象；旧 clone 的 `legacy` push URL 仍是 `DISABLED` → 不是从这些 clone 经 SSH / legacy remote 推的；
+- 当前 token（用户 `GStarX`）对旧仓与 fork 都有 `admin`/`push` 权限（GitHub API `permissions` 实测），即 **API/MCP token 也能写旧仓**；具体通道待主机官确认（临时 clone + 本机 https 凭据，或 API/MCP）。
+
+**处置（按 E1 口径，待首席确认）**：旧仓保留历史、不重写；内容已逐字节回收进 fork（`fce6c31`，`docs/14` blob `243e3acd`，与旧仓同 blob）。冻结基线仍锁 `93900546`，`15eb676` 只是新偏移，不得当基线。
+
+**防再发（待首席/用户定）**：
+1. 归档旧仓（GitHub Archive，owner 操作、可逆）→ 所有人只读，最彻底；
+2. 给 bot 用的 GitHub token 换成只授权 fork 的 fine-grained PAT（当前 token 对旧仓有 admin，是真实可写通道）；
+3. 主机官说明本次推送用的确切命令/通道；写 clone 只允许 `C:\AiWork\Polaris-TerminalOS-fork`。
