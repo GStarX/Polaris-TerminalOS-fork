@@ -1,0 +1,139 @@
+
+==== A. ENVIRONMENT ====
+javac: javac 17.0.20.1
+android.jar: C:\AiWork\tmp\android-35\android.jar  sha256=4566663C3876E022B4FA4CED8C8697C4AB1688267F090114FD92D027B32E619B
+repo: C:\AiWork\Polaris-TerminalOS-repos\android_packages_apps_TerminalHome
+HEAD: ccedcc4a9f6e74245dd6dcc51570a46768d579cb
+date: 2026-10-29T01:12:27+08:00
+
+==== B. UNIT TEST (current implementation: first-tap suppression ON) ====
+command: javac src/org/terminalos/terminalhome/TitleTapEntryGate.java tests/TitleTapEntryGateTest.java
+javac output: 
+command: java -cp out org.terminalos.terminalhome.TitleTapEntryGateTest
+
+PASS  首击前：无抑制（可以正常自动拉起）
+PASS  首击：返回 suppressionStarted=true（UI 据此取消已排队的自动拉起）
+PASS  首击：不打开维护入口
+PASS  首击后：抑制窗口激活
+PASS  首击后：剩余 15000 ms
+PASS  第 1 击：未打开维护入口
+PASS  第 1 击后：自动拉起仍被抑制（连击不会被打断）
+PASS  第 1 击：suppressionStarted 只在首击为 true
+PASS  第 2 击：未打开维护入口
+PASS  第 2 击后：自动拉起仍被抑制（连击不会被打断）
+PASS  第 2 击：suppressionStarted 只在首击为 true
+PASS  第 3 击：未打开维护入口
+PASS  第 3 击后：自动拉起仍被抑制（连击不会被打断）
+PASS  第 3 击：suppressionStarted 只在首击为 true
+PASS  第 4 击：未打开维护入口
+PASS  第 4 击后：自动拉起仍被抑制（连击不会被打断）
+PASS  第 4 击：suppressionStarted 只在首击为 true
+PASS  第 5 击：未打开维护入口
+PASS  第 5 击后：自动拉起仍被抑制（连击不会被打断）
+PASS  第 5 击：suppressionStarted 只在首击为 true
+PASS  第 6 击：未打开维护入口
+PASS  第 6 击后：自动拉起仍被抑制（连击不会被打断）
+PASS  第 6 击：suppressionStarted 只在首击为 true
+PASS  第 7 击：达成维护入口
+PASS  7 连击总时长 1200 ms > 自动拉起延迟 500 ms（不打抑制必被打断）
+PASS  超时后重新计数：tapCount=1
+PASS  超时后：不开维护入口
+PASS  超时后：窗口仍有效（不重复开启、也不放行）
+PASS  每击间隔 1.6 s：10 击也不打开维护入口
+PASS  窗口内最后一毫秒：仍抑制
+PASS  窗口内最后一毫秒：剩余 1 ms
+PASS  到达 15 s：抑制结束（自动拉起立即恢复）
+PASS  到达 15 s：剩余 0
+PASS  手动恢复前：抑制中
+PASS  手动恢复：返回 true
+PASS  手动恢复后：抑制结束
+PASS  手动恢复幂等：再次调用返回 false
+PASS  达成维护入口后：抑制窗口已收掉（返回 HOME 后自动拉起照常）
+PASS  达成维护入口后：连击计数归零
+
+结果: 39 项通过, 0 项失败
+结论: PASS
+java_exit=0
+
+==== C. MUTATION TEST (first-tap suppression REMOVED = pre-fix semantics; same test must FAIL) ====
+mutation applied: True
+diff of mutated gate source (only the suppression block removed):
+--- original
+boolean suppressionStarted = false;
+if (!suppressionActive) { suppressionActive = true; suppressionUntilMs = now + window; suppressionStarted = true; }
++++ mutated
+boolean suppressionStarted = false;
+
+PASS  首击前：无抑制（可以正常自动拉起）
+FAIL  首击：返回 suppressionStarted=true（UI 据此取消已排队的自动拉起）
+PASS  首击：不打开维护入口
+FAIL  首击后：抑制窗口激活
+FAIL  首击后：剩余 15000 ms
+PASS  第 1 击：未打开维护入口
+FAIL  第 1 击后：自动拉起仍被抑制（连击不会被打断）
+FAIL  第 1 击：suppressionStarted 只在首击为 true
+PASS  第 2 击：未打开维护入口
+FAIL  第 2 击后：自动拉起仍被抑制（连击不会被打断）
+PASS  第 2 击：suppressionStarted 只在首击为 true
+PASS  第 3 击：未打开维护入口
+FAIL  第 3 击后：自动拉起仍被抑制（连击不会被打断）
+PASS  第 3 击：suppressionStarted 只在首击为 true
+PASS  第 4 击：未打开维护入口
+FAIL  第 4 击后：自动拉起仍被抑制（连击不会被打断）
+PASS  第 4 击：suppressionStarted 只在首击为 true
+PASS  第 5 击：未打开维护入口
+FAIL  第 5 击后：自动拉起仍被抑制（连击不会被打断）
+PASS  第 5 击：suppressionStarted 只在首击为 true
+PASS  第 6 击：未打开维护入口
+FAIL  第 6 击后：自动拉起仍被抑制（连击不会被打断）
+PASS  第 6 击：suppressionStarted 只在首击为 true
+PASS  第 7 击：达成维护入口
+PASS  7 连击总时长 1200 ms > 自动拉起延迟 500 ms（不打抑制必被打断）
+PASS  超时后重新计数：tapCount=1
+PASS  超时后：不开维护入口
+FAIL  超时后：窗口仍有效（不重复开启、也不放行）
+PASS  每击间隔 1.6 s：10 击也不打开维护入口
+FAIL  窗口内最后一毫秒：仍抑制
+FAIL  窗口内最后一毫秒：剩余 1 ms
+PASS  到达 15 s：抑制结束（自动拉起立即恢复）
+PASS  到达 15 s：剩余 0
+FAIL  手动恢复前：抑制中
+FAIL  手动恢复：返回 true
+PASS  手动恢复后：抑制结束
+PASS  手动恢复幂等：再次调用返回 false
+PASS  达成维护入口后：抑制窗口已收掉（返回 HOME 后自动拉起照常）
+PASS  达成维护入口后：连击计数归零
+结论: FAIL
+java_exit=1  (expected 1)
+javac output: 
+
+==== D. LOCAL COMPILE CHECK (all sources + R generated from res/, android.jar API 35) ====
+R resources: string=88 id=17 layout=2 color=7 style=1 drawable=1 xml=1
+sources: 11 java files
+javac_exit=0
+class files: 55
+exit=0
+
+==== E. CHANGE SET (uncommitted; app repo has no remote) ====
+git status --porcelain:
+ M README.md
+ M res/values/strings.xml
+ M src/org/terminalos/terminalhome/MainActivity.java
+ M src/org/terminalos/terminalhome/TerminalOsConfig.java
+?? src/org/terminalos/terminalhome/TitleTapEntryGate.java
+?? tests/
+
+git diff --stat (with intent-to-add):
+ README.md                                          |  59 +++++--
+ res/values/strings.xml                             |   4 +
+ src/org/terminalos/terminalhome/MainActivity.java  | 179 ++++++++++++++++++---
+ .../terminalos/terminalhome/TerminalOsConfig.java  |  14 ++
+ 4 files changed, 223 insertions(+), 33 deletions(-)
+
+sha256[0:16]  path:
+BA39C49ECA6EF574  src/org/terminalos/terminalhome/TitleTapEntryGate.java
+C1DE215232EDDAB1  src/org/terminalos/terminalhome/MainActivity.java
+DFC3052D3DD2D26B  src/org/terminalos/terminalhome/TerminalOsConfig.java
+3342067D2B18272D  res/values/strings.xml
+56A595A934CF666C  tests/TitleTapEntryGateTest.java
+4C27B4B1BCB482EC  README.md
