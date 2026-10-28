@@ -9,14 +9,21 @@ name: build-rom
 #   - 或 GitHub larger runner（组织/企业付费，label 形如 "ubuntu-24.04-64core"）
 # 运行前 preflight 会检查磁盘，不足会立即失败并说明原因（不会浪费几小时）。
 #
-# 触发方式：仅 workflow_dispatch（手动）。
+# 触发方式：仅 workflow_dispatch（手动），没有 push / schedule 触发。**D-25（2026-10-29：零构建先交付）
+#   期间不得触发本 workflow**；为防误点 Run，第一道"触发守卫"要求 confirm 输入 BUILD（默认空 → 直接失败），
+#   并拒绝托管标准 runner（约 14 GB 磁盘，preflight 必失败），在启动前就挡掉。
 # 产物：artifact 上传（默认 7 天）+ 可选创建 GitHub Release。
-# 状态：结果写回 ci-status 分支，便于核对。
+# 状态：结束时调用 publish-status.sh 尝试写回 ci-status 分支（分支不存在时创建 orphan 分支）；
+#   fork 目前没有该分支 —— 尚无 build-rom/sync-check 运行写过回，这不代表"没有记录就代表跑过"。
 # 运行手册：docs/14_整包构建运行手册.md（参数怎么填、时间预算、失败分诊、产物验收）。
 
 on:
   workflow_dispatch:
     inputs:
+      confirm:
+        description: '防误触发：必须输入 BUILD 才执行（D-25 零构建阶段禁止触发整包构建）'
+        type: string
+        default: ''
       lineage_branch:
         description: 'LineageOS 分支（先跑 22.2；23.2 是实验目标）'
         type: choice
@@ -32,9 +39,9 @@ on:
           - terminalos
           - baseline
       runner:
-        description: 'runs-on 的 JSON：字符串如 "ubuntu-24.04"，或数组如 ["self-hosted","linux","x64"]'
+        description: 'runs-on 的 JSON：self-hosted 数组如 ["self-hosted","linux","x64","lineage-builder"]；larger runner 如 "ubuntu-24.04-64core"。托管标准 runner（约 14 GB 磁盘）会被守卫拒绝'
         type: string
-        default: '"ubuntu-24.04"'
+        default: '["self-hosted","linux","x64","lineage-builder"]'
       ccache:
         description: '启用 ccache（self-hosted runner 上会显著加速二次构建）'
         type: boolean
@@ -61,6 +68,25 @@ jobs:
       BUILD_TARGET: ${{ inputs.build_target }}
       WORKSPACE: ${{ github.workspace }}/android
     steps:
+      - name: 触发守卫（D-25 零构建阶段：拒绝误触发）
+        env:
+          CONFIRM: ${{ inputs.confirm }}
+          RUNNER_JSON: ${{ inputs.runner }}
+        run: |
+          set -euo pipefail
+          if [ "${CONFIRM}" != "BUILD" ]; then
+              echo "ERROR: confirm 未填 BUILD —— 整包构建要跑数小时、需要 ≥400 GB 构建盘，D-25 零构建阶段不触发。"
+              echo "       确需运行时（runner 已就绪、D-25 已解除）在 confirm 输入 BUILD。"
+              exit 1
+          fi
+          lowered=$(printf '%s' "$RUNNER_JSON" | tr '[:upper:]' '[:lower:]')
+          if ! printf '%s' "$lowered" | grep -Eq 'self-hosted|core'; then
+              echo "ERROR: runner=${RUNNER_JSON} 不是 self-hosted，也不像 larger runner（label 含 core）。"
+              echo "       托管标准 runner 只有约 14 GB 磁盘，整包构建必失败，在 preflight 之前先拦下。"
+              exit 1
+          fi
+          echo "守卫通过：confirm=BUILD，runner=${RUNNER_JSON}"
+
       - uses: actions/checkout@v4
 
       - name: 构建机 preflight（磁盘/内存/核数）
