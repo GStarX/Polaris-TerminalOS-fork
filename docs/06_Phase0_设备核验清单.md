@@ -42,6 +42,31 @@
 - [ ] 记录不可用的具体表现（命令报错、设备无响应、被识别为其他设备）。
 - [ ] 明确写出结论：**在恢复 Android 系统之前，无法确认分区与固件状态 → 不进行刷写**。
 
+## 2.1 DTBO 分区确认（K3-01P 4.19 PoC 的 P3 前置，只读）
+
+> 背景：4.9 采用扁平 DTB 布局；4.19 PoC 需要 `BOARD_KERNEL_SEPARATED_DTBO := true` + 独立 dtbo.img，
+> 刷入前必须确认设备分区表里**存在 dtbo 分区**，否则「刷进去起不来、也刷不回去」。
+>
+> 静态证据（2026-10-28 GitHub 实测 `LineageOS/android_device_xiaomi_sdm845-common` @`35cf356`）：
+> - `BOARD_KERNEL_SEPARATED_DTBO`、`BOARD_PREBUILT_DTBOIMAGE` 在该仓**均未设置**（两次全仓检索 0 命中）→ 4.9 不产 dtbo.img；
+> - 但 `sepolicy/vendor/file_contexts` 明确映射 `/dev/block/platform/soc/1d84000.ufshc/by-name/dtbo`，
+>   `releasetools.py` 的 `OTA_InstallEnd` 会向 `/dev/block/bootdevice/by-name/dtbo` 写 dtbo.img，
+>   `sepolicy/vendor/fastbootd.te` 允许 fastbootd 写 `dtbo_block_device`
+>   → **平台分区表里本应有 dtbo 分区**（OEM 固件使用），只是 LineageOS 4.9 不生成/不刷它；
+> - 因此「`fstab.qcom` 无 dtbo 条目」**不等于**「无 dtbo 分区」：Android 不挂载 dtbo，它不是 fstab 项；
+> - 仍须实测：设备当前跑 iOS 移植系统，GPT 可能被改过。**分区表只读检查由首席执行。**
+
+- [ ] `adb shell ls -l /dev/block/by-name/ | grep -i dtbo`（或 `/dev/block/bootdevice/by-name/`）——是否出现 dtbo 节点
+- [ ] `adb shell ls -l /dev/block/platform/soc/1d84000.ufshc/by-name/ | grep -i dtbo`
+- [ ] `adb shell cat /proc/partitions`——记录含 dtbo 的行
+- [ ] `adb shell getprop | grep -i dtbo`（如有 `ro.boot.dtbo_idx` 一并记录）
+- [ ] 与 `device/xiaomi/polaris/init/fstab.qcom` 的 by-name 列表逐项对照，记录差异（fstab 不含 dtbo 属正常）
+
+判据：
+
+- 出现 dtbo 分区 → K3-01P 的 **P3 前置满足**（仍需 Phase 0 其余项完成，且刷写另行授权）；
+- 无 dtbo 分区 → **P3 禁止执行**，K3-01P 止步 P2（编译/DTB），由首席决定后续。
+
 ## 3. 恢复路径确认（Phase 0 的关键交付）
 
 - [ ] 写出从"当前状态"回到"官方 LineageOS 22.2 polaris 可启动状态"的**完整步骤草案**（描述性即可，
@@ -61,6 +86,7 @@
 | 当前系统（Android? iOS?） | 待填 | | |
 | adb 可用性 | 待填 | | |
 | 活动槽位/分区清单 | 待填 | | |
+| dtbo 分区存在性（K3-01P P3 前置） | 待填（出现 / 未出现） | | |
 | 固件区域/版本 | 待填 | | |
 | 回退到官方 22.2 的步骤草案 | 待填 | | |
 | 数据备份与恢复验证 | 待填 | | |

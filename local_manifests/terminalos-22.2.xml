@@ -2,10 +2,16 @@
 <!--
   Polaris-TerminalOS local manifest —— lineage-22.2（可构建基线，先跑这条）
 
+  【路线归属】本文件是**交付线**（K2-04 结案口径：Linux 4.9.337 / lineage-22.2）的构建输入，
+  也是 scripts/init-sources.sh 在 lineage-22.2 分支（当前默认）下自动选用的 manifest。
+  交付线 pin：local_manifests/pins-22.2.txt；构建前校验：`bash scripts/verify-pins.sh`（只读）。
+  23.2 实验路线用 terminalos.xml；纯上游基线用 baseline-22.2.xml。
+
   用法（在源码根目录）：
     mkdir -p .repo/local_manifests
     cp <本项目>/local_manifests/terminalos-22.2.xml .repo/local_manifests/terminalos.xml
     repo sync
+    （或直接用 scripts/init-sources.sh，它会按分支自动选用本文件）
 
   与 terminalos.xml（23.2 版）的差异：
     - revision 全部指向自有仓库的 terminalos/lineage-22.2 分支；

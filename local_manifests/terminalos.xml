@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Polaris-TerminalOS local manifest
+  Polaris-TerminalOS local manifest —— 23.2 实验路线专用
+
+  【路线归属】本文件只服务 **23.2 实验路线**（K3-01P / 4.19 PoC、Android 16 目标）。
+    - 交付线（K2-04 结案口径：Linux 4.9.337 / lineage-22.2）请用 local_manifests/terminalos-22.2.xml；
+    - 纯上游基线请用 local_manifests/baseline-22.2.xml；
+    - scripts/init-sources.sh 会按分支参数自动选择（22.2→terminalos-22.2.xml，23.2→本文件）。
+    - 交付线 pin 见 local_manifests/pins-22.2.txt，校验用 scripts/verify-pins.sh（只读）。
+  把本文件当成"默认/唯一" manifest 会造成"构建输入与结案口径矛盾"的误判，注意区分。
 
   用法（在源码根目录）：
     mkdir -p .repo/local_manifests
