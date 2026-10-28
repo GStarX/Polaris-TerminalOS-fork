@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Polaris-TerminalOS 交付线（lineage-22.2）按 SHA 锁定的 local manifest —— D-27 口径①
+
+  用途：与 local_manifests/pins-22.2.txt 同源（同一组 6 个 commit），供 verify-pins.sh
+  做硬门禁；terminalos-22.2.xml 仍是按分支锁的快照记录，不再作为 pin 比对基准。
+
+  用法（源码根目录）：
+    cp local_manifests/terminalos-22.2-sha.xml .repo/local_manifests/terminalos.xml
+    repo sync
+
+  维护：SHA 来自 2026-10-29 的 pins-22.2.txt 快照（当日核对 6 个远端分支 head 均等于下列 SHA）；
+  升版时必须同时改 pins-22.2.txt 与本文件，并在提交信息里写明原因与验证方式。
+-->
+<manifest>
+    <remote name="terminalos" fetch="https://github.com/GStarX/" />
+    <remote name="github" fetch="https://github.com/" />
+
+    <project name="android_device_xiaomi_polaris"
+             path="device/xiaomi/polaris"
+             remote="terminalos"
+             revision="a7f801743b9f8c399a3014eb5f6d1838aebf9710" />
+    <project name="android_vendor_terminalos"
+             path="vendor/terminalos"
+             remote="terminalos"
+             revision="d4559c341644b16649c3ab6195e73f7efe430134" />
+    <project name="android_packages_apps_TerminalHome"
+             path="packages/apps/TerminalHome"
+             remote="terminalos"
+             revision="ccedcc4a9f6e74245dd6dcc51570a46768d579cb" />
+
+    <project name="LineageOS/android_kernel_xiaomi_sdm845"
+             path="kernel/xiaomi/sdm845"
+             remote="github"
+             revision="aa8adfe9bf212c6e93238a86980b4024da4f819a" />
+    <project name="TheMuppets/proprietary_vendor_xiaomi_polaris"
+             path="vendor/xiaomi/polaris"
+             remote="github"
+             revision="9e9707959acceea4b990cba733d259aab64c183e" />
+    <project name="TheMuppets/proprietary_vendor_xiaomi_sdm845-common"
+             path="vendor/xiaomi/sdm845-common"
+             remote="github"
+             revision="b971b2ccd4cf66dede975cf645d01f4cbc203150" />
+</manifest>
