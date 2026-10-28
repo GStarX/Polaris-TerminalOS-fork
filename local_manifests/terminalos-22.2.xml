@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Polaris-TerminalOS local manifest —— lineage-22.2（可构建基线，先跑这条）
+
+  用法（在源码根目录）：
+    mkdir -p .repo/local_manifests
+    cp <本项目>/local_manifests/terminalos-22.2.xml .repo/local_manifests/terminalos.xml
+    repo sync
+
+  与 terminalos.xml（23.2 版）的差异：
+    - revision 全部指向自有仓库的 terminalos/lineage-22.2 分支；
+    - 内核与 vendor blobs 本来就是 lineage-22.2（官方支持版本，无需"锁定"）；
+    - 22.2 的 frameworks/base 没有锁任务快捷设置的 aconfig flag，
+      因此 vendor/terminalos 的 overlay 在 22.2 分支不覆盖监督角色资源（已适配）。
+
+  checkout 场景（CI 的 baseline job）请用 baseline-22.2.xml（不叠加自有设备树 fork）。
+-->
+<manifest>
+    <remote name="terminalos" fetch="https://github.com/GStarX/" />
+
+    <project name="android_device_xiaomi_polaris"
+             path="device/xiaomi/polaris"
+             remote="terminalos"
+             revision="terminalos/lineage-22.2" />
+    <project name="android_vendor_terminalos"
+             path="vendor/terminalos"
+             remote="terminalos"
+             revision="terminalos/lineage-22.2" />
+    <project name="android_packages_apps_TerminalHome"
+             path="packages/apps/TerminalHome"
+             remote="terminalos"
+             revision="terminalos/lineage-22.2" />
+
+    <!-- 22.2 官方支持分支：内核与 blobs 均存在，显式声明以保证可复现 -->
+    <project name="LineageOS/android_kernel_xiaomi_sdm845"
+             path="kernel/xiaomi/sdm845"
+             revision="lineage-22.2" />
+    <project name="TheMuppets/proprietary_vendor_xiaomi_polaris"
+             path="vendor/xiaomi/polaris"
+             revision="lineage-22.2" />
+    <project name="TheMuppets/proprietary_vendor_xiaomi_sdm845-common"
+             path="vendor/xiaomi/sdm845-common"
+             revision="lineage-22.2" />
+</manifest>

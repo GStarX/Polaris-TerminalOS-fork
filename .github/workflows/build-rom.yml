@@ -1,0 +1,310 @@
+name: build-rom
+
+# 云端整包构建（LineageOS ROM）。默认先跑 22.2（官方支持基线）。
+#
+# 重要：GitHub 托管的标准 runner 只有约 14 GB 磁盘，无法整包构建 LineageOS
+# （官方 21+ 建议 400 GB 磁盘 / 64 GB RAM）。因此本 workflow 必须指定一个
+# 具备足够磁盘的 runner：
+#   - self-hosted 云服务器（推荐，runner label 形如 ["self-hosted","linux","x64"]）
+#   - 或 GitHub larger runner（组织/企业付费，label 形如 "ubuntu-24.04-64core"）
+# 运行前 preflight 会检查磁盘，不足会立即失败并说明原因（不会浪费几小时）。
+#
+# 触发方式：仅 workflow_dispatch（手动）。
+# 产物：artifact 上传（默认 7 天）+ 可选创建 GitHub Release。
+# 状态：结果写回 ci-status 分支，便于核对。
+# 运行手册：docs/14_整包构建运行手册.md（参数怎么填、时间预算、失败分诊、产物验收）。
+
+on:
+  workflow_dispatch:
+    inputs:
+      lineage_branch:
+        description: 'LineageOS 分支（先跑 22.2；23.2 是实验目标）'
+        type: choice
+        default: lineage-22.2
+        options:
+          - lineage-22.2
+          - lineage-23.2
+      build_target:
+        description: 'terminalos = 带 TerminalOS 产品；baseline = 未修改的 LineageOS 基线'
+        type: choice
+        default: terminalos
+        options:
+          - terminalos
+          - baseline
+      runner:
+        description: 'runs-on 的 JSON：字符串如 "ubuntu-24.04"，或数组如 ["self-hosted","linux","x64"]'
+        type: string
+        default: '"ubuntu-24.04"'
+      ccache:
+        description: '启用 ccache（self-hosted runner 上会显著加速二次构建）'
+        type: boolean
+        default: true
+      release_tag:
+        description: '可选：把产物发布为 GitHub Release 的 tag（留空则不发布）'
+        type: string
+        default: ''
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-${{ inputs.lineage_branch }}-${{ inputs.build_target }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ${{ fromJSON(inputs.runner) }}
+    # self-hosted 用它兜底；GitHub 托管 runner 单 job 上限 6 小时（360 分钟），会被平台先截断
+    timeout-minutes: 900
+    env:
+      LINEAGE_BRANCH: ${{ inputs.lineage_branch }}
+      BUILD_TARGET: ${{ inputs.build_target }}
+      WORKSPACE: ${{ github.workspace }}/android
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 构建机 preflight（磁盘/内存/核数）
+        run: |
+          bash "$GITHUB_WORKSPACE/.github/scripts/preflight-build-host.sh"
+
+      - name: 显示构建参数
+        run: |
+          echo "branch : $LINEAGE_BRANCH"
+          echo "target : $BUILD_TARGET"
+          echo "runner : ${{ inputs.runner }}"
+          echo "ccache : ${{ inputs.ccache }}"
+          echo "release: ${RELEASE_TAG:-<none>}"
+        env:
+          RELEASE_TAG: ${{ inputs.release_tag }}
+
+      - name: 安装构建依赖
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
+            bc bison build-essential ccache curl erofs-utils flex g++-multilib gcc-multilib \
+            git git-lfs gnupg gperf imagemagick kmod protobuf-compiler python3-protobuf \
+            lib32readline-dev lib32z1-dev libdw-dev libelf-dev libgnutls28-dev lz4 \
+            libsdl1.2-dev libssl-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool \
+            squashfs-tools xsltproc xxd zip zlib1g-dev
+          git lfs install
+
+      - name: 安装 repo 工具并配置 git
+        run: |
+          set -euo pipefail
+          mkdir -p "$HOME/bin"
+          curl -fsSL https://storage.googleapis.com/git-repo-downloads/repo -o "$HOME/bin/repo"
+          chmod +x "$HOME/bin/repo"
+          echo "$HOME/bin" >> "$GITHUB_PATH"
+          git config --global user.name "TerminalOS CI"
+          git config --global user.email "ci@users.noreply.github.com"
+          git config --global trailer.changeid.key "Change-Id"
+          repo --version
+
+      - name: repo init
+        run: |
+          set -euo pipefail
+          mkdir -p "$WORKSPACE"
+          cd "$WORKSPACE"
+          repo init -u https://github.com/LineageOS/android.git -b "$LINEAGE_BRANCH" --git-lfs --no-clone-bundle
+
+      - name: 安装 local manifest（按 target 选择）
+        run: |
+          set -euo pipefail
+          if [ "$BUILD_TARGET" = "baseline" ]; then
+              if [ "$LINEAGE_BRANCH" != "lineage-22.2" ]; then
+                  echo "ERROR: baseline 目前只支持 lineage-22.2（23.2 缺内核/blobs 分支，属实验）"
+                  exit 1
+              fi
+              src="$GITHUB_WORKSPACE/local_manifests/baseline-22.2.xml"
+              dest="$WORKSPACE/.repo/local_manifests/baseline.xml"
+          else
+              if [ "$LINEAGE_BRANCH" = "lineage-23.2" ]; then
+                  src="$GITHUB_WORKSPACE/local_manifests/terminalos.xml"
+              else
+                  src="$GITHUB_WORKSPACE/local_manifests/terminalos-22.2.xml"
+              fi
+              dest="$WORKSPACE/.repo/local_manifests/terminalos.xml"
+          fi
+          mkdir -p "$WORKSPACE/.repo/local_manifests"
+          cp "$src" "$dest"
+          echo "using local manifest: $src -> $dest"
+          sed -n '1,120p' "$dest"
+
+      - name: repo sync（全量，耗时长；网络抖动自动重试）
+        run: |
+          set -uo pipefail
+          cd "$WORKSPACE"
+          # 整包同步量远大于 sync-check（后者在托管 runner 上曾耗时约 13 分钟且出现链路波动），
+          # 失败重试比整个 job 重跑便宜得多。前两次普通同步，第三次加 --force-sync 修工作树。
+          attempt=1
+          while :; do
+              echo "== repo sync 第 ${attempt}/3 次 =="
+              if [ "$attempt" -ge 3 ]; then
+                  if repo sync -c --no-tags --force-sync -j"$(nproc)"; then ok=1; else ok=0; fi
+              else
+                  if repo sync -c --no-tags -j"$(nproc)"; then ok=1; else ok=0; fi
+              fi
+              if [ "$ok" -eq 1 ]; then break; fi
+              if [ "$attempt" -ge 3 ]; then
+                  echo "ERROR: repo sync 连续 3 次失败（网络或上游问题），见上方日志"
+                  exit 1
+              fi
+              attempt=$((attempt + 1))
+              echo "repo sync 失败，60 秒后重试（第 ${attempt}/3 次）"
+              sleep 60
+          done
+          echo "repo sync 成功（第 ${attempt} 次）"
+
+      - name: 安装 ccache（可选）
+        if: ${{ inputs.ccache }}
+        run: |
+          set -euo pipefail
+          ccache --version
+          ccache -M 50G
+          ccache -z
+          echo "CCACHE_DIR=$HOME/.ccache" >> "$GITHUB_ENV"
+          echo "USE_CCACHE=1" >> "$GITHUB_ENV"
+          echo "CCACHE_EXEC=$(command -v ccache)" >> "$GITHUB_ENV"
+
+      - name: 后置依赖检查
+        run: |
+          set -euo pipefail
+          extra=()
+          if [ "$LINEAGE_BRANCH" = "lineage-23.2" ]; then
+              extra=(--allow-22.2-pinned-deps)
+          fi
+          bash "$GITHUB_WORKSPACE/scripts/fetch-vendor-deps.sh" \
+              --source-root "$WORKSPACE" \
+              --target-branch "$LINEAGE_BRANCH" \
+              "${extra[@]}"
+
+      - name: 获取并校验 Termux APK（仅 terminalos）
+        if: ${{ inputs.build_target == 'terminalos' }}
+        run: |
+          set -euo pipefail
+          cd "$WORKSPACE/vendor/terminalos"
+          bash scripts/fetch-termux.sh
+          # sha256 文件里是相对文件名（Termux.apk），必须在 prebuilt/ 目录内校验
+          ( cd prebuilt && sha256sum --check Termux.apk.sha256 )
+
+      - name: 构建 ROM
+        run: |
+          set -euo pipefail
+          mkdir -p "$GITHUB_WORKSPACE/out/ci"
+          cd "$WORKSPACE"
+          if [ "$BUILD_TARGET" = "baseline" ]; then
+              PRODUCT=lineage_polaris
+          else
+              PRODUCT=terminalos_polaris
+          fi
+          echo "PRODUCT=$PRODUCT" >> "$GITHUB_ENV"
+          set +u
+          source build/envsetup.sh
+          set -u
+          lunch "${PRODUCT}-userdebug"
+          set +u
+          if brunch "$PRODUCT" 2>&1 | tee "$GITHUB_WORKSPACE/out/ci/build.log"; then
+              echo "brunch 成功"
+          else
+              echo "brunch 失败，回退为: mka bacon（记录在 docs/11 D-07）"
+              mka bacon 2>&1 | tee -a "$GITHUB_WORKSPACE/out/ci/build.log" || {
+                  echo "ERROR: 构建失败，见 artifact 中的 build.log"; exit 1;
+              }
+          fi
+          set -u
+
+      - name: ccache 统计（可选，用于判断二次构建能否提速）
+        if: ${{ inputs.ccache }}
+        continue-on-error: true
+        run: |
+          ccache -s
+          du -sh "$CCACHE_DIR" 2>/dev/null || true
+
+      - name: 收集产物与构建信息
+        run: |
+          set -euo pipefail
+          out_dir="${OUT:-$WORKSPACE/out/target/product/polaris}"
+          art="$GITHUB_WORKSPACE/out/artifacts"
+          mkdir -p "$art"
+          shopt -s nullglob
+          # 必须区分"可刷写包"与中间产物：target_files 等中间 zip 不能刷机，
+          # 只收集它们会造成"构建看似成功、实际没有可刷包"的误判。
+          roms=()
+          for f in "$out_dir"/*.zip; do
+              case "$f" in
+                  *target_files*) echo "跳过中间产物: $f"; continue ;;
+              esac
+              roms+=("$f")
+          done
+          if (( ${#roms[@]} == 0 )); then
+              echo "ERROR: 没有找到可刷写 ROM 包（$out_dir 下 *.zip，已排除 target_files）"
+              echo "       通常意味着 bacon/ota 没跑完，先看 out/ci/build.log 尾部"
+              exit 1
+          fi
+          files=("${roms[@]}" "$out_dir"/*.img "$out_dir"/*.tar.md5)
+          printf '可刷写包: %s\n' "${roms[@]}"
+          for f in "${files[@]}"; do cp -v "$f" "$art/"; done
+          cd "$art"
+          sha256sum * > sha256sums.txt
+          {
+              echo "branch=$LINEAGE_BRANCH"
+              echo "product=${PRODUCT:-unknown}"
+              echo "target=$BUILD_TARGET"
+              echo "built_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+              echo "run_id=${GITHUB_RUN_ID:-}"
+              echo "commit=${GITHUB_SHA:-}"
+              echo
+              echo "# repository revisions"
+              for p in device/xiaomi/polaris vendor/terminalos packages/apps/TerminalHome kernel/xiaomi/sdm845 vendor/xiaomi/polaris vendor/xiaomi/sdm845-common; do
+                  printf '%s: %s\n' "$p" "$(git -C "$WORKSPACE/$p" log -1 --oneline 2>/dev/null || echo 'n/a')"
+              done
+          } > build-info.txt
+          ls -lh
+          cat build-info.txt
+
+      - name: 上传产物（artifact）
+        uses: actions/upload-artifact@v4
+        with:
+          name: rom-${{ inputs.lineage_branch }}-${{ inputs.build_target }}
+          path: |
+            out/artifacts/
+            out/ci/build.log
+          retention-days: 7
+          if-no-files-found: error
+
+      - name: 上传构建日志（失败时也保留）
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-log-${{ inputs.lineage_branch }}-${{ inputs.build_target }}
+          path: out/ci/build.log
+          retention-days: 7
+          if-no-files-found: warn
+
+      - name: 发布 GitHub Release（可选）
+        if: ${{ inputs.release_tag != '' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          tag="${{ inputs.release_tag }}"
+          if gh release view "$tag" >/dev/null 2>&1; then
+              gh release upload "$tag" out/artifacts/* --clobber
+          else
+              gh release create "$tag" out/artifacts/* \
+                  --title "TerminalOS ${tag}" \
+                  --notes "branch=${LINEAGE_BRANCH} target=${BUILD_TARGET} run=${GITHUB_RUN_ID}" \
+                  --target "$GITHUB_SHA"
+          fi
+
+      - name: 写回 ci-status 分支
+        if: always()
+        env:
+          JOB_KIND: build-rom
+          JOB_STATUS: ${{ job.status }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          JOB_DETAIL=$(printf '{"lineage_branch":"%s","build_target":"%s","product":"%s"}' \
+              "$LINEAGE_BRANCH" "$BUILD_TARGET" "${PRODUCT:-unknown}") \
+            bash "$GITHUB_WORKSPACE/.github/scripts/publish-status.sh"

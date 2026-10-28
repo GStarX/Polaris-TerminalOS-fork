@@ -1,0 +1,617 @@
+Kernel modules overview  |  Android OS core topics  |  Android Open Source Project
+
+ Skip to main content
+
+ Docs
+
+ What's new?
+
+ Release notes
+
+ Latest security bulletins
+
+ Latest Compatibility Definition Document (CDD)
+
+ Site updates
+
+ Getting Started
+
+ About
+
+ Start
+
+ Download
+
+ Builds
+
+ Test
+
+ Create
+
+ Contribute
+
+ Community
+
+ Tools, build, and related reference
+
+ Security
+
+ Overview
+
+ Bulletins
+
+ Features
+
+ Testing
+
+ Best Practices
+
+ Core Topics
+
+ Architecture
+
+ Audio
+
+ Camera
+
+ Connectivity
+
+ Data
+
+ Display
+
+ Fonts
+
+ Graphics
+
+ Interaction
+
+ Media
+
+ Performance
+
+ Permissions
+
+ Power
+
+ Runtime
+
+ Settings
+
+ Storage
+
+ Tests
+
+ Updates
+
+ Virtualization
+
+ Compatibility
+
+ Compatibility Definition Document (CDD)
+
+ Compatibility Test Suite (CTS)
+
+ Android Devices
+
+ Overview
+
+ Cuttlefish
+
+ Enterprise
+
+ TV
+
+ Automotive
+
+ Overview
+
+ Software Defined Vehicle
+
+ In-vehicle Infotainment
+
+ Release Details
+
+ Reference
+
+ HIDL
+
+ HAL
+
+ Trade Federation
+
+ Security Test Suite
+
+ Android Code Search
+
+ /
+
+ English
+
+ Deutsch
+
+ Español – América Latina
+
+ Français
+
+ Indonesia
+
+ Italiano
+
+ Polski
+
+ Português – Brasil
+
+ Tiếng Việt
+
+ Türkçe
+
+ Русский
+
+ עברית
+
+ العربيّة
+
+ فارسی
+
+ हिंदी
+
+ বাংলা
+
+ ภาษาไทย
+
+ 中文 – 简体
+
+ 中文 – 繁體
+
+ 日本語
+
+ 한국어
+
+ Sign in
+
+ Docs
+
+ Core topics
+
+ Overview
+
+ Architecture and Platform
+
+ Connectivity and Input
+
+ Media and Display
+
+ System health and Updates
+
+ Testing
+
+ Data storage and access
+
+ Docs
+
+ More
+
+ Overview
+
+ Architecture and Platform
+
+ Connectivity and Input
+
+ Media and Display
+
+ System health and Updates
+
+ Testing
+
+ Data storage and access
+
+ Android Code Search
+
+ Architecture
+ Overview
+ 
+ Hardware abstraction layer (HAL)
+ Overview
+ 
+ HIDL (deprecated)
+ OverviewInterfaces and packagesInterface hashingServices and data transferFast Message QueueUse Binder IPCHIDL MemoryBlockNetwork stack configuration toolsModel threadingConvert HAL modulesData typesSafe unionInterface versioningCode style guide
+ HIDL C++
+ OverviewPackagesInterfacesData typesFunctions
+ HIDL Java
+ OverviewData typesInterface methods and errorsExport constants
+ Other
+ HIDL framework backward compatibility verificationDynamically available HALsLegacy HALs (AOSP <=v7)
+ 
+ Kernel
+ OverviewKernel release notesStable kernel releases and updatesAndroid common kernelsGKI projectGKI developmentGKI versioning scheme
+ 
+ GKI release builds
+ Overviewandroid12-5.10 release buildsandroid13-5.10 release buildsandroid13-5.15 release buildsandroid14-5.15 release buildsandroid14-6.1 release buildsandroid15-6.6 release buildsandroid16-6.12 release buildsandroid17-6.18 release builds
+ 
+ Deprecated builds
+ android12-5.10 deprecated buildsandroid13-5.10 deprecated buildsandroid13-5.15 deprecated buildsandroid14-5.15 deprecated buildsandroid14-6.1 deprecated buildsandroid15-6.6 deprecated buildsandroid16-6.12 deprecated buildsandroid17-6.18 deprecated builds
+ 
+ GKI release builds (JSON)
+ android12-5.10 release buildsandroid13-5.10 release buildsandroid13-5.15 release buildsandroid14-5.15 release buildsandroid14-6.1 release buildsandroid15-6.6 release buildsandroid16-6.12 release buildsandroid17-6.18 release buildsGKI release processRequest a respinGKI 16-6.12 android-mainline errataMaintain a stable KMI
+ 
+ Kernel ABI monitoring
+ OverviewRun ABI monitoringWork with symbol lists
+ 
+ Modules
+ OverviewConfigure kernel features as GKI modulesVendor module guidelinesLoadable kernel modulesKernel module supportTest GKI modulesBoot time optimizationDebug featuresDevelop kernel code for GKIProxy Execution in AndroidAndroid kernel file system supportExtend the kernel with eBPFCollect kernel telemetry with eBPFUse DebugFS in Android 12FIPS 140-3 certifiable GKI crypto moduleEROFSAndroid kernel FAQKernel networking unit testsTransition from ION to DMA-BUF heaps (5.4 kernel)Incremental File System
+ 
+ Configuration
+ OverviewImplement system properties as APIsAdd system propertiesImplement Config File Schema API
+ 
+ Archive
+ OverviewConfigStoreCreate the HAL interfaceImplement the serviceClient-side useAdd ConfigStore classes and items
+ 
+ Device tree overlays
+ OverviewImplement DTOsDTO syntaxCompile and verifyUse multiple DTsDTB and DTBO partitionsOptimize DTO
+ 
+ Vendor NDK (<=AOSP 14)
+ OverviewEnable VNDKVNDK build system supportVNDK extensionsVNDK snapshot designGenerate VNDK snapshotsGenerate vendor snapshotsLinker namespaceDirectories, rules, and sepolicyRenderScriptABI stabilityPrebuilt ABI usages checker
+ 
+ Vendor interface object
+ OverviewManifestsCompatibility matrixesFCM lifecycleDevice manifest developmentMatch rulesAdditional resources
+ 
+ AIDL
+ OverviewAIDL languageAIDL backendsStable AIDLAIDL for HALsRun AIDL services dynamicallyAnnotations in AIDLFMQ with AIDLAIDL fuzzingAIDL style guide
+ 
+ Binder (Interprocess Communication)
+ OverviewHandle threadsPriority inheritanceHandle cached and frozen apps
+ 
+ Bootloader
+ OverviewCanonical boot reasonBoot image headerImplement bootconfigRecovery imagesDTB imagesImplement OTA updatesLock and unlock the bootloaderVersion information in AVB propertiesMove fastboot to userspace
+ 
+ Generic Bootloader
+ OverviewDeploy GBLGBL respin processGBL release builds
+ 
+ Partitions
+ OverviewPartition layoutVendor boot partitionsVendor and ODM DLKM partitionsShared system imageRamdisk partitionsGeneric boot partitionODM partitionsProduct partitionsImplement a GKI module partitionEnforce product partition interfacesTrusty OS partitions
+ 
+ 16 KB page size
+ OverviewUse Cuttlefish with 16 KB page size on ARM64Simulate Cuttlefish with 16 KB page size on x86-64Flash Pixel with 16 KB page size supportGet the page sizeOptimize for 16 KB page sizeSystem propertiesEnable 16 KB toggleEnable 16 KB backcompat optionVendor API level
+
+ Power
+ OverviewPower managementThermal mitigationPower stats HALApp power managementPlatform power management with DozePerformance managementApp background behavior trackersSupport batteryless devicesMeasure component powerMeasure device powerMeasure power valuesRoutine Battery SaverTV standbySystemSuspend service
+ 
+ Wattson
+ Power analysis overviewCollect and analyze traces
+
+ Settings
+ OverviewDesign guidelinesPatterns and componentsInformation architecturePersonalized settingsUniversal search
+
+ Fonts
+ Implement custom font fallback
+
+ What's new?
+
+ Release notes
+
+ Latest security bulletins
+
+ Latest Compatibility Definition Document (CDD)
+
+ Site updates
+
+ Getting Started
+
+ About
+
+ Start
+
+ Download
+
+ Builds
+
+ Test
+
+ Create
+
+ Contribute
+
+ Community
+
+ Tools, build, and related reference
+
+ Security
+
+ Overview
+
+ Bulletins
+
+ Features
+
+ Testing
+
+ Best Practices
+
+ Core Topics
+
+ Architecture
+
+ Audio
+
+ Camera
+
+ Connectivity
+
+ Data
+
+ Display
+
+ Fonts
+
+ Graphics
+
+ Interaction
+
+ Media
+
+ Performance
+
+ Permissions
+
+ Power
+
+ Runtime
+
+ Settings
+
+ Storage
+
+ Tests
+
+ Updates
+
+ Virtualization
+
+ Compatibility
+
+ Compatibility Definition Document (CDD)
+
+ Compatibility Test Suite (CTS)
+
+ Android Devices
+
+ Overview
+
+ Cuttlefish
+
+ Enterprise
+
+ TV
+
+ Automotive
+
+ Overview
+
+ Software Defined Vehicle
+
+ In-vehicle Infotainment
+
+ Release Details
+
+ Reference
+
+ HIDL
+
+ HAL
+
+ Trade Federation
+
+ Security Test Suite
+
+ Effective in 2026, to align with our trunk stable development model and ensure platform stability for the ecosystem, we will publish source code to AOSP in Q2 and Q4. For building and contributing to AOSP, use android-latest-release. The android-latest-release manifest branch will always reference the most recent release pushed to AOSP. For more information, see Changes to AOSP.
+
+ AOSP
+
+ Docs
+
+ Core topics
+
+ Architecture and Platform
+
+ Kernel modules overview
+
+ Stay organized with collections
+
+ Save and categorize content based on your preferences.
+
+There are two types of kernel modules: hardware agnostic
+GKI modules and hardware-specific
+vendor modules. This page provides an overview of both types
+of modules.
+
+GKI modules
+
+Generic kernel image (GKI) modules are used to deliver nonboot-required kernel
+capabilities separate from the generic core kernel. With GKI modules, you can
+choose specific kernel capabilities to use, often reducing kernel image size
+and runtime memory consumption. The reduction in size makes GKI well suited for
+Android Go devices and other resource-restricted form factors.
+
+GKI modules also provide a mechanism to let vendors incorporate new
+upstream features after the KMI freeze milestone. Built-in code
+can’t be replaced without building another image, whereas code delivered as a
+module can be replaced by another module.
+
+GKI modules use the kernel's build time signing infrastructure to differentiate
+between GKI and other modules at run time. Unsigned modules are allowed to load
+as long as they only use symbols appearing on the allowlist or provided by other
+unsigned modules.
+Note: For an overview of GKI-related terms, refer to
+Kernel overview.
+There are two logical types of GKI modules: protected GKI module
+and unprotected GKI module.
+
+Protected GKI module
+
+A protected GKI module is delivered by Google, isn't restricted in any way, and
+behaves as though it is built with the kernel after loading. Additionally,
+protected GKI modules have the following characteristics:
+
+Protected GKI modules have access to non-KMI kernel symbols that aren't
+available to vendor modules or unprotected GKI modules.
+Protected GKI modules can export symbols that become part of the KMI surface
+as long as those symbols are cited in a symbol list.
+Protected GKI modules can't be overridden by vendor modules.
+
+A protected GKI module is the default class of GKI modules. All GKI
+modules are considered protected at the time of KMI freeze.
+
+Unprotected GKI module
+
+An unprotected GKI module can be overridden by a vendor module. After KMI freeze,
+a protected GKI module might be reclassified as unprotected if the GKI team
+decides that vendors need to override the default implementation
+with a version that includes new features from upstream Linux. On the next
+GKI release, unprotected modules are reclassified as protected after
+upstream code lands in an Android Common Kernel (ACK). Unprotected GKI modules
+have the following characteristics:
+
+Unprotected GKI modules have the same access to exported symbols as vendor
+modules.
+Unprotected GKI modules can't export symbols exported by protected GKI
+modules.
+Unprotected GKI modules must preserve any KMI interfaces as though part of the
+core kernel.
+Unprotected GKI modules can be overridden by vendor modules.
+
+Vendor modules
+
+A vendor module is delivered by partners to implement SoC and device-specific
+capabilities. Any existing kernel module that isn't delivered as part of the
+GKI kernel can be delivered as a vendor module.
+
+Since one of the primary goals of the GKI project is to minimize
+hardware-specific code in the core kernel, vendors can expect that the GKI
+kernel won't include modules that are clearly managing their own hardware. For
+example, vendor ABC Inc. can expect that configs such as
+CONFIG_ABC_SOC_SUPPORT won't be enabled either as built-in or loadable
+GKI modules without their support.
+
+If a kernel driver or framework exists in ACK, but isn't delivered as part of
+the GKI kernel, vendors can modify the driver and deliver it as a vendor
+module. Such modifications are discouraged for non vendor-specific modules
+because the same capabilities might be delivered with the GKI kernel in a
+future release. When the GKI kernel contains capabilities provided by a vendor
+module, the vendor module won't load. For example,
+CONFIG_GREYBUS isn't set for GKI in Android 11, so
+vendors may deliver greybus vendor modules. However, CONFIG_GREYBUS might be
+enabled as a GKI built-in or module in Android 12, in
+which case greybus vendor modules won't be loaded. A best practice is to use
+the upstream version of non vendor-specific drivers if they are delivered as
+vendor modules.
+
+You can deliver vendor modules in the vendor or the
+vendor_boot
+image. Modules required early in the boot process must be in vendor_boot.
+There is a boot-time cost associated with loading modules from vendor_boot.
+
+ Content and code samples on this page are subject to the licenses described in the Content License. Java and OpenJDK are trademarks or registered trademarks of Oracle and/or its affiliates.
+ Last updated 2026-10-09 UTC.
+
+ [[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-10-09 UTC."],[],[]]
+
+ Build
+
+ Android repository
+
+ Requirements
+
+ Downloading
+
+ Preview binaries
+
+ Factory images
+
+ Driver binaries
+
+ Connect
+
+ @Android on X
+
+ @AndroidDev on X
+
+ Android Blog
+
+ Google Security Blog
+
+ Platform on Google Groups
+
+ Building on Google Groups
+
+ Porting on Google Groups
+
+ Get help
+
+ Android Help Center
+
+ Pixel Help Center
+
+ www.android.com
+
+ Google Mobile Services
+
+ Stack Overflow
+
+ Issue Tracker
+
+ About Android
+
+ Community
+
+ Legal
+
+ License
+
+ Privacy
+
+ Site feedback
+
+ Manage cookies
+
+ English
+
+ Deutsch
+
+ Español – América Latina
+
+ Français
+
+ Indonesia
+
+ Italiano
+
+ Polski
+
+ Português – Brasil
+
+ Tiếng Việt
+
+ Türkçe
+
+ Русский
+
+ עברית
+
+ العربيّة
+
+ فارسی
+
+ हिंदी
+
+ বাংলা
+
+ ภาษาไทย
+
+ 中文 – 简体
+
+ 中文 – 繁體
+
+ 日本語
+
+ 한국어

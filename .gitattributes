@@ -1,0 +1,8 @@
+# 统一换行：仓库内所有文本文件以 LF 存储，避免 Windows 上编辑后脚本出现 CRLF 导致 bash 执行失败。
+* text=auto eol=lf
+
+# 二进制/生成物
+*.zip binary
+*.img binary
+*.jar binary
+*.apk binary

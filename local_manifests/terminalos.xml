@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Polaris-TerminalOS local manifest
+
+  用法（在源码根目录）：
+    mkdir -p .repo/local_manifests
+    cp <本项目>/local_manifests/terminalos.xml .repo/local_manifests/
+    repo sync
+
+  说明：
+  - 自有仓库全部固定到 terminalos/lineage-23.2 分支（分支命名是项目内部约定）。
+  - 其余 LineageOS 仓库继续跟踪上游，不在本文件里出现。
+  - 内核与 vendor blobs 的上游状态（2026-10-27 核验）：
+      * LineageOS/android_kernel_xiaomi_sdm845           没有 lineage-23.2 分支（最高 lineage-22.2，Linux 4.9）
+      * TheMuppets/proprietary_vendor_xiaomi_polaris      没有 lineage-23.2 分支（最高 lineage-22.2）
+      * TheMuppets/proprietary_vendor_xiaomi_sdm845-common 没有 lineage-23.2 分支（最高 lineage-22.2）
+    因此这里把三者显式锁定到 lineage-22.2，让 23.2 的 repo sync 至少可以完成。
+    这是**实验性设备移植的前提**，不代表 23.2 已获得设备支持；构建与实机验证见 docs/03、docs/09。
+    如果后续上游出现 23.2 分支（或我们自建了内核分支），应先核验再改这里的 revision。
+  - 如果不想锁定内核，也可以在构建前设置 ROOMSERVICE_BRANCHES="lineage-22.2" 让 breakfast 自行回退，
+    但那样结果依赖环境变量、不可复现，因此不作为默认方案。
+-->
+<manifest>
+    <remote name="terminalos" fetch="https://github.com/GStarX/" />
+
+    <!-- 自有仓库：设备树 fork、产品配置、TerminalHome -->
+    <project name="android_device_xiaomi_polaris"
+             path="device/xiaomi/polaris"
+             remote="terminalos"
+             revision="terminalos/lineage-23.2" />
+    <project name="android_vendor_terminalos"
+             path="vendor/terminalos"
+             remote="terminalos"
+             revision="terminalos/lineage-23.2" />
+    <project name="android_packages_apps_TerminalHome"
+             path="packages/apps/TerminalHome"
+             remote="terminalos"
+             revision="terminalos/lineage-23.2" />
+
+    <!-- 上游缺口：显式锁定到 22.2，见文件头说明；使用默认 remote（github） -->
+    <project name="LineageOS/android_kernel_xiaomi_sdm845"
+             path="kernel/xiaomi/sdm845"
+             revision="lineage-22.2" />
+    <project name="TheMuppets/proprietary_vendor_xiaomi_polaris"
+             path="vendor/xiaomi/polaris"
+             revision="lineage-22.2" />
+    <project name="TheMuppets/proprietary_vendor_xiaomi_sdm845-common"
+             path="vendor/xiaomi/sdm845-common"
+             revision="lineage-22.2" />
+</manifest>

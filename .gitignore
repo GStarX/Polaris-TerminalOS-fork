@@ -1,0 +1,8 @@
+# 构建产物 / CI 输出不入库
+/android/
+/out/
+*.log
+
+# 本地临时
+*.part
+*.tmp

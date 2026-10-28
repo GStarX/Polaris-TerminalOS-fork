@@ -1,0 +1,578 @@
+GKI development  |  Android OS core topics  |  Android Open Source Project
+
+ Skip to main content
+
+ Docs
+
+ What's new?
+
+ Release notes
+
+ Latest security bulletins
+
+ Latest Compatibility Definition Document (CDD)
+
+ Site updates
+
+ Getting Started
+
+ About
+
+ Start
+
+ Download
+
+ Builds
+
+ Test
+
+ Create
+
+ Contribute
+
+ Community
+
+ Tools, build, and related reference
+
+ Security
+
+ Overview
+
+ Bulletins
+
+ Features
+
+ Testing
+
+ Best Practices
+
+ Core Topics
+
+ Architecture
+
+ Audio
+
+ Camera
+
+ Connectivity
+
+ Data
+
+ Display
+
+ Fonts
+
+ Graphics
+
+ Interaction
+
+ Media
+
+ Performance
+
+ Permissions
+
+ Power
+
+ Runtime
+
+ Settings
+
+ Storage
+
+ Tests
+
+ Updates
+
+ Virtualization
+
+ Compatibility
+
+ Compatibility Definition Document (CDD)
+
+ Compatibility Test Suite (CTS)
+
+ Android Devices
+
+ Overview
+
+ Cuttlefish
+
+ Enterprise
+
+ TV
+
+ Automotive
+
+ Overview
+
+ Software Defined Vehicle
+
+ In-vehicle Infotainment
+
+ Release Details
+
+ Reference
+
+ HIDL
+
+ HAL
+
+ Trade Federation
+
+ Security Test Suite
+
+ Android Code Search
+
+ /
+
+ English
+
+ Deutsch
+
+ Español – América Latina
+
+ Français
+
+ Indonesia
+
+ Italiano
+
+ Polski
+
+ Português – Brasil
+
+ Tiếng Việt
+
+ Türkçe
+
+ Русский
+
+ עברית
+
+ العربيّة
+
+ فارسی
+
+ हिंदी
+
+ বাংলা
+
+ ภาษาไทย
+
+ 中文 – 简体
+
+ 中文 – 繁體
+
+ 日本語
+
+ 한국어
+
+ Sign in
+
+ Docs
+
+ Core topics
+
+ Overview
+
+ Architecture and Platform
+
+ Connectivity and Input
+
+ Media and Display
+
+ System health and Updates
+
+ Testing
+
+ Data storage and access
+
+ Docs
+
+ More
+
+ Overview
+
+ Architecture and Platform
+
+ Connectivity and Input
+
+ Media and Display
+
+ System health and Updates
+
+ Testing
+
+ Data storage and access
+
+ Android Code Search
+
+ Architecture
+ Overview
+ 
+ Hardware abstraction layer (HAL)
+ Overview
+ 
+ HIDL (deprecated)
+ OverviewInterfaces and packagesInterface hashingServices and data transferFast Message QueueUse Binder IPCHIDL MemoryBlockNetwork stack configuration toolsModel threadingConvert HAL modulesData typesSafe unionInterface versioningCode style guide
+ HIDL C++
+ OverviewPackagesInterfacesData typesFunctions
+ HIDL Java
+ OverviewData typesInterface methods and errorsExport constants
+ Other
+ HIDL framework backward compatibility verificationDynamically available HALsLegacy HALs (AOSP <=v7)
+ 
+ Kernel
+ OverviewKernel release notesStable kernel releases and updatesAndroid common kernelsGKI projectGKI developmentGKI versioning scheme
+ 
+ GKI release builds
+ Overviewandroid12-5.10 release buildsandroid13-5.10 release buildsandroid13-5.15 release buildsandroid14-5.15 release buildsandroid14-6.1 release buildsandroid15-6.6 release buildsandroid16-6.12 release buildsandroid17-6.18 release builds
+ 
+ Deprecated builds
+ android12-5.10 deprecated buildsandroid13-5.10 deprecated buildsandroid13-5.15 deprecated buildsandroid14-5.15 deprecated buildsandroid14-6.1 deprecated buildsandroid15-6.6 deprecated buildsandroid16-6.12 deprecated buildsandroid17-6.18 deprecated builds
+ 
+ GKI release builds (JSON)
+ android12-5.10 release buildsandroid13-5.10 release buildsandroid13-5.15 release buildsandroid14-5.15 release buildsandroid14-6.1 release buildsandroid15-6.6 release buildsandroid16-6.12 release buildsandroid17-6.18 release buildsGKI release processRequest a respinGKI 16-6.12 android-mainline errataMaintain a stable KMI
+ 
+ Kernel ABI monitoring
+ OverviewRun ABI monitoringWork with symbol lists
+ 
+ Modules
+ OverviewConfigure kernel features as GKI modulesVendor module guidelinesLoadable kernel modulesKernel module supportTest GKI modulesBoot time optimizationDebug featuresDevelop kernel code for GKIProxy Execution in AndroidAndroid kernel file system supportExtend the kernel with eBPFCollect kernel telemetry with eBPFUse DebugFS in Android 12FIPS 140-3 certifiable GKI crypto moduleEROFSAndroid kernel FAQKernel networking unit testsTransition from ION to DMA-BUF heaps (5.4 kernel)Incremental File System
+ 
+ Configuration
+ OverviewImplement system properties as APIsAdd system propertiesImplement Config File Schema API
+ 
+ Archive
+ OverviewConfigStoreCreate the HAL interfaceImplement the serviceClient-side useAdd ConfigStore classes and items
+ 
+ Device tree overlays
+ OverviewImplement DTOsDTO syntaxCompile and verifyUse multiple DTsDTB and DTBO partitionsOptimize DTO
+ 
+ Vendor NDK (<=AOSP 14)
+ OverviewEnable VNDKVNDK build system supportVNDK extensionsVNDK snapshot designGenerate VNDK snapshotsGenerate vendor snapshotsLinker namespaceDirectories, rules, and sepolicyRenderScriptABI stabilityPrebuilt ABI usages checker
+ 
+ Vendor interface object
+ OverviewManifestsCompatibility matrixesFCM lifecycleDevice manifest developmentMatch rulesAdditional resources
+ 
+ AIDL
+ OverviewAIDL languageAIDL backendsStable AIDLAIDL for HALsRun AIDL services dynamicallyAnnotations in AIDLFMQ with AIDLAIDL fuzzingAIDL style guide
+ 
+ Binder (Interprocess Communication)
+ OverviewHandle threadsPriority inheritanceHandle cached and frozen apps
+ 
+ Bootloader
+ OverviewCanonical boot reasonBoot image headerImplement bootconfigRecovery imagesDTB imagesImplement OTA updatesLock and unlock the bootloaderVersion information in AVB propertiesMove fastboot to userspace
+ 
+ Generic Bootloader
+ OverviewDeploy GBLGBL respin processGBL release builds
+ 
+ Partitions
+ OverviewPartition layoutVendor boot partitionsVendor and ODM DLKM partitionsShared system imageRamdisk partitionsGeneric boot partitionODM partitionsProduct partitionsImplement a GKI module partitionEnforce product partition interfacesTrusty OS partitions
+ 
+ 16 KB page size
+ OverviewUse Cuttlefish with 16 KB page size on ARM64Simulate Cuttlefish with 16 KB page size on x86-64Flash Pixel with 16 KB page size supportGet the page sizeOptimize for 16 KB page sizeSystem propertiesEnable 16 KB toggleEnable 16 KB backcompat optionVendor API level
+
+ Power
+ OverviewPower managementThermal mitigationPower stats HALApp power managementPlatform power management with DozePerformance managementApp background behavior trackersSupport batteryless devicesMeasure component powerMeasure device powerMeasure power valuesRoutine Battery SaverTV standbySystemSuspend service
+ 
+ Wattson
+ Power analysis overviewCollect and analyze traces
+
+ Settings
+ OverviewDesign guidelinesPatterns and componentsInformation architecturePersonalized settingsUniversal search
+
+ Fonts
+ Implement custom font fallback
+
+ What's new?
+
+ Release notes
+
+ Latest security bulletins
+
+ Latest Compatibility Definition Document (CDD)
+
+ Site updates
+
+ Getting Started
+
+ About
+
+ Start
+
+ Download
+
+ Builds
+
+ Test
+
+ Create
+
+ Contribute
+
+ Community
+
+ Tools, build, and related reference
+
+ Security
+
+ Overview
+
+ Bulletins
+
+ Features
+
+ Testing
+
+ Best Practices
+
+ Core Topics
+
+ Architecture
+
+ Audio
+
+ Camera
+
+ Connectivity
+
+ Data
+
+ Display
+
+ Fonts
+
+ Graphics
+
+ Interaction
+
+ Media
+
+ Performance
+
+ Permissions
+
+ Power
+
+ Runtime
+
+ Settings
+
+ Storage
+
+ Tests
+
+ Updates
+
+ Virtualization
+
+ Compatibility
+
+ Compatibility Definition Document (CDD)
+
+ Compatibility Test Suite (CTS)
+
+ Android Devices
+
+ Overview
+
+ Cuttlefish
+
+ Enterprise
+
+ TV
+
+ Automotive
+
+ Overview
+
+ Software Defined Vehicle
+
+ In-vehicle Infotainment
+
+ Release Details
+
+ Reference
+
+ HIDL
+
+ HAL
+
+ Trade Federation
+
+ Security Test Suite
+
+ Effective in 2026, to align with our trunk stable development model and ensure platform stability for the ecosystem, we will publish source code to AOSP in Q2 and Q4. For building and contributing to AOSP, use android-latest-release. The android-latest-release manifest branch will always reference the most recent release pushed to AOSP. For more information, see Changes to AOSP.
+
+ AOSP
+
+ Docs
+
+ Core topics
+
+ Architecture and Platform
+
+ GKI development
+
+ Stay organized with collections
+
+ Save and categorize content based on your preferences.
+
+This guide provides a high-level overview of GKI development.
+
+Review existing documentation
+
+Before you begin GKI development, read the following documents:
+
+For an overview of the GKI project, read
+GKI project.
+For an explanation of how Android Common Kernels (ACKs), GKI kernels, and
+KMI relate, read Android Common Kernels (ACK).
+To learn how to contribute to the kernel, read
+Developing kernel code for GKI,
+Contribution guidelines
+for Android Common Kernels, and
+Linux kernel coding standards.
+To learn about GKI and vendor modules, read
+Kernel modules overview and other
+documents in the modules section.
+
+Build, monitor, and test
+
+When building, monitoring, and testing your GKI implementations, follow these
+guidelines:
+
+Use the hermetic build process and LLVM toolchain.
+Submit your KMI symbol list to the
+appropriate ACK.
+Set up a
+continuous ABI monitoring system
+in your internal kernel development workflows. For additional details, see
+Maintaining a Stable KMI.
+Run full system validation tests with GKI. If you experience any
+regressions in power and performance and don't have mechanisms to address these
+issues in the ACK code, email
+kernel-team@android.com for help.
+
+Follow the patch process
+
+Before creating and sending a patch,
+send patches upstream to LKML.
+ If the patch can't be upstreamed first, explain the rationale
+ in a bug. For further
+ information on patching, see
+ Develop kernel code for GKI.
+
+How to file a kernel bug or contact us
+
+To report a bug, click the Kernel (GKI) File a bug link on the
+Reporting bugs page.
+If you have GKI or kernel-related questions, email the
+kernel-team@android.com.
+
+ Content and code samples on this page are subject to the licenses described in the Content License. Java and OpenJDK are trademarks or registered trademarks of Oracle and/or its affiliates.
+ Last updated 2026-10-09 UTC.
+
+ [[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-10-09 UTC."],[],[]]
+
+ Build
+
+ Android repository
+
+ Requirements
+
+ Downloading
+
+ Preview binaries
+
+ Factory images
+
+ Driver binaries
+
+ Connect
+
+ @Android on X
+
+ @AndroidDev on X
+
+ Android Blog
+
+ Google Security Blog
+
+ Platform on Google Groups
+
+ Building on Google Groups
+
+ Porting on Google Groups
+
+ Get help
+
+ Android Help Center
+
+ Pixel Help Center
+
+ www.android.com
+
+ Google Mobile Services
+
+ Stack Overflow
+
+ Issue Tracker
+
+ About Android
+
+ Community
+
+ Legal
+
+ License
+
+ Privacy
+
+ Site feedback
+
+ Manage cookies
+
+ English
+
+ Deutsch
+
+ Español – América Latina
+
+ Français
+
+ Indonesia
+
+ Italiano
+
+ Polski
+
+ Português – Brasil
+
+ Tiếng Việt
+
+ Türkçe
+
+ Русский
+
+ עברית
+
+ العربيّة
+
+ فارسی
+
+ हिंदी
+
+ বাংলা
+
+ ภาษาไทย
+
+ 中文 – 简体
+
+ 中文 – 繁體
+
+ 日本語
+
+ 한국어

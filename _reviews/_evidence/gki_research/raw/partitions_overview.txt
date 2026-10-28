@@ -1,0 +1,691 @@
+Partitions overview  |  Android OS core topics  |  Android Open Source Project
+
+ Skip to main content
+
+ Docs
+
+ What's new?
+
+ Release notes
+
+ Latest security bulletins
+
+ Latest Compatibility Definition Document (CDD)
+
+ Site updates
+
+ Getting Started
+
+ About
+
+ Start
+
+ Download
+
+ Builds
+
+ Test
+
+ Create
+
+ Contribute
+
+ Community
+
+ Tools, build, and related reference
+
+ Security
+
+ Overview
+
+ Bulletins
+
+ Features
+
+ Testing
+
+ Best Practices
+
+ Core Topics
+
+ Architecture
+
+ Audio
+
+ Camera
+
+ Connectivity
+
+ Data
+
+ Display
+
+ Fonts
+
+ Graphics
+
+ Interaction
+
+ Media
+
+ Performance
+
+ Permissions
+
+ Power
+
+ Runtime
+
+ Settings
+
+ Storage
+
+ Tests
+
+ Updates
+
+ Virtualization
+
+ Compatibility
+
+ Compatibility Definition Document (CDD)
+
+ Compatibility Test Suite (CTS)
+
+ Android Devices
+
+ Overview
+
+ Cuttlefish
+
+ Enterprise
+
+ TV
+
+ Automotive
+
+ Overview
+
+ Software Defined Vehicle
+
+ In-vehicle Infotainment
+
+ Release Details
+
+ Reference
+
+ HIDL
+
+ HAL
+
+ Trade Federation
+
+ Security Test Suite
+
+ Android Code Search
+
+ /
+
+ English
+
+ Deutsch
+
+ Español – América Latina
+
+ Français
+
+ Indonesia
+
+ Italiano
+
+ Polski
+
+ Português – Brasil
+
+ Tiếng Việt
+
+ Türkçe
+
+ Русский
+
+ עברית
+
+ العربيّة
+
+ فارسی
+
+ हिंदी
+
+ বাংলা
+
+ ภาษาไทย
+
+ 中文 – 简体
+
+ 中文 – 繁體
+
+ 日本語
+
+ 한국어
+
+ Sign in
+
+ Docs
+
+ Core topics
+
+ Overview
+
+ Architecture and Platform
+
+ Connectivity and Input
+
+ Media and Display
+
+ System health and Updates
+
+ Testing
+
+ Data storage and access
+
+ Docs
+
+ More
+
+ Overview
+
+ Architecture and Platform
+
+ Connectivity and Input
+
+ Media and Display
+
+ System health and Updates
+
+ Testing
+
+ Data storage and access
+
+ Android Code Search
+
+ Architecture
+ Overview
+ 
+ Hardware abstraction layer (HAL)
+ Overview
+ 
+ HIDL (deprecated)
+ OverviewInterfaces and packagesInterface hashingServices and data transferFast Message QueueUse Binder IPCHIDL MemoryBlockNetwork stack configuration toolsModel threadingConvert HAL modulesData typesSafe unionInterface versioningCode style guide
+ HIDL C++
+ OverviewPackagesInterfacesData typesFunctions
+ HIDL Java
+ OverviewData typesInterface methods and errorsExport constants
+ Other
+ HIDL framework backward compatibility verificationDynamically available HALsLegacy HALs (AOSP <=v7)
+ 
+ Kernel
+ OverviewKernel release notesStable kernel releases and updatesAndroid common kernelsGKI projectGKI developmentGKI versioning scheme
+ 
+ GKI release builds
+ Overviewandroid12-5.10 release buildsandroid13-5.10 release buildsandroid13-5.15 release buildsandroid14-5.15 release buildsandroid14-6.1 release buildsandroid15-6.6 release buildsandroid16-6.12 release buildsandroid17-6.18 release builds
+ 
+ Deprecated builds
+ android12-5.10 deprecated buildsandroid13-5.10 deprecated buildsandroid13-5.15 deprecated buildsandroid14-5.15 deprecated buildsandroid14-6.1 deprecated buildsandroid15-6.6 deprecated buildsandroid16-6.12 deprecated buildsandroid17-6.18 deprecated builds
+ 
+ GKI release builds (JSON)
+ android12-5.10 release buildsandroid13-5.10 release buildsandroid13-5.15 release buildsandroid14-5.15 release buildsandroid14-6.1 release buildsandroid15-6.6 release buildsandroid16-6.12 release buildsandroid17-6.18 release buildsGKI release processRequest a respinGKI 16-6.12 android-mainline errataMaintain a stable KMI
+ 
+ Kernel ABI monitoring
+ OverviewRun ABI monitoringWork with symbol lists
+ 
+ Modules
+ OverviewConfigure kernel features as GKI modulesVendor module guidelinesLoadable kernel modulesKernel module supportTest GKI modulesBoot time optimizationDebug featuresDevelop kernel code for GKIProxy Execution in AndroidAndroid kernel file system supportExtend the kernel with eBPFCollect kernel telemetry with eBPFUse DebugFS in Android 12FIPS 140-3 certifiable GKI crypto moduleEROFSAndroid kernel FAQKernel networking unit testsTransition from ION to DMA-BUF heaps (5.4 kernel)Incremental File System
+ 
+ Configuration
+ OverviewImplement system properties as APIsAdd system propertiesImplement Config File Schema API
+ 
+ Archive
+ OverviewConfigStoreCreate the HAL interfaceImplement the serviceClient-side useAdd ConfigStore classes and items
+ 
+ Device tree overlays
+ OverviewImplement DTOsDTO syntaxCompile and verifyUse multiple DTsDTB and DTBO partitionsOptimize DTO
+ 
+ Vendor NDK (<=AOSP 14)
+ OverviewEnable VNDKVNDK build system supportVNDK extensionsVNDK snapshot designGenerate VNDK snapshotsGenerate vendor snapshotsLinker namespaceDirectories, rules, and sepolicyRenderScriptABI stabilityPrebuilt ABI usages checker
+ 
+ Vendor interface object
+ OverviewManifestsCompatibility matrixesFCM lifecycleDevice manifest developmentMatch rulesAdditional resources
+ 
+ AIDL
+ OverviewAIDL languageAIDL backendsStable AIDLAIDL for HALsRun AIDL services dynamicallyAnnotations in AIDLFMQ with AIDLAIDL fuzzingAIDL style guide
+ 
+ Binder (Interprocess Communication)
+ OverviewHandle threadsPriority inheritanceHandle cached and frozen apps
+ 
+ Bootloader
+ OverviewCanonical boot reasonBoot image headerImplement bootconfigRecovery imagesDTB imagesImplement OTA updatesLock and unlock the bootloaderVersion information in AVB propertiesMove fastboot to userspace
+ 
+ Generic Bootloader
+ OverviewDeploy GBLGBL respin processGBL release builds
+ 
+ Partitions
+ OverviewPartition layoutVendor boot partitionsVendor and ODM DLKM partitionsShared system imageRamdisk partitionsGeneric boot partitionODM partitionsProduct partitionsImplement a GKI module partitionEnforce product partition interfacesTrusty OS partitions
+ 
+ 16 KB page size
+ OverviewUse Cuttlefish with 16 KB page size on ARM64Simulate Cuttlefish with 16 KB page size on x86-64Flash Pixel with 16 KB page size supportGet the page sizeOptimize for 16 KB page sizeSystem propertiesEnable 16 KB toggleEnable 16 KB backcompat optionVendor API level
+
+ Power
+ OverviewPower managementThermal mitigationPower stats HALApp power managementPlatform power management with DozePerformance managementApp background behavior trackersSupport batteryless devicesMeasure component powerMeasure device powerMeasure power valuesRoutine Battery SaverTV standbySystemSuspend service
+ 
+ Wattson
+ Power analysis overviewCollect and analyze traces
+
+ Settings
+ OverviewDesign guidelinesPatterns and componentsInformation architecturePersonalized settingsUniversal search
+
+ Fonts
+ Implement custom font fallback
+
+ What's new?
+
+ Release notes
+
+ Latest security bulletins
+
+ Latest Compatibility Definition Document (CDD)
+
+ Site updates
+
+ Getting Started
+
+ About
+
+ Start
+
+ Download
+
+ Builds
+
+ Test
+
+ Create
+
+ Contribute
+
+ Community
+
+ Tools, build, and related reference
+
+ Security
+
+ Overview
+
+ Bulletins
+
+ Features
+
+ Testing
+
+ Best Practices
+
+ Core Topics
+
+ Architecture
+
+ Audio
+
+ Camera
+
+ Connectivity
+
+ Data
+
+ Display
+
+ Fonts
+
+ Graphics
+
+ Interaction
+
+ Media
+
+ Performance
+
+ Permissions
+
+ Power
+
+ Runtime
+
+ Settings
+
+ Storage
+
+ Tests
+
+ Updates
+
+ Virtualization
+
+ Compatibility
+
+ Compatibility Definition Document (CDD)
+
+ Compatibility Test Suite (CTS)
+
+ Android Devices
+
+ Overview
+
+ Cuttlefish
+
+ Enterprise
+
+ TV
+
+ Automotive
+
+ Overview
+
+ Software Defined Vehicle
+
+ In-vehicle Infotainment
+
+ Release Details
+
+ Reference
+
+ HIDL
+
+ HAL
+
+ Trade Federation
+
+ Security Test Suite
+
+ Effective in 2026, to align with our trunk stable development model and ensure platform stability for the ecosystem, we will publish source code to AOSP in Q2 and Q4. For building and contributing to AOSP, use android-latest-release. The android-latest-release manifest branch will always reference the most recent release pushed to AOSP. For more information, see Changes to AOSP.
+
+ AOSP
+
+ Docs
+
+ Core topics
+
+ Architecture and Platform
+
+ Partitions overview
+
+ Stay organized with collections
+
+ Save and categorize content based on your preferences.
+
+Android devices contain several partitions or specific sections of storage
+space used to contain specific parts of the device's software. Each partition
+contains a partition image (an IMG file) or snapshot of all the software for
+the partition. Figure 1 shows the layout of core partitions on a device:
+
+Figure 1. Layout of core partitions.
+
+Partitions are classified in three categories:
+
+System partitions are partitions that are updated when updating the OS
+and other features. The system, boot, and init_boot are core system
+partitions.
+Vendor partitions contain device and hardware-specific code that might
+never be updated after initial release. The vendor, vendor_boot, and odm
+partitions are core vendor partitions.
+Nonupdatable partitions are partitions whose contents are either not updated
+or updated with user data.
+
+Code in system and vendor partitions can interact using a stable interface
+called the vendor interface (VINTF).
+Note: The separation of system partitions from vendor partitions was part of
+an Android 11 effort called Project Treble. With this architecture, you can
+update a device's operating system and apps without updating any of
+hardware-specific code.
+System partitions
+
+Following is a list of all system partitions and their use:
+
+boot partition. This partition contains a Generic Kernel Image (GKI).
+This partition also contains the generic ramdisk in devices launched in
+Android 12 and lower. For further information on generic ramdisk, see
+Generic ramdisk image contents.
+init_boot partition (Android 13 and higher). This partition contains a
+generic ramdisk. In Android 11 and 12, the generic ramdisk is in the
+boot partition.
+system partition. This partition contains the system image used
+for OEM products.
+system_ext partition. This partition contains system resources and
+proprietary system modules that extend the common system image in the system
+partition.
+Note: Single system image (SSI) refers to a file, such as a zip file
+that contains the images
+of the system and system_ext partitions and reuses those images across a
+set of target devices. For further information on SSI, see Android shared system image.
+system_dlkm partition. This partition contains GKI modules. For further
+information on this partition, see Implement a GKI module partition.
+product partition. This partition can contain product-specific modules
+that aren't bundled with any other partitions.
+Note: The Vendor Native Development Kit (VNDK)
+is a set of libraries installed in the system partition and designed
+exclusively for vendors to implement their HALs. The product and vendor
+partitions can link to VNDK libraries in the system partition, but can't
+link to other libraries in the system partition.
+pvmfw partition. This partition stores the Protected Virtual Machine
+Firmware (pvmfw) which is the first code that runs in protected VMs. For more
+information, see Protected Virtual Machine Firmware.
+generic_bootloader partition. This partition contains the generic bootloader.
+
+Vendor partitions
+
+Following is a list of all vendor partitions and their use:
+
+vendor_boot partition. This partition contains vendor-specific boot
+code. For more information, see Vendor boot partitions.
+recovery partition. This partition stores the recovery image, which is
+booted during the over-the-air (OTA) update process. Devices that support
+seamless updates can store the recovery images as a ramdisk contained in the
+boot or init_boot image. For more information on seamless updates,
+see A/B (seamless) updates.
+misc partition. This partition is used by the recovery partition and is
+4 KB or larger.
+vbmeta partition. This partition contains the Verified Boot information
+for all of the partitions. This information verifies that the images installed
+in each partition is trusted. For further information on
+Verified Boot, see
+Verified Boot.
+vendor partition. This partition contains any binary that is vendor
+specific and not generic enough to distribute to AOSP.
+Note: The Vendor Native Development Kit (VNDK)
+is a set of libraries installed in the system partition and designed
+exclusively for vendors to implement their HALs. The product and vendor
+partitions can link to VNDK libraries in the system partition, but can't
+link to other libraries in the system partition.
+vendor_dlkm partition. This partition contains vendor
+kernel modules. By storing vendor kernel modules in this partition
+instead of the vendor partition, you can update kernel
+modules without updating the vendor partition. For more information, see
+Vendor and ODM DKLM partitions.
+odm partition. This partition contains original design manufacturer
+(ODM)
+customizations to system-on-chip (SoC) vendor board-support packages (BSPs).
+Such customizations enable ODMs to replace or customize SoC components, and
+implement kernel modules for board-specific components, daemons, and
+ODM-specific features on hardware abstraction layers (HALs). This partition is
+optional. Typically this partition is used to contain customizations so that
+devices can
+use a single vendor image for multiple hardware SKUs. For more information,
+see ODM partitions.
+odm_dlkm partition. This partition is dedicated to storing ODM kernel
+modules. By storing ODM kernel modules in the this partition, instead of
+the odm partition, you can update ODM kernel modules without updating the
+odm partition. For more information, see
+Vendor and ODM DKLM partitions.
+radio partition. This partition contains the radio image and is needed
+only for devices that include a radio with radio-specific software in a
+dedicated partition.
+
+Note: Devices that support seamless updates
+need two partitions, referred to as slots (slot A and slot B) for the boot,
+system, vendor, and radio partitions. For further
+information, see Partition selection (slots).
+Nonupdatable partitions
+
+Following is a list of all nonupdatable partitions and their use:
+
+cache partition. This partition contains temporary data and is optional
+if your device uses seamless updates. This partition doesn't need to be
+writable from the bootloader, but needs to be erasable. The partition
+size depends on the device type and the availability of space on userdata;
+typically, 50 to 100 MB is sufficient.
+userdata partition. This partition contains user-installed apps and
+data, including customization data.
+metadata partition. If your device uses metadata encryption,
+this partition contains the metadata encryption key. The size of this
+partition is 16 MB or larger, it isn't encrypted, and its data isn't
+snapshotted. This partition is erased when the device is factory reset.
+
+Partition update rules and recommendations
+
+We recommend updating all system partitions as a whole
+and all vendor partitions as another whole. By updating the set of partitions as
+a whole, you can test to verify the interfaces between images in each partition
+remain stable.
+
+Regardless of how you update your partitions, the following partitions must
+be updated due to tightly coupled dependencies and lack of stable APIs:
+
+The boot and system_dlkm partitions
+the init_boot, system, system_ext, and product partitions
+
+Note: If all interfaces between the product partition and other system
+partitions
+have stable ABIs, you can update the product partition independently. For
+furthe information, see Maintain ABIs between partitions.
+Dynamic partitions
+
+Devices running Android 11 and higher can support
+dynamic partitions, which are a userspace partitioning system for Android that
+lets you create, resize, or destroy partitions during over-the-air (OTA)
+updates. For more information, see Dynamic partitions.
+
+Soong product variants
+
+The Soong build system uses image variants to split
+build dependencies. Native modules (/build/soong/cc) can mutate system
+process modules to the core variant and vendor process modules to the
+vendor variant; a module in one image variant can't link to other modules in
+a different image variant.
+
+In Android 12 or higher, a system module with
+vendor_available: true creates a vendor variant in addition to the core
+variant. To create a product variant, product_available: true must be
+ defined. Some VNDK libraries without product_available: true aren't
+ available to product modules.
+
+ Content and code samples on this page are subject to the licenses described in the Content License. Java and OpenJDK are trademarks or registered trademarks of Oracle and/or its affiliates.
+ Last updated 2026-10-09 UTC.
+
+ [[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-10-09 UTC."],[],[]]
+
+ Build
+
+ Android repository
+
+ Requirements
+
+ Downloading
+
+ Preview binaries
+
+ Factory images
+
+ Driver binaries
+
+ Connect
+
+ @Android on X
+
+ @AndroidDev on X
+
+ Android Blog
+
+ Google Security Blog
+
+ Platform on Google Groups
+
+ Building on Google Groups
+
+ Porting on Google Groups
+
+ Get help
+
+ Android Help Center
+
+ Pixel Help Center
+
+ www.android.com
+
+ Google Mobile Services
+
+ Stack Overflow
+
+ Issue Tracker
+
+ About Android
+
+ Community
+
+ Legal
+
+ License
+
+ Privacy
+
+ Site feedback
+
+ Manage cookies
+
+ English
+
+ Deutsch
+
+ Español – América Latina
+
+ Français
+
+ Indonesia
+
+ Italiano
+
+ Polski
+
+ Português – Brasil
+
+ Tiếng Việt
+
+ Türkçe
+
+ Русский
+
+ עברית
+
+ العربيّة
+
+ فارسی
+
+ हिंदी
+
+ বাংলা
+
+ ภาษาไทย
+
+ 中文 – 简体
+
+ 中文 – 繁體
+
+ 日本語
+
+ 한국어

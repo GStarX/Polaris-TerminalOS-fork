@@ -1,0 +1,640 @@
+Kernel module support  |  Android OS core topics  |  Android Open Source Project
+
+ Skip to main content
+
+ Docs
+
+ What's new?
+
+ Release notes
+
+ Latest security bulletins
+
+ Latest Compatibility Definition Document (CDD)
+
+ Site updates
+
+ Getting Started
+
+ About
+
+ Start
+
+ Download
+
+ Builds
+
+ Test
+
+ Create
+
+ Contribute
+
+ Community
+
+ Tools, build, and related reference
+
+ Security
+
+ Overview
+
+ Bulletins
+
+ Features
+
+ Testing
+
+ Best Practices
+
+ Core Topics
+
+ Architecture
+
+ Audio
+
+ Camera
+
+ Connectivity
+
+ Data
+
+ Display
+
+ Fonts
+
+ Graphics
+
+ Interaction
+
+ Media
+
+ Performance
+
+ Permissions
+
+ Power
+
+ Runtime
+
+ Settings
+
+ Storage
+
+ Tests
+
+ Updates
+
+ Virtualization
+
+ Compatibility
+
+ Compatibility Definition Document (CDD)
+
+ Compatibility Test Suite (CTS)
+
+ Android Devices
+
+ Overview
+
+ Cuttlefish
+
+ Enterprise
+
+ TV
+
+ Automotive
+
+ Overview
+
+ Software Defined Vehicle
+
+ In-vehicle Infotainment
+
+ Release Details
+
+ Reference
+
+ HIDL
+
+ HAL
+
+ Trade Federation
+
+ Security Test Suite
+
+ Android Code Search
+
+ /
+
+ English
+
+ Deutsch
+
+ Español – América Latina
+
+ Français
+
+ Indonesia
+
+ Italiano
+
+ Polski
+
+ Português – Brasil
+
+ Tiếng Việt
+
+ Türkçe
+
+ Русский
+
+ עברית
+
+ العربيّة
+
+ فارسی
+
+ हिंदी
+
+ বাংলা
+
+ ภาษาไทย
+
+ 中文 – 简体
+
+ 中文 – 繁體
+
+ 日本語
+
+ 한국어
+
+ Sign in
+
+ Docs
+
+ Core topics
+
+ Overview
+
+ Architecture and Platform
+
+ Connectivity and Input
+
+ Media and Display
+
+ System health and Updates
+
+ Testing
+
+ Data storage and access
+
+ Docs
+
+ More
+
+ Overview
+
+ Architecture and Platform
+
+ Connectivity and Input
+
+ Media and Display
+
+ System health and Updates
+
+ Testing
+
+ Data storage and access
+
+ Android Code Search
+
+ Architecture
+ Overview
+ 
+ Hardware abstraction layer (HAL)
+ Overview
+ 
+ HIDL (deprecated)
+ OverviewInterfaces and packagesInterface hashingServices and data transferFast Message QueueUse Binder IPCHIDL MemoryBlockNetwork stack configuration toolsModel threadingConvert HAL modulesData typesSafe unionInterface versioningCode style guide
+ HIDL C++
+ OverviewPackagesInterfacesData typesFunctions
+ HIDL Java
+ OverviewData typesInterface methods and errorsExport constants
+ Other
+ HIDL framework backward compatibility verificationDynamically available HALsLegacy HALs (AOSP <=v7)
+ 
+ Kernel
+ OverviewKernel release notesStable kernel releases and updatesAndroid common kernelsGKI projectGKI developmentGKI versioning scheme
+ 
+ GKI release builds
+ Overviewandroid12-5.10 release buildsandroid13-5.10 release buildsandroid13-5.15 release buildsandroid14-5.15 release buildsandroid14-6.1 release buildsandroid15-6.6 release buildsandroid16-6.12 release buildsandroid17-6.18 release builds
+ 
+ Deprecated builds
+ android12-5.10 deprecated buildsandroid13-5.10 deprecated buildsandroid13-5.15 deprecated buildsandroid14-5.15 deprecated buildsandroid14-6.1 deprecated buildsandroid15-6.6 deprecated buildsandroid16-6.12 deprecated buildsandroid17-6.18 deprecated builds
+ 
+ GKI release builds (JSON)
+ android12-5.10 release buildsandroid13-5.10 release buildsandroid13-5.15 release buildsandroid14-5.15 release buildsandroid14-6.1 release buildsandroid15-6.6 release buildsandroid16-6.12 release buildsandroid17-6.18 release buildsGKI release processRequest a respinGKI 16-6.12 android-mainline errataMaintain a stable KMI
+ 
+ Kernel ABI monitoring
+ OverviewRun ABI monitoringWork with symbol lists
+ 
+ Modules
+ OverviewConfigure kernel features as GKI modulesVendor module guidelinesLoadable kernel modulesKernel module supportTest GKI modulesBoot time optimizationDebug featuresDevelop kernel code for GKIProxy Execution in AndroidAndroid kernel file system supportExtend the kernel with eBPFCollect kernel telemetry with eBPFUse DebugFS in Android 12FIPS 140-3 certifiable GKI crypto moduleEROFSAndroid kernel FAQKernel networking unit testsTransition from ION to DMA-BUF heaps (5.4 kernel)Incremental File System
+ 
+ Configuration
+ OverviewImplement system properties as APIsAdd system propertiesImplement Config File Schema API
+ 
+ Archive
+ OverviewConfigStoreCreate the HAL interfaceImplement the serviceClient-side useAdd ConfigStore classes and items
+ 
+ Device tree overlays
+ OverviewImplement DTOsDTO syntaxCompile and verifyUse multiple DTsDTB and DTBO partitionsOptimize DTO
+ 
+ Vendor NDK (<=AOSP 14)
+ OverviewEnable VNDKVNDK build system supportVNDK extensionsVNDK snapshot designGenerate VNDK snapshotsGenerate vendor snapshotsLinker namespaceDirectories, rules, and sepolicyRenderScriptABI stabilityPrebuilt ABI usages checker
+ 
+ Vendor interface object
+ OverviewManifestsCompatibility matrixesFCM lifecycleDevice manifest developmentMatch rulesAdditional resources
+ 
+ AIDL
+ OverviewAIDL languageAIDL backendsStable AIDLAIDL for HALsRun AIDL services dynamicallyAnnotations in AIDLFMQ with AIDLAIDL fuzzingAIDL style guide
+ 
+ Binder (Interprocess Communication)
+ OverviewHandle threadsPriority inheritanceHandle cached and frozen apps
+ 
+ Bootloader
+ OverviewCanonical boot reasonBoot image headerImplement bootconfigRecovery imagesDTB imagesImplement OTA updatesLock and unlock the bootloaderVersion information in AVB propertiesMove fastboot to userspace
+ 
+ Generic Bootloader
+ OverviewDeploy GBLGBL respin processGBL release builds
+ 
+ Partitions
+ OverviewPartition layoutVendor boot partitionsVendor and ODM DLKM partitionsShared system imageRamdisk partitionsGeneric boot partitionODM partitionsProduct partitionsImplement a GKI module partitionEnforce product partition interfacesTrusty OS partitions
+ 
+ 16 KB page size
+ OverviewUse Cuttlefish with 16 KB page size on ARM64Simulate Cuttlefish with 16 KB page size on x86-64Flash Pixel with 16 KB page size supportGet the page sizeOptimize for 16 KB page sizeSystem propertiesEnable 16 KB toggleEnable 16 KB backcompat optionVendor API level
+
+ Power
+ OverviewPower managementThermal mitigationPower stats HALApp power managementPlatform power management with DozePerformance managementApp background behavior trackersSupport batteryless devicesMeasure component powerMeasure device powerMeasure power valuesRoutine Battery SaverTV standbySystemSuspend service
+ 
+ Wattson
+ Power analysis overviewCollect and analyze traces
+
+ Settings
+ OverviewDesign guidelinesPatterns and componentsInformation architecturePersonalized settingsUniversal search
+
+ Fonts
+ Implement custom font fallback
+
+ What's new?
+
+ Release notes
+
+ Latest security bulletins
+
+ Latest Compatibility Definition Document (CDD)
+
+ Site updates
+
+ Getting Started
+
+ About
+
+ Start
+
+ Download
+
+ Builds
+
+ Test
+
+ Create
+
+ Contribute
+
+ Community
+
+ Tools, build, and related reference
+
+ Security
+
+ Overview
+
+ Bulletins
+
+ Features
+
+ Testing
+
+ Best Practices
+
+ Core Topics
+
+ Architecture
+
+ Audio
+
+ Camera
+
+ Connectivity
+
+ Data
+
+ Display
+
+ Fonts
+
+ Graphics
+
+ Interaction
+
+ Media
+
+ Performance
+
+ Permissions
+
+ Power
+
+ Runtime
+
+ Settings
+
+ Storage
+
+ Tests
+
+ Updates
+
+ Virtualization
+
+ Compatibility
+
+ Compatibility Definition Document (CDD)
+
+ Compatibility Test Suite (CTS)
+
+ Android Devices
+
+ Overview
+
+ Cuttlefish
+
+ Enterprise
+
+ TV
+
+ Automotive
+
+ Overview
+
+ Software Defined Vehicle
+
+ In-vehicle Infotainment
+
+ Release Details
+
+ Reference
+
+ HIDL
+
+ HAL
+
+ Trade Federation
+
+ Security Test Suite
+
+ Effective in 2026, to align with our trunk stable development model and ensure platform stability for the ecosystem, we will publish source code to AOSP in Q2 and Q4. For building and contributing to AOSP, use android-latest-release. The android-latest-release manifest branch will always reference the most recent release pushed to AOSP. For more information, see Changes to AOSP.
+
+ AOSP
+
+ Docs
+
+ Core topics
+
+ Architecture and Platform
+
+ Kernel module support
+
+ Stay organized with collections
+
+ Save and categorize content based on your preferences.
+
+A generic kernel image (GKI) may not contain the required driver support to
+enable a device to mount partitions. To enable a device to mount partitions and
+to continue booting, first-stage init is enhanced to load the
+kernel modules present on a ramdisk. The ramdisk is split into generic and
+vendor ramdisks. Vendor kernel modules are stored in the vendor ramdisk. The
+order in which kernel modules are loaded is configurable.
+
+Module location
+
+The ramdisk is the filesystem for first-stage init, and for the
+recovery/fastbootd image on A/B and virtual A/B devices. It's an
+initramfs composed of two cpio archives that get concatenated by
+the bootloader. The first cpio archive, which is stored as the vendor ramdisk
+in the vendor-boot partition, contains these components:
+
+First-stage init vendor kernel modules, located in
+/lib/modules/.
+modprobe config files, located in /lib/modules/:
+modules.dep, modules.softdep,
+modules.alias, modules.options.
+A modules.load file that indicates which modules to load
+during first stage init, and in which order, in
+/lib/modules/.
+Vendor recovery-kernel modules, for A/B and Virtual A/B devices, in
+/lib/modules/
+modules.load.recovery which indicates the modules to load, and
+in which order, for A/B and Virtual A/B devices, in
+/lib/modules.
+
+The second cpio archive, which is supplied with the GKI
+as the ramdisk of the boot.img and applied on top of the
+first, contains first_stage_init and the libraries on which it depends.
+
+Module loading in first-stage init
+
+First-stage init begins by reading the modprobe configuration
+files from /lib/modules/ on the ramdisk. Next, it reads the list
+of modules specified in /lib/modules/modules.load (or in the case
+of recovery, /lib/modules/modules.load.recovery) and attempts to
+load each of those modules in order, following the configuration specified in
+the previously loaded files. The requested order may be deviated from to
+satisfy hard or soft dependencies.
+
+Build support, first-stage init
+
+To specify kernel modules to be copied into the vendor ramdisk cpio, list
+them in BOARD_VENDOR_RAMDISK_KERNEL_MODULES. The build runs
+depmod on these modules and puts the resulting modprobe configuration
+files in the vendor ramdisk cpio.
+
+The build also creates a modules.load file and stores it in the
+vendor ramdisk cpio. By default it contains all of the modules listed in
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES. To override the contents of
+that file, use BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD, as shown
+in this example:
+
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := \
+ device/vendor/mydevice-kernel/first.ko \
+ device/vendor/mydevice-kernel/second.ko \
+ device/vendor/mydevice-kernel/third.ko
+
+Build support, full Android
+
+As is the case in Android 10 and lower releases, kernel modules listed in
+BOARD_VENDOR_KERNEL_MODULES are copied by the Android platform
+build into the vendor partition at /vendor/lib/modules. The
+platform build runs depmod on these modules, and copies the
+depmod output files into the vendor partition at the same
+location. The mechanism for loading kernel modules from /vendor
+remains the same as it was for prior releases of Android. It's your decision
+how and when to load these modules, although typically this is done using
+init.rc scripts.
+
+Wildcards and integrated kernel builds
+
+Vendors who combine their device kernel build with the Android platform build
+may run into a problem using the above mentioned BOARD macros to
+specify kernel modules to be copied on to the device. If the vendor wishes to avoid
+listing kernel modules in the device's platform build files, they can use a wildcard
+($(wildcard device/vendor/mydevice/*.ko). Note that the wildcard doesn't
+work in the case of an integrated kernel build, because when make is invoked and the
+macros are expanded in makefiles, the kernel modules haven't been built, so the macros
+are empty.
+
+ To get around this problem, the vendor may have their kernel build create a zip
+archive containing the kernel modules to be be copied onto each partition.
+Set the path of that zip archive in BOARD_*_KERNEL_MODULES_ARCHIVE
+where * is the name of the partition (such as
+BOARD_VENDOR_KERNEL_MODULES_ARCHIVE). The Android platform build
+extracts this zip archive into the appropriate location and runs depmod
+on the modules.
+
+The kernel module zip archive should have a make rule that ensures the platform
+build can generate the archive when required.
+
+Recovery
+
+ In prior Android releases, kernel modules required for recovery were
+specified in BOARD_RECOVERY_KERNEL_MODULES. In Android 12,
+kernel modules required for recovery are still
+specified using this macro. However, the recovery kernel modules are copied to
+the vendor ramdisk cpio, rather than the generic ramdisk cpio. By default all
+kernel modules listed in BOARD_RECOVERY_KERNEL_MODULES are loaded
+during first-stage init. If you only want a subset of these
+modules to be loaded, specify the contents of that subset in
+BOARD_RECOVERY_KERNEL_MODULES_LOAD.
+
+Related documentation
+
+To learn about creating a vendor boot partition (which contains the vendor
+ramdisk mentioned on this page), see
+Boot
+partitions.
+
+ Content and code samples on this page are subject to the licenses described in the Content License. Java and OpenJDK are trademarks or registered trademarks of Oracle and/or its affiliates.
+ Last updated 2026-10-09 UTC.
+
+ [[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-10-09 UTC."],[],[]]
+
+ Build
+
+ Android repository
+
+ Requirements
+
+ Downloading
+
+ Preview binaries
+
+ Factory images
+
+ Driver binaries
+
+ Connect
+
+ @Android on X
+
+ @AndroidDev on X
+
+ Android Blog
+
+ Google Security Blog
+
+ Platform on Google Groups
+
+ Building on Google Groups
+
+ Porting on Google Groups
+
+ Get help
+
+ Android Help Center
+
+ Pixel Help Center
+
+ www.android.com
+
+ Google Mobile Services
+
+ Stack Overflow
+
+ Issue Tracker
+
+ About Android
+
+ Community
+
+ Legal
+
+ License
+
+ Privacy
+
+ Site feedback
+
+ Manage cookies
+
+ English
+
+ Deutsch
+
+ Español – América Latina
+
+ Français
+
+ Indonesia
+
+ Italiano
+
+ Polski
+
+ Português – Brasil
+
+ Tiếng Việt
+
+ Türkçe
+
+ Русский
+
+ עברית
+
+ العربيّة
+
+ فارسی
+
+ हिंदी
+
+ বাংলা
+
+ ภาษาไทย
+
+ 中文 – 简体
+
+ 中文 – 繁體
+
+ 日本語
+
+ 한국어

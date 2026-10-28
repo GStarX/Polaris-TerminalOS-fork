@@ -1,0 +1,592 @@
+Vendor Test Suite (VTS) and infrastructure  |  Android OS core topics  |  Android Open Source Project
+
+ Skip to main content
+
+ Docs
+
+ What's new?
+
+ Release notes
+
+ Latest security bulletins
+
+ Latest Compatibility Definition Document (CDD)
+
+ Site updates
+
+ Getting Started
+
+ About
+
+ Start
+
+ Download
+
+ Builds
+
+ Test
+
+ Create
+
+ Contribute
+
+ Community
+
+ Tools, build, and related reference
+
+ Security
+
+ Overview
+
+ Bulletins
+
+ Features
+
+ Testing
+
+ Best Practices
+
+ Core Topics
+
+ Architecture
+
+ Audio
+
+ Camera
+
+ Connectivity
+
+ Data
+
+ Display
+
+ Fonts
+
+ Graphics
+
+ Interaction
+
+ Media
+
+ Performance
+
+ Permissions
+
+ Power
+
+ Runtime
+
+ Settings
+
+ Storage
+
+ Tests
+
+ Updates
+
+ Virtualization
+
+ Compatibility
+
+ Compatibility Definition Document (CDD)
+
+ Compatibility Test Suite (CTS)
+
+ Android Devices
+
+ Overview
+
+ Cuttlefish
+
+ Enterprise
+
+ TV
+
+ Automotive
+
+ Overview
+
+ Software Defined Vehicle
+
+ In-vehicle Infotainment
+
+ Release Details
+
+ Reference
+
+ HIDL
+
+ HAL
+
+ Trade Federation
+
+ Security Test Suite
+
+ Android Code Search
+
+ /
+
+ English
+
+ Deutsch
+
+ Español – América Latina
+
+ Français
+
+ Indonesia
+
+ Italiano
+
+ Polski
+
+ Português – Brasil
+
+ Tiếng Việt
+
+ Türkçe
+
+ Русский
+
+ עברית
+
+ العربيّة
+
+ فارسی
+
+ हिंदी
+
+ বাংলা
+
+ ภาษาไทย
+
+ 中文 – 简体
+
+ 中文 – 繁體
+
+ 日本語
+
+ 한국어
+
+ Sign in
+
+ Docs
+
+ Core topics
+
+ Overview
+
+ Architecture and Platform
+
+ Connectivity and Input
+
+ Media and Display
+
+ System health and Updates
+
+ Testing
+
+ Data storage and access
+
+ Docs
+
+ More
+
+ Overview
+
+ Architecture and Platform
+
+ Connectivity and Input
+
+ Media and Display
+
+ System health and Updates
+
+ Testing
+
+ Data storage and access
+
+ Android Code Search
+
+ Tests
+ Overview
+ Test development workflow
+ OverviewSimple build configurationComplex test configuration
+ 
+ Instrumentation tests
+ OverviewSelf-instrumenting tests exampleTarget an app example
+ 
+ GoogleTests (GTests)
+ OverviewAdd new GTestsMetric testsJAR host testsTest mappingRun tests with Atest
+ 
+ OmniLab Android Test Station
+ User guideOmniLab ATS 2.0 upgrade guideVirtual devices in OmniLab ATSCloud Orchestration in OmniLab ATSAutoenable USB debugging on user buildsRun UIConductor testsAPIRelease notesFAQ
+ Vendor Test Suite (VTS)
+ OverviewParameterized GTest for HAL testingTest setupGeneric system image (GSI)
+ Vendor Test Suite (VTS) 10
+ OverviewVideo tutorialsSystems testing with VTS
+ 
+ Test framework
+ Device shell commandsTest templatesService name aware HAL testingHAL testability checkMulti-device testingVTS with debug ramdisk
+ 
+ VTS Dashboard
+ SetupDatabaseUser interface
+ 
+ Lab infrastructure
+ Automated testing infrastructureHost controller architecturePerformance testing
+ Trade Federation (TF) test harness
+
+ Get started
+ OverviewStartDevelopment environmentWork with devicesConsoleTest lifecycleOption handlingEnd-to-end example
+ 
+ Write and run Tradefed tests
+ Overview
+ 
+ Test through Tradefed
+ OverviewWrite a test runnerWrite a sharded IRemoteTest test runnerWrite a host-driven testWrite a host-side deviceless testReport metrics or data from a testAutomatic test retryRetry isolationAutomated log on failure collectionDry run a configurationRun instrumentation tests from APKsWrite a shell testGlobal filters
+ 
+ Test through suites
+ OverviewSet up suitesPass options and filtersCheck system statusAndroidTest.xml structureConfigure shardingEmploy module controllersUse suite retryMulti-device modules
+ 
+ Develop TF
+ OverviewTest harness guidelinesSet up EclipseInclude unit and functional testsRun Error Prone bug checkerContribute non-core code
+ 
+ Architecture
+ Overview
+ 
+ XML configuration
+ High-level structureTemplates and includesConfiguration object
+ 
+ Global Configuration
+ File optionsHost options
+ 
+ Advanced concepts
+ Keystore secretsTest Command SchedulerStructure of a test runnerTest shardingRun tests with multiple devicesUse Scripting LayerLoad protocols with global configNative device
+ 
+ Device Manager
+ Device statesDevice allocationDevice detection
+ 
+ Build
+ Build providersBuildInfo
+ 
+ Device setup
+ Target preparersMulti-target preparers
+ 
+ Results
+ Create a result reporterHandle log filesResult reporter summaryLog saver
+ 
+ Metrics
+ Host-driven metrics collectorDevice-side metric collectionPackage index
+ Multidevice testing with Mobly
+ Overview
+ Debug native platform code
+ OverviewRead bug reportsUnderstand loggingImplement scoped vendor loggingDiagnose native crashes
+ 
+ Evaluate performance
+ OverviewUnderstand systraceUse ftraceIdentify capacity-related jankIdentify jitter-related jank
+ 
+ Feature implementation
+ Implement Test Harness ModeUse debuggersDebug native memory useRescue PartyImplement storagedUse strace
+
+ What's new?
+
+ Release notes
+
+ Latest security bulletins
+
+ Latest Compatibility Definition Document (CDD)
+
+ Site updates
+
+ Getting Started
+
+ About
+
+ Start
+
+ Download
+
+ Builds
+
+ Test
+
+ Create
+
+ Contribute
+
+ Community
+
+ Tools, build, and related reference
+
+ Security
+
+ Overview
+
+ Bulletins
+
+ Features
+
+ Testing
+
+ Best Practices
+
+ Core Topics
+
+ Architecture
+
+ Audio
+
+ Camera
+
+ Connectivity
+
+ Data
+
+ Display
+
+ Fonts
+
+ Graphics
+
+ Interaction
+
+ Media
+
+ Performance
+
+ Permissions
+
+ Power
+
+ Runtime
+
+ Settings
+
+ Storage
+
+ Tests
+
+ Updates
+
+ Virtualization
+
+ Compatibility
+
+ Compatibility Definition Document (CDD)
+
+ Compatibility Test Suite (CTS)
+
+ Android Devices
+
+ Overview
+
+ Cuttlefish
+
+ Enterprise
+
+ TV
+
+ Automotive
+
+ Overview
+
+ Software Defined Vehicle
+
+ In-vehicle Infotainment
+
+ Release Details
+
+ Reference
+
+ HIDL
+
+ HAL
+
+ Trade Federation
+
+ Security Test Suite
+
+ Effective in 2026, to align with our trunk stable development model and ensure platform stability for the ecosystem, we will publish source code to AOSP in Q2 and Q4. For building and contributing to AOSP, use android-latest-release. The android-latest-release manifest branch will always reference the most recent release pushed to AOSP. For more information, see Changes to AOSP.
+
+ AOSP
+
+ Docs
+
+ Core topics
+
+ Testing
+
+ Vendor Test Suite (VTS) and infrastructure
+
+ Stay organized with collections
+
+ Save and categorize content based on your preferences.
+
+The Android Vendor Test Suite (VTS) provides
+extensive testing on the following:
+
+Kernel
+Hardware abstraction layer (HAL)
+
+VTS runs on a
+desktop machine and executes test cases directly on attached devices or
+on the emulators. Similar to CTS, VTS is
+an automated test suite that uses the following major software components:
+
+The VTS Trade Federation
+test harness runs on your host machine and manages test
+execution. It offers the ability to
+Configure sharding
+across multiple devices under test (DUTs). You can also use
+the Suite Retry
+feature to retry only the failures rather than the entire test suites,
+which greatly reduces the re-run time.
+Individual test cases are executed on the DUT. The test cases
+can be GTest-style tests, kernel tests, or JUnit-style tests written in
+Java.
+
+Types of tests
+
+The various types of VTS tests are described in the following sections.
+
+GTest-style tests
+
+Most tests in VTS are GTest-style tests that check the HAL
+implementation. The test is
+written in C++ and runs on the device. A typical VTS GTest iterates through
+each instance of a given interface, and runs all the test cases
+against it. Refer to VtsHalHealthStorageV1_0TargetTest
+for an example.
+
+Linux kernel tests
+
+Kselftest (external/linux-kselftest)
+is a collection of tests included within the Linux kernel repository
+at tools/testing/selftests, of which 23 are included in VTS to run on ARM.
+Linux Test Project (external/ltp)
+tests validate the reliability, robustness, and stability of the Linux kernel.
+
+JUnit-style tests
+
+A small set of host-driven tests in VTS are JUnit-style tests, for example,
+KernelApiSysfsTest.
+The Java tests are implemented as
+BaseHostJUnit4Test,
+which is associated with a test device and can run shell
+commands to perform validation.
+
+Standalone Python3 tests
+
+Some VTS tests, such as
+vts_treble_sys_prop_test
+are written in Python3. The
+Python-based tests are implemented as unittest.TestCase and each test
+case can interact with the device through shell commands.
+Caution: The Python tests aren't recommended due to limited support in the
+Android tree. We highly recommend writing the VTS tests as GTest, or
+at least as JUnit-style tests.
+
+ Content and code samples on this page are subject to the licenses described in the Content License. Java and OpenJDK are trademarks or registered trademarks of Oracle and/or its affiliates.
+ Last updated 2026-10-09 UTC.
+
+ [[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-10-09 UTC."],[],[]]
+
+ Build
+
+ Android repository
+
+ Requirements
+
+ Downloading
+
+ Preview binaries
+
+ Factory images
+
+ Driver binaries
+
+ Connect
+
+ @Android on X
+
+ @AndroidDev on X
+
+ Android Blog
+
+ Google Security Blog
+
+ Platform on Google Groups
+
+ Building on Google Groups
+
+ Porting on Google Groups
+
+ Get help
+
+ Android Help Center
+
+ Pixel Help Center
+
+ www.android.com
+
+ Google Mobile Services
+
+ Stack Overflow
+
+ Issue Tracker
+
+ About Android
+
+ Community
+
+ Legal
+
+ License
+
+ Privacy
+
+ Site feedback
+
+ Manage cookies
+
+ English
+
+ Deutsch
+
+ Español – América Latina
+
+ Français
+
+ Indonesia
+
+ Italiano
+
+ Polski
+
+ Português – Brasil
+
+ Tiếng Việt
+
+ Türkçe
+
+ Русский
+
+ עברית
+
+ العربيّة
+
+ فارسی
+
+ हिंदी
+
+ বাংলা
+
+ ภาษาไทย
+
+ 中文 – 简体
+
+ 中文 – 繁體
+
+ 日本語
+
+ 한국어

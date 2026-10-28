@@ -1,0 +1,651 @@
+Kernel overview  |  Android OS core topics  |  Android Open Source Project
+
+ Skip to main content
+
+ Docs
+
+ What's new?
+
+ Release notes
+
+ Latest security bulletins
+
+ Latest Compatibility Definition Document (CDD)
+
+ Site updates
+
+ Getting Started
+
+ About
+
+ Start
+
+ Download
+
+ Builds
+
+ Test
+
+ Create
+
+ Contribute
+
+ Community
+
+ Tools, build, and related reference
+
+ Security
+
+ Overview
+
+ Bulletins
+
+ Features
+
+ Testing
+
+ Best Practices
+
+ Core Topics
+
+ Architecture
+
+ Audio
+
+ Camera
+
+ Connectivity
+
+ Data
+
+ Display
+
+ Fonts
+
+ Graphics
+
+ Interaction
+
+ Media
+
+ Performance
+
+ Permissions
+
+ Power
+
+ Runtime
+
+ Settings
+
+ Storage
+
+ Tests
+
+ Updates
+
+ Virtualization
+
+ Compatibility
+
+ Compatibility Definition Document (CDD)
+
+ Compatibility Test Suite (CTS)
+
+ Android Devices
+
+ Overview
+
+ Cuttlefish
+
+ Enterprise
+
+ TV
+
+ Automotive
+
+ Overview
+
+ Software Defined Vehicle
+
+ In-vehicle Infotainment
+
+ Release Details
+
+ Reference
+
+ HIDL
+
+ HAL
+
+ Trade Federation
+
+ Security Test Suite
+
+ Android Code Search
+
+ /
+
+ English
+
+ Deutsch
+
+ Español – América Latina
+
+ Français
+
+ Indonesia
+
+ Italiano
+
+ Polski
+
+ Português – Brasil
+
+ Tiếng Việt
+
+ Türkçe
+
+ Русский
+
+ עברית
+
+ العربيّة
+
+ فارسی
+
+ हिंदी
+
+ বাংলা
+
+ ภาษาไทย
+
+ 中文 – 简体
+
+ 中文 – 繁體
+
+ 日本語
+
+ 한국어
+
+ Sign in
+
+ Docs
+
+ Core topics
+
+ Overview
+
+ Architecture and Platform
+
+ Connectivity and Input
+
+ Media and Display
+
+ System health and Updates
+
+ Testing
+
+ Data storage and access
+
+ Docs
+
+ More
+
+ Overview
+
+ Architecture and Platform
+
+ Connectivity and Input
+
+ Media and Display
+
+ System health and Updates
+
+ Testing
+
+ Data storage and access
+
+ Android Code Search
+
+ Architecture
+ Overview
+ 
+ Hardware abstraction layer (HAL)
+ Overview
+ 
+ HIDL (deprecated)
+ OverviewInterfaces and packagesInterface hashingServices and data transferFast Message QueueUse Binder IPCHIDL MemoryBlockNetwork stack configuration toolsModel threadingConvert HAL modulesData typesSafe unionInterface versioningCode style guide
+ HIDL C++
+ OverviewPackagesInterfacesData typesFunctions
+ HIDL Java
+ OverviewData typesInterface methods and errorsExport constants
+ Other
+ HIDL framework backward compatibility verificationDynamically available HALsLegacy HALs (AOSP <=v7)
+ 
+ Kernel
+ OverviewKernel release notesStable kernel releases and updatesAndroid common kernelsGKI projectGKI developmentGKI versioning scheme
+ 
+ GKI release builds
+ Overviewandroid12-5.10 release buildsandroid13-5.10 release buildsandroid13-5.15 release buildsandroid14-5.15 release buildsandroid14-6.1 release buildsandroid15-6.6 release buildsandroid16-6.12 release buildsandroid17-6.18 release builds
+ 
+ Deprecated builds
+ android12-5.10 deprecated buildsandroid13-5.10 deprecated buildsandroid13-5.15 deprecated buildsandroid14-5.15 deprecated buildsandroid14-6.1 deprecated buildsandroid15-6.6 deprecated buildsandroid16-6.12 deprecated buildsandroid17-6.18 deprecated builds
+ 
+ GKI release builds (JSON)
+ android12-5.10 release buildsandroid13-5.10 release buildsandroid13-5.15 release buildsandroid14-5.15 release buildsandroid14-6.1 release buildsandroid15-6.6 release buildsandroid16-6.12 release buildsandroid17-6.18 release buildsGKI release processRequest a respinGKI 16-6.12 android-mainline errataMaintain a stable KMI
+ 
+ Kernel ABI monitoring
+ OverviewRun ABI monitoringWork with symbol lists
+ 
+ Modules
+ OverviewConfigure kernel features as GKI modulesVendor module guidelinesLoadable kernel modulesKernel module supportTest GKI modulesBoot time optimizationDebug featuresDevelop kernel code for GKIProxy Execution in AndroidAndroid kernel file system supportExtend the kernel with eBPFCollect kernel telemetry with eBPFUse DebugFS in Android 12FIPS 140-3 certifiable GKI crypto moduleEROFSAndroid kernel FAQKernel networking unit testsTransition from ION to DMA-BUF heaps (5.4 kernel)Incremental File System
+ 
+ Configuration
+ OverviewImplement system properties as APIsAdd system propertiesImplement Config File Schema API
+ 
+ Archive
+ OverviewConfigStoreCreate the HAL interfaceImplement the serviceClient-side useAdd ConfigStore classes and items
+ 
+ Device tree overlays
+ OverviewImplement DTOsDTO syntaxCompile and verifyUse multiple DTsDTB and DTBO partitionsOptimize DTO
+ 
+ Vendor NDK (<=AOSP 14)
+ OverviewEnable VNDKVNDK build system supportVNDK extensionsVNDK snapshot designGenerate VNDK snapshotsGenerate vendor snapshotsLinker namespaceDirectories, rules, and sepolicyRenderScriptABI stabilityPrebuilt ABI usages checker
+ 
+ Vendor interface object
+ OverviewManifestsCompatibility matrixesFCM lifecycleDevice manifest developmentMatch rulesAdditional resources
+ 
+ AIDL
+ OverviewAIDL languageAIDL backendsStable AIDLAIDL for HALsRun AIDL services dynamicallyAnnotations in AIDLFMQ with AIDLAIDL fuzzingAIDL style guide
+ 
+ Binder (Interprocess Communication)
+ OverviewHandle threadsPriority inheritanceHandle cached and frozen apps
+ 
+ Bootloader
+ OverviewCanonical boot reasonBoot image headerImplement bootconfigRecovery imagesDTB imagesImplement OTA updatesLock and unlock the bootloaderVersion information in AVB propertiesMove fastboot to userspace
+ 
+ Generic Bootloader
+ OverviewDeploy GBLGBL respin processGBL release builds
+ 
+ Partitions
+ OverviewPartition layoutVendor boot partitionsVendor and ODM DLKM partitionsShared system imageRamdisk partitionsGeneric boot partitionODM partitionsProduct partitionsImplement a GKI module partitionEnforce product partition interfacesTrusty OS partitions
+ 
+ 16 KB page size
+ OverviewUse Cuttlefish with 16 KB page size on ARM64Simulate Cuttlefish with 16 KB page size on x86-64Flash Pixel with 16 KB page size supportGet the page sizeOptimize for 16 KB page sizeSystem propertiesEnable 16 KB toggleEnable 16 KB backcompat optionVendor API level
+
+ Power
+ OverviewPower managementThermal mitigationPower stats HALApp power managementPlatform power management with DozePerformance managementApp background behavior trackersSupport batteryless devicesMeasure component powerMeasure device powerMeasure power valuesRoutine Battery SaverTV standbySystemSuspend service
+ 
+ Wattson
+ Power analysis overviewCollect and analyze traces
+
+ Settings
+ OverviewDesign guidelinesPatterns and componentsInformation architecturePersonalized settingsUniversal search
+
+ Fonts
+ Implement custom font fallback
+
+ What's new?
+
+ Release notes
+
+ Latest security bulletins
+
+ Latest Compatibility Definition Document (CDD)
+
+ Site updates
+
+ Getting Started
+
+ About
+
+ Start
+
+ Download
+
+ Builds
+
+ Test
+
+ Create
+
+ Contribute
+
+ Community
+
+ Tools, build, and related reference
+
+ Security
+
+ Overview
+
+ Bulletins
+
+ Features
+
+ Testing
+
+ Best Practices
+
+ Core Topics
+
+ Architecture
+
+ Audio
+
+ Camera
+
+ Connectivity
+
+ Data
+
+ Display
+
+ Fonts
+
+ Graphics
+
+ Interaction
+
+ Media
+
+ Performance
+
+ Permissions
+
+ Power
+
+ Runtime
+
+ Settings
+
+ Storage
+
+ Tests
+
+ Updates
+
+ Virtualization
+
+ Compatibility
+
+ Compatibility Definition Document (CDD)
+
+ Compatibility Test Suite (CTS)
+
+ Android Devices
+
+ Overview
+
+ Cuttlefish
+
+ Enterprise
+
+ TV
+
+ Automotive
+
+ Overview
+
+ Software Defined Vehicle
+
+ In-vehicle Infotainment
+
+ Release Details
+
+ Reference
+
+ HIDL
+
+ HAL
+
+ Trade Federation
+
+ Security Test Suite
+
+ Effective in 2026, to align with our trunk stable development model and ensure platform stability for the ecosystem, we will publish source code to AOSP in Q2 and Q4. For building and contributing to AOSP, use android-latest-release. The android-latest-release manifest branch will always reference the most recent release pushed to AOSP. For more information, see Changes to AOSP.
+
+ AOSP
+
+ Docs
+
+ Core topics
+
+ Architecture and Platform
+
+ Kernel overview
+
+ Stay organized with collections
+
+ Save and categorize content based on your preferences.
+
+The Android kernel is based on an upstream
+Linux Long Term Supported (LTS) kernel. At Google, LTS kernels are combined
+with Android-specific patches to form Android Common Kernels (ACKs).
+
+ACKs are built from the kernel/common repository. This repository is a
+superset of the upstream Linux kernel, with additional Android-specific patches.
+
+ACKs that are 5.10 and higher are also known as *generic kernel images (GKI)
+kernels. GKI kernels support the separation of the hardware-agnostic generic
+core kernel code and GKI modules from hardware-specific
+vendor modules.
+
+The interaction between the GKI kernel and vendor modules is enabled by the
+Kernel Module Interface (KMI) consisting of symbol lists identifying the
+functions and global data required by vendor modules. Figure 1 shows the GKI
+kernel and vendor module architecture:
+
+Figure 1. GKI kernel and vendor module architecture.
+Note: The GKI kernel, GKI module, and vendor module architecture is the result
+of a multi-year effort known as the Generic Kernel Image (GKI) project. For
+information about this project and its phases, refer to
+The Generic Kernel Image (GKI) project.Note: Kernels are referred to by their platform version followed by a kernel
+version. For example, android15-6.6 is kernel for Android 15 with a version
+of 6.6.
+Kernel glossary
+
+Following are terms used throughout the kernel documentation.
+
+Kernel types
+
+Android Common Kernel (ACK)
+A kernel that is downstream of a LTS kernel and includes patches that are
+important to the Android community. These patches haven't been merged into
+Linux mainline or Long Term GKI kernels.
+
+Kernel with versions of 5.10 and higher are also referred to as
+Generic Kernel Image (GKI) kernels.
+
+Android Open Source Project (AOSP) kernel
+See Android Common Kernel.
+
+Android 12 features can't be backported to 4.19 kernels; the feature set would
+be similar to a device that launched with 4.19 on Android 11 and upgraded to
+Android 12.
+
+Generic Kernel Image (GKI) kernel
+Any 5.10 and higher ACK kernel(aarch64 only). The GKI kernel has these
+two parts:
+
+Generic kernel - The portion of the GKI kernel that is common across
+all devices.
+GKI modules - Kernel modules built by Google that can be dynamically
+loaded on devices where applicable. These modules are built as artifacts
+of the GKI kernel and are delivered alongside GKI as the
+system_dlkm_staging_archive.tar.gz archive. GKI modules are signed by
+Google using the kernel build time key pair and are compatible only with the
+GKI kernel that they're built with.
+
+Kernel Module Interface (KMI) kernel
+See GKI kernel.
+
+Long Term Supported (LTS) kernel
+A Linux kernel that's supported for 2 to 6 years. LTS kernels are
+released once per year and are the basis for each of Google's
+Android Common Kernels.
+
+Branch types
+
+ACK KMI kernel branch
+The branch for which GKI kernels are built. Branch names correspond
+to kernel versions, such as android15-6.6.
+Android-mainline
+The primary development branch for Android features. When a new
+LTS kernel is declared upstream, the corresponding new
+GKI kernel is branched from android-mainline.
+
+Linux mainline
+:The primary development branch for the upstream Linux kernels, including LTS
+kernels.
+
+Other terms
+
+Certified boot image
+The kernel delivered in binary form (boot.img) and flashed onto the device.
+This image is considered certified because contains embedded certificates so
+Google can verify that the device ships with a kernel certified by Google.
+
+Dynamically loadable kernel module (DLKM)
+A module that can be dynamically loaded during device boot depending on the
+needs of the device. GKI and vendor modules are both types of DLKMs. DLKMs are
+released in .ko form and can be drivers or can deliver other kernel
+functionality.
+GKI project
+A Google project addressing kernel fragmentation by separating common core
+kernel functionality from vendor-specific SoC and board support into loadable
+modules.
+
+Generic Kernel Image (GKI)
+:A boot image certified by Google that contains a GKI kernel built from
+an ACK source tree and is suitable to be flashed to the boot partition
+of an Android-powered device.
+
+Kernel Module Interface (KMI)
+An interface between the GKI kernel and vendor modules allowing
+vendor modules to be updated independently of the GKI kernel. This interface
+consists of kernel functions and global data that have been identified as
+vendor/OEM dependencies using per-partner symbol lists.
+Vendor module
+A hardware-specific module developed by a partner and that contains SoC and
+device-specific functionality. A vendor module is a type of dynamically loadable
+kernel module.
+
+What's next
+
+If you're new to Android kernel development, start by reading the
+following:
+
+Long Term Stable Kernels -
+Background on upstream LTS kernels which feed into ACKs.
+Android Common Kernels -
+Background on ACKs.
+
+If you're new to GKI kernel development, start by reading
+GKI development.
+
+ Content and code samples on this page are subject to the licenses described in the Content License. Java and OpenJDK are trademarks or registered trademarks of Oracle and/or its affiliates.
+ Last updated 2026-10-09 UTC.
+
+ [[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-10-09 UTC."],[],[]]
+
+ Build
+
+ Android repository
+
+ Requirements
+
+ Downloading
+
+ Preview binaries
+
+ Factory images
+
+ Driver binaries
+
+ Connect
+
+ @Android on X
+
+ @AndroidDev on X
+
+ Android Blog
+
+ Google Security Blog
+
+ Platform on Google Groups
+
+ Building on Google Groups
+
+ Porting on Google Groups
+
+ Get help
+
+ Android Help Center
+
+ Pixel Help Center
+
+ www.android.com
+
+ Google Mobile Services
+
+ Stack Overflow
+
+ Issue Tracker
+
+ About Android
+
+ Community
+
+ Legal
+
+ License
+
+ Privacy
+
+ Site feedback
+
+ Manage cookies
+
+ English
+
+ Deutsch
+
+ Español – América Latina
+
+ Français
+
+ Indonesia
+
+ Italiano
+
+ Polski
+
+ Português – Brasil
+
+ Tiếng Việt
+
+ Türkçe
+
+ Русский
+
+ עברית
+
+ العربيّة
+
+ فارسی
+
+ हिंदी
+
+ বাংলা
+
+ ภาษาไทย
+
+ 中文 – 简体
+
+ 中文 – 繁體
+
+ 日本語
+
+ 한국어

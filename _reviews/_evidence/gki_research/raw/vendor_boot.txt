@@ -1,0 +1,808 @@
+Vendor boot partitions  |  Android OS core topics  |  Android Open Source Project
+
+ Skip to main content
+
+ Docs
+
+ What's new?
+
+ Release notes
+
+ Latest security bulletins
+
+ Latest Compatibility Definition Document (CDD)
+
+ Site updates
+
+ Getting Started
+
+ About
+
+ Start
+
+ Download
+
+ Builds
+
+ Test
+
+ Create
+
+ Contribute
+
+ Community
+
+ Tools, build, and related reference
+
+ Security
+
+ Overview
+
+ Bulletins
+
+ Features
+
+ Testing
+
+ Best Practices
+
+ Core Topics
+
+ Architecture
+
+ Audio
+
+ Camera
+
+ Connectivity
+
+ Data
+
+ Display
+
+ Fonts
+
+ Graphics
+
+ Interaction
+
+ Media
+
+ Performance
+
+ Permissions
+
+ Power
+
+ Runtime
+
+ Settings
+
+ Storage
+
+ Tests
+
+ Updates
+
+ Virtualization
+
+ Compatibility
+
+ Compatibility Definition Document (CDD)
+
+ Compatibility Test Suite (CTS)
+
+ Android Devices
+
+ Overview
+
+ Cuttlefish
+
+ Enterprise
+
+ TV
+
+ Automotive
+
+ Overview
+
+ Software Defined Vehicle
+
+ In-vehicle Infotainment
+
+ Release Details
+
+ Reference
+
+ HIDL
+
+ HAL
+
+ Trade Federation
+
+ Security Test Suite
+
+ Android Code Search
+
+ /
+
+ English
+
+ Deutsch
+
+ Español – América Latina
+
+ Français
+
+ Indonesia
+
+ Italiano
+
+ Polski
+
+ Português – Brasil
+
+ Tiếng Việt
+
+ Türkçe
+
+ Русский
+
+ עברית
+
+ العربيّة
+
+ فارسی
+
+ हिंदी
+
+ বাংলা
+
+ ภาษาไทย
+
+ 中文 – 简体
+
+ 中文 – 繁體
+
+ 日本語
+
+ 한국어
+
+ Sign in
+
+ Docs
+
+ Core topics
+
+ Overview
+
+ Architecture and Platform
+
+ Connectivity and Input
+
+ Media and Display
+
+ System health and Updates
+
+ Testing
+
+ Data storage and access
+
+ Docs
+
+ More
+
+ Overview
+
+ Architecture and Platform
+
+ Connectivity and Input
+
+ Media and Display
+
+ System health and Updates
+
+ Testing
+
+ Data storage and access
+
+ Android Code Search
+
+ Architecture
+ Overview
+ 
+ Hardware abstraction layer (HAL)
+ Overview
+ 
+ HIDL (deprecated)
+ OverviewInterfaces and packagesInterface hashingServices and data transferFast Message QueueUse Binder IPCHIDL MemoryBlockNetwork stack configuration toolsModel threadingConvert HAL modulesData typesSafe unionInterface versioningCode style guide
+ HIDL C++
+ OverviewPackagesInterfacesData typesFunctions
+ HIDL Java
+ OverviewData typesInterface methods and errorsExport constants
+ Other
+ HIDL framework backward compatibility verificationDynamically available HALsLegacy HALs (AOSP <=v7)
+ 
+ Kernel
+ OverviewKernel release notesStable kernel releases and updatesAndroid common kernelsGKI projectGKI developmentGKI versioning scheme
+ 
+ GKI release builds
+ Overviewandroid12-5.10 release buildsandroid13-5.10 release buildsandroid13-5.15 release buildsandroid14-5.15 release buildsandroid14-6.1 release buildsandroid15-6.6 release buildsandroid16-6.12 release buildsandroid17-6.18 release builds
+ 
+ Deprecated builds
+ android12-5.10 deprecated buildsandroid13-5.10 deprecated buildsandroid13-5.15 deprecated buildsandroid14-5.15 deprecated buildsandroid14-6.1 deprecated buildsandroid15-6.6 deprecated buildsandroid16-6.12 deprecated buildsandroid17-6.18 deprecated builds
+ 
+ GKI release builds (JSON)
+ android12-5.10 release buildsandroid13-5.10 release buildsandroid13-5.15 release buildsandroid14-5.15 release buildsandroid14-6.1 release buildsandroid15-6.6 release buildsandroid16-6.12 release buildsandroid17-6.18 release buildsGKI release processRequest a respinGKI 16-6.12 android-mainline errataMaintain a stable KMI
+ 
+ Kernel ABI monitoring
+ OverviewRun ABI monitoringWork with symbol lists
+ 
+ Modules
+ OverviewConfigure kernel features as GKI modulesVendor module guidelinesLoadable kernel modulesKernel module supportTest GKI modulesBoot time optimizationDebug featuresDevelop kernel code for GKIProxy Execution in AndroidAndroid kernel file system supportExtend the kernel with eBPFCollect kernel telemetry with eBPFUse DebugFS in Android 12FIPS 140-3 certifiable GKI crypto moduleEROFSAndroid kernel FAQKernel networking unit testsTransition from ION to DMA-BUF heaps (5.4 kernel)Incremental File System
+ 
+ Configuration
+ OverviewImplement system properties as APIsAdd system propertiesImplement Config File Schema API
+ 
+ Archive
+ OverviewConfigStoreCreate the HAL interfaceImplement the serviceClient-side useAdd ConfigStore classes and items
+ 
+ Device tree overlays
+ OverviewImplement DTOsDTO syntaxCompile and verifyUse multiple DTsDTB and DTBO partitionsOptimize DTO
+ 
+ Vendor NDK (<=AOSP 14)
+ OverviewEnable VNDKVNDK build system supportVNDK extensionsVNDK snapshot designGenerate VNDK snapshotsGenerate vendor snapshotsLinker namespaceDirectories, rules, and sepolicyRenderScriptABI stabilityPrebuilt ABI usages checker
+ 
+ Vendor interface object
+ OverviewManifestsCompatibility matrixesFCM lifecycleDevice manifest developmentMatch rulesAdditional resources
+ 
+ AIDL
+ OverviewAIDL languageAIDL backendsStable AIDLAIDL for HALsRun AIDL services dynamicallyAnnotations in AIDLFMQ with AIDLAIDL fuzzingAIDL style guide
+ 
+ Binder (Interprocess Communication)
+ OverviewHandle threadsPriority inheritanceHandle cached and frozen apps
+ 
+ Bootloader
+ OverviewCanonical boot reasonBoot image headerImplement bootconfigRecovery imagesDTB imagesImplement OTA updatesLock and unlock the bootloaderVersion information in AVB propertiesMove fastboot to userspace
+ 
+ Generic Bootloader
+ OverviewDeploy GBLGBL respin processGBL release builds
+ 
+ Partitions
+ OverviewPartition layoutVendor boot partitionsVendor and ODM DLKM partitionsShared system imageRamdisk partitionsGeneric boot partitionODM partitionsProduct partitionsImplement a GKI module partitionEnforce product partition interfacesTrusty OS partitions
+ 
+ 16 KB page size
+ OverviewUse Cuttlefish with 16 KB page size on ARM64Simulate Cuttlefish with 16 KB page size on x86-64Flash Pixel with 16 KB page size supportGet the page sizeOptimize for 16 KB page sizeSystem propertiesEnable 16 KB toggleEnable 16 KB backcompat optionVendor API level
+
+ Power
+ OverviewPower managementThermal mitigationPower stats HALApp power managementPlatform power management with DozePerformance managementApp background behavior trackersSupport batteryless devicesMeasure component powerMeasure device powerMeasure power valuesRoutine Battery SaverTV standbySystemSuspend service
+ 
+ Wattson
+ Power analysis overviewCollect and analyze traces
+
+ Settings
+ OverviewDesign guidelinesPatterns and componentsInformation architecturePersonalized settingsUniversal search
+
+ Fonts
+ Implement custom font fallback
+
+ What's new?
+
+ Release notes
+
+ Latest security bulletins
+
+ Latest Compatibility Definition Document (CDD)
+
+ Site updates
+
+ Getting Started
+
+ About
+
+ Start
+
+ Download
+
+ Builds
+
+ Test
+
+ Create
+
+ Contribute
+
+ Community
+
+ Tools, build, and related reference
+
+ Security
+
+ Overview
+
+ Bulletins
+
+ Features
+
+ Testing
+
+ Best Practices
+
+ Core Topics
+
+ Architecture
+
+ Audio
+
+ Camera
+
+ Connectivity
+
+ Data
+
+ Display
+
+ Fonts
+
+ Graphics
+
+ Interaction
+
+ Media
+
+ Performance
+
+ Permissions
+
+ Power
+
+ Runtime
+
+ Settings
+
+ Storage
+
+ Tests
+
+ Updates
+
+ Virtualization
+
+ Compatibility
+
+ Compatibility Definition Document (CDD)
+
+ Compatibility Test Suite (CTS)
+
+ Android Devices
+
+ Overview
+
+ Cuttlefish
+
+ Enterprise
+
+ TV
+
+ Automotive
+
+ Overview
+
+ Software Defined Vehicle
+
+ In-vehicle Infotainment
+
+ Release Details
+
+ Reference
+
+ HIDL
+
+ HAL
+
+ Trade Federation
+
+ Security Test Suite
+
+ Effective in 2026, to align with our trunk stable development model and ensure platform stability for the ecosystem, we will publish source code to AOSP in Q2 and Q4. For building and contributing to AOSP, use android-latest-release. The android-latest-release manifest branch will always reference the most recent release pushed to AOSP. For more information, see Changes to AOSP.
+
+ AOSP
+
+ Docs
+
+ Core topics
+
+ Architecture and Platform
+
+ Vendor boot partitions
+
+ Stay organized with collections
+
+ Save and categorize content based on your preferences.
+
+Android 11 introduced the concept of the Generic Kernel
+Image (GKI). To enable booting an arbitrary device with the GKI, Android
+11 devices can use boot image header version 3. In
+version 3, all vendor-specific information is factored out of the boot
+partition and relocated into a new vendor_boot partition. An ARM64 device
+launching with Android 11 on the 5.4 Linux kernel must
+support the vendor_boot partition and the updated boot partition format to
+pass testing with the GKI.
+
+Android 12 devices can use boot image header version 4,
+which supports including multiple vendor ramdisks in the vendor_boot
+partition. Multiple vendor ramdisk fragments are concatenated one after another
+in the vendor ramdisk section. A vendor ramdisk table is used to describe the
+layout of the vendor ramdisk section and the metadata of each vendor ramdisk
+fragment.
+
+Partition structure
+
+The vendor boot partition is A/B-ed with virtual A/B and protected by Android
+Verified Boot.
+
+Version 3
+
+The partition consists of a header, the vendor ramdisk, and the device tree blob
+(DTB).
+
+ Section
+ Number of pages
+
+ Vendor boot header (n pages)
+ n = (2112 + page_size - 1) / page_size
+
+ Vendor ramdisk (o pages)
+ o = (vendor_ramdisk_size + page_size - 1) / page_size
+
+ DTB (p pages)
+ p = (dtb_size + page_size - 1) / page_size
+
+Version 4
+
+The partition consists of a header, the vendor ramdisk section (consisting of
+all vendor ramdisk fragments, concatenated), the device tree blob (DTB), and the
+vendor ramdisk table.
+
+ Section
+ Number of pages
+
+ Vendor boot header (n pages)
+ n = (2128 + page_size - 1) / page_size
+
+ Vendor ramdisk fragments (o pages)
+ o = (vendor_ramdisk_size + page_size - 1) / page_size
+
+ DTB (p pages)
+ p = (dtb_size + page_size - 1) / page_size
+
+ Vendor ramdisk table (q pages)
+ q = (vendor_ramdisk_table_size + page_size - 1) / page_size
+
+ Bootconfig (r pages)
+ r = (bootconfig_size + page_size - 1) / page_size
+
+Note: For details on the vendor ramdisk and the handling of kernel modules, see
+Kernel Module Support.
+Vendor boot header
+
+The contents of the vendor boot partition header consist primarily of data
+that has been relocated there from the
+boot image header. It
+also contains information about the vendor ramdisk.
+
+Version 3
+struct vendor_boot_img_hdr_v3
+{
+#define VENDOR_BOOT_MAGIC_SIZE 8
+ uint8_t magic[VENDOR_BOOT_MAGIC_SIZE];
+ uint32_t header_version;
+ uint32_t page_size; /* flash page size we assume */
+
+ uint32_t kernel_addr; /* physical load addr */
+ uint32_t ramdisk_addr; /* physical load addr */
+
+ uint32_t vendor_ramdisk_size; /* size in bytes */
+
+#define VENDOR_BOOT_ARGS_SIZE 2048
+ uint8_t cmdline[VENDOR_BOOT_ARGS_SIZE];
+
+ uint32_t tags_addr; /* physical addr for kernel tags */
+
+#define VENDOR_BOOT_NAME_SIZE 16
+ uint8_t name[VENDOR_BOOT_NAME_SIZE]; /* asciiz product name */
+ uint32_t header_size; /* size of vendor boot image header in
+ * bytes */
+ uint32_t dtb_size; /* size of dtb image */
+ uint64_t dtb_addr; /* physical load address */
+
+};
+
+Version 4
+struct vendor_boot_img_hdr_v4
+{
+#define VENDOR_BOOT_MAGIC_SIZE 8
+ uint8_t magic[VENDOR_BOOT_MAGIC_SIZE];
+ uint32_t header_version;
+ uint32_t page_size; /* flash page size we assume */
+
+ uint32_t kernel_addr; /* physical load addr */
+ uint32_t ramdisk_addr; /* physical load addr */
+
+ uint32_t vendor_ramdisk_size; /* size in bytes */
+
+#define VENDOR_BOOT_ARGS_SIZE 2048
+ uint8_t cmdline[VENDOR_BOOT_ARGS_SIZE];
+
+ uint32_t tags_addr; /* physical addr for kernel tags */
+
+#define VENDOR_BOOT_NAME_SIZE 16
+ uint8_t name[VENDOR_BOOT_NAME_SIZE]; /* asciiz product name */
+ uint32_t header_size; /* size of vendor boot image header in
+ * bytes */
+ uint32_t dtb_size; /* size of dtb image */
+ uint64_t dtb_addr; /* physical load address */
+
+ uint32_t vendor_ramdisk_table_size; /* size in bytes for the vendor ramdisk table */
+ uint32_t vendor_ramdisk_table_entry_num; /* number of entries in the vendor ramdisk table */
+ uint32_t vendor_ramdisk_table_entry_size; /* size in bytes for a vendor ramdisk table entry */
+ uint32_t bootconfig_size; /* size in bytes for the bootconfig section */
+};
+
+#define VENDOR_RAMDISK_TYPE_NONE 0
+#define VENDOR_RAMDISK_TYPE_PLATFORM 1
+#define VENDOR_RAMDISK_TYPE_RECOVERY 2
+#define VENDOR_RAMDISK_TYPE_DLKM 3
+
+struct vendor_ramdisk_table_entry_v4
+{
+ uint32_t ramdisk_size; /* size in bytes for the ramdisk image */
+ uint32_t ramdisk_offset; /* offset to the ramdisk image in vendor ramdisk section */
+ uint32_t ramdisk_type; /* type of the ramdisk */
+#define VENDOR_RAMDISK_NAME_SIZE 32
+ uint8_t ramdisk_name[VENDOR_RAMDISK_NAME_SIZE]; /* asciiz ramdisk name */
+
+#define VENDOR_RAMDISK_TABLE_ENTRY_BOARD_ID_SIZE 16
+ // Hardware identifiers describing the board, soc or platform which this
+ // ramdisk is intended to be loaded on.
+ uint32_t board_id[VENDOR_RAMDISK_TABLE_ENTRY_BOARD_ID_SIZE];
+};
+
+vendor_ramdisk_size is the total size of all the vendor ramdisk fragments.
+ramdisk_type denotes the type of the ramdisk, possible values are:
+
+VENDOR_RAMDISK_TYPE_NONE indicates the value is unspecified.
+VENDOR_RAMDISK_TYPE_PLATFORM ramdisks contain platform specific bits.
+The bootloader must always load these into memory.
+VENDOR_RAMDISK_TYPE_RECOVERY ramdisks contain recovery resources. The
+bootloader must load these into memory when booting into recovery.
+VENDOR_RAMDISK_TYPE_DLKM ramdisks contain dynamic loadable kernel
+modules.
+
+ramdisk_name is an unique name of the ramdisk.
+board_id is a vector of vendor defined hardware identifiers.
+
+Note: To view AOSP details on all supported boot and vendor boot image
+headers, refer to
+system/tools/mkbootimg/include/bootimg/bootimg.h.
+Bootloader support
+
+Because the vendor boot partition contains information (such as flash page size,
+kernel, ramdisk load addresses, the DTB itself) that previously existed in the
+boot partition, the bootloader must access both the boot and vendor boot
+partitions to have enough data to complete booting.
+
+The bootloader must load the generic ramdisk into memory immediately following
+the vendor ramdisk (the CPIO, Gzip, and lz4 formats support this type of
+concatenation). Don't page align the generic ramdisk image or introduce any
+other space between it and the end of the vendor ramdisk in memory. After the
+kernel decompresses, it extracts the concatenated file into an initramfs,
+which results in a file structure that's a generic ramdisk overlaid on the
+vendor ramdisk file structure.
+
+Because the generic ramdisk and vendor ramdisk get concatenated, they must be in
+the same format. The GKI boot image uses an lz4-compressed generic ramdisk, so a
+device that is GKI-compliant must use an lz4-compressed vendor ramdisk. The
+configuration for this is shown below.
+
+The bootloader requirements for supporting bootconfig are explained in
+Implement
+Bootconfig.
+
+Multiple vendor ramdisks (version 4)
+
+With boot image header version 4, the bootloader can select either a subset or
+all of the vendor ramdisks to load as the initramfs during boot time. The
+vendor ramdisk table contains the metadata of each ramdisk, and can aid the
+bootloader in deciding which ramdisks to load. The bootloader can decide the
+order to load the selected vendor ramdisks, as long as the generic ramdisk is
+loaded last.
+
+For example, the bootloader can omit loading vendor ramdisks of type
+VENDOR_RAMDISK_TYPE_RECOVERY during normal boot to conserve resources, so only
+vendor ramdisks of type VENDOR_RAMDISK_TYPE_PLATFORM and
+VENDOR_RAMDISK_TYPE_DLKM are loaded into memory. On the other hand, vendor
+ramdisks of type VENDOR_RAMDISK_TYPE_PLATFORM, VENDOR_RAMDISK_TYPE_RECOVERY
+and VENDOR_RAMDISK_TYPE_DLKM are loaded into memory when booting into recovery
+mode.
+
+Alternatively, the bootloader can ignore the vendor ramdisk table and load the
+entire vendor ramdisk section. This has the same effect as does loading all of
+the vendor ramdisk fragments in the vendor_boot partition.
+
+Build support
+
+To implement vendor boot support for a device:
+
+Set BOARD_BOOT_HEADER_VERSION to 3 or greater.
+Set BOARD_RAMDISK_USE_LZ4 to true if your device is GKI-compliant, or if
+it otherwise uses an lz4-compressed generic ramdisk.
+Set BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE to an appropriate size for your
+device, considering the kernel modules that must go on the vendor ramdisk.
+Update AB_OTA_PARTITIONS to include vendor_boot and any vendor-specific
+lists of OTA partitions on the device.
+Copy your device fstab into /first_stage_ramdisk in the vendor_boot
+partition, not the boot partition. For example,
+$(LOCAL_PATH)/fstab.hardware:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.$(PRODUCT_PLATFORM).
+
+To include multiple vendor ramdisks in vendor_boot:
+
+Set BOARD_BOOT_HEADER_VERSION to 4.
+Set BOARD_VENDOR_RAMDISK_FRAGMENTS to a list of logical vendor ramdisk
+fragment names to be included in vendor_boot.
+Important: For Android 12 and higher, usage of
+the name default is reserved. Giving the name default to vendor ramdisk
+fragments isn't allowed under any circumstances. To learn more, see the
+Moving Fastboot to Userspace page,
+under mkbootimg.
+To add a prebuilt vendor ramdisk, set
+BOARD_VENDOR_RAMDISK_FRAGMENT.$(vendor_ramdisk).PREBUILT to the prebuilt
+path.
+To add a DLKM vendor ramdisk, set
+BOARD_VENDOR_RAMDISK_FRAGMENT.$(vendor_ramdisk).KERNEL_MODULE_DIRS to the
+list of kernel module directories to be included.
+Set BOARD_VENDOR_RAMDISK_FRAGMENT.$(vendor_ramdisk).MKBOOTIMG_ARGS to
+mkbootimg arguments. These are the --board_id[0-15] and --ramdisk_type
+arguments for the vendor ramdisk fragment. For DLKM vendor ramdisk, the
+default --ramdisk_type would be DLKM if it's not otherwise specified.
+
+To build recovery resources as a standalone recovery ramdisk in vendor_boot:
+
+Set BOARD_BOOT_HEADER_VERSION to 4.
+Set BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT to true.
+Set BOARD_INCLUDE_RECOVERY_RAMDISK_IN_VENDOR_BOOT to true.
+This adds a vendor ramdisk fragment whose ramdisk_name is recovery and
+ramdisk_type is VENDOR_RAMDISK_TYPE_RECOVERY. The ramdisk then contains
+all recovery files, which are files installed under
+$(TARGET_RECOVERY_ROOT_OUT).
+
+mkbootimg arguments
+
+ Argument
+ Description
+
+ --ramdisk_type
+ 
+ The type of the ramdisk, can be one of NONE,
+ PLATFORM, RECOVERY or DLKM.
+
+ --board_id[0-15]
+ Specify the board_id vector, defaults to 0.
+
+Following is an example configuration:
+BOARD_KERNEL_MODULE_DIRS := foo bar baz
+BOARD_BOOT_HEADER_VERSION := 4
+BOARD_VENDOR_RAMDISK_FRAGMENTS := dlkm_foobar
+BOARD_VENDOR_RAMDISK_FRAGMENT.dlkm_foobar.KERNEL_MODULE_DIRS := foo bar
+BOARD_VENDOR_RAMDISK_FRAGMENT.dlkm_foobar.MKBOOTIMG_ARGS := --board_id0 0xF00BA5 --board_id1 0xC0FFEE
+
+The resulting vendor_boot would contain two vendor ramdisk fragments. The
+first one is the "default" ramdisk, which contains the DLKM directory baz and
+the rest of the files in $(TARGET_VENDOR_RAMDISK_OUT). The second one is the
+dlkm_foobar ramdisk, which contains the DLKM directories foo and bar, and
+the --ramdisk_type defaults to DLKM.
+
+ Content and code samples on this page are subject to the licenses described in the Content License. Java and OpenJDK are trademarks or registered trademarks of Oracle and/or its affiliates.
+ Last updated 2026-10-09 UTC.
+
+ [[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-10-09 UTC."],[],[]]
+
+ Build
+
+ Android repository
+
+ Requirements
+
+ Downloading
+
+ Preview binaries
+
+ Factory images
+
+ Driver binaries
+
+ Connect
+
+ @Android on X
+
+ @AndroidDev on X
+
+ Android Blog
+
+ Google Security Blog
+
+ Platform on Google Groups
+
+ Building on Google Groups
+
+ Porting on Google Groups
+
+ Get help
+
+ Android Help Center
+
+ Pixel Help Center
+
+ www.android.com
+
+ Google Mobile Services
+
+ Stack Overflow
+
+ Issue Tracker
+
+ About Android
+
+ Community
+
+ Legal
+
+ License
+
+ Privacy
+
+ Site feedback
+
+ Manage cookies
+
+ English
+
+ Deutsch
+
+ Español – América Latina
+
+ Français
+
+ Indonesia
+
+ Italiano
+
+ Polski
+
+ Português – Brasil
+
+ Tiếng Việt
+
+ Türkçe
+
+ Русский
+
+ עברית
+
+ العربيّة
+
+ فارسی
+
+ हिंदी
+
+ বাংলা
+
+ ภาษาไทย
+
+ 中文 – 简体
+
+ 中文 – 繁體
+
+ 日本語
+
+ 한국어

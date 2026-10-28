@@ -1,0 +1,59 @@
+TerminalOS 验收静态预检（static precondition checks）
+仓库根: C:\AiWork\Polaris-TerminalOS-repos
+时间: 2026-10-28T00:18:53
+  android_packages_apps_TerminalHome       HEAD=ccedcc4a9f6e74245dd6dcc51570a46768d579cb
+  android_vendor_terminalos                HEAD=d4559c341644b16649c3ab6195e73f7efe430134
+  android_device_xiaomi_polaris            HEAD=a7f801743b9f8c399a3014eb5f6d1838aebf9710
+
+[PASS] S01 T01/T02/T03/T13 HOME/维护组件声明契约
+       断言 17 条，失败 0 条
+       替代验证盲区：不能证明 aapt2 编译通过与系统解析结果；需构建产物 aapt2 dump + 实机
+[PASS] S02 T10      限流参数常量 (10min/5/4s/8s)
+       断言 6 条，失败 0 条
+       替代验证盲区：常量对但逻辑可错；逻辑由 S03/S04 覆盖，运行行为仍需实机
+[PASS] S03 T10      限流窗口/冷静期/重置逻辑
+       断言 16 条，失败 0 条
+       替代验证盲区：文本结构证明；时钟边界与 SharedPreferences 行为需 Robolectric/实机
+[PASS] S04 T10      8 秒快速返回接入限流
+       断言 8 条，失败 0 条
+       替代验证盲区：不能证明 onResume 时序与 Termux 崩溃路径，需实机 force-stop 演练
+[PASS] S05 T13      PIN 只存 PBKDF2 派生值
+       断言 9 条，失败 0 条
+       替代验证盲区：未证明 PBKDF2 在目标 ROM 可用；需实机首次设置/校验/重启后校验
+[PASS] S06 T13/T19  维护入口门禁与退出锁定流程
+       断言 11 条，失败 0 条
+       替代验证盲区：界面交互、PIN 对话框、锁任务下能否打开维护页需实机
+[PASS] S07 T03/T04/T06/T18 DO 门禁/白名单/特性位/非 DO 不伪装
+       断言 14 条，失败 0 条
+       替代验证盲区：DPM 真实授权、SYSTEM_SUPERVISION 角色、反射隐藏 API 是否可用需实机
+[PASS] S08 T05/T06  导航栏 overlay 与产品继承
+       断言 6 条，失败 0 条
+       NOTE SKIP: 当前 overlay 无 config_allowedSupervisionRolePackages。这是 22.2 分支的预期形态（该资源只存在于 23.2）；23.2 分支（vendor@9a5d532）已带该条，需在 23.2 树上复查 S08。
+       替代验证盲区：overlay 是否被链接、手势提示条表现需构建产物 + 实机
+[PASS] S09 T02/T20  开机重置/初始化幂等/Termux presigned
+       断言 17 条，失败 0 条
+       替代验证盲区：first_boot.sh 未接入系统；Termux 首次启动与数据幂等需实机
+[PASS] S10 构建前置     资源引用与 XML 语法
+       断言 2 条，失败 0 条
+       替代验证盲区：不能替代 Soong 编译；只抓引用级错误
+[PASS] S11 构建前置     文案占位符与实参匹配
+       断言 20 条，失败 0 条
+       替代验证盲区：不能替代 lint/编译；只抓数目/位置参数错配
+
+汇总：11 项检查，0 项失败
+
+== 变异自检：每条注入一个真实缺陷，要求对应检查由 PASS 变 FAIL ==
+
+[KILL] M01 -> S01 已检出：删掉 HOME 类别（系统不再把 TerminalHome 当桌面）
+[KILL] M02 -> S02 已检出：把 10 分钟 5 次放宽到 50 次（无限重启风险回归）
+[KILL] M03 -> S03 已检出：失败重启不再计入窗口（限流形同虚设）
+[KILL] M04 -> S04 已检出：8 秒快速返回不再接入限流（只判成功）
+[KILL] M05 -> S05 已检出：定长比较退化为普通 equals（时序侧信道）
+[KILL] M06 -> S07 已检出：非 DO 也尝试锁任务（伪装/异常路径回归）
+[KILL] M07 -> S08 已检出：导航栏重新显示（T05 目标丢失）
+[KILL] M08 -> S09 已检出：首次初始化失去幂等检查（重复执行副作用）
+[KILL] M09 -> S10 已检出：资源名拼错（构建失败级缺陷）
+[KILL] M10 -> S11 已检出：诊断文案多传一个格式参数（运行时 IllegalFormat 崩溃）
+[KILL] M11 -> S09 已检出：校验值错一位（下载校验失效/误报）
+
+变异自检汇总：11 个变异，检出 11 个，漏检 0 个，异常 0 个

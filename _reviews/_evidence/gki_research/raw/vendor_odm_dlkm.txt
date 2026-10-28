@@ -1,0 +1,666 @@
+Vendor and ODM DLKM partitions  |  Android OS core topics  |  Android Open Source Project
+
+ Skip to main content
+
+ Docs
+
+ What's new?
+
+ Release notes
+
+ Latest security bulletins
+
+ Latest Compatibility Definition Document (CDD)
+
+ Site updates
+
+ Getting Started
+
+ About
+
+ Start
+
+ Download
+
+ Builds
+
+ Test
+
+ Create
+
+ Contribute
+
+ Community
+
+ Tools, build, and related reference
+
+ Security
+
+ Overview
+
+ Bulletins
+
+ Features
+
+ Testing
+
+ Best Practices
+
+ Core Topics
+
+ Architecture
+
+ Audio
+
+ Camera
+
+ Connectivity
+
+ Data
+
+ Display
+
+ Fonts
+
+ Graphics
+
+ Interaction
+
+ Media
+
+ Performance
+
+ Permissions
+
+ Power
+
+ Runtime
+
+ Settings
+
+ Storage
+
+ Tests
+
+ Updates
+
+ Virtualization
+
+ Compatibility
+
+ Compatibility Definition Document (CDD)
+
+ Compatibility Test Suite (CTS)
+
+ Android Devices
+
+ Overview
+
+ Cuttlefish
+
+ Enterprise
+
+ TV
+
+ Automotive
+
+ Overview
+
+ Software Defined Vehicle
+
+ In-vehicle Infotainment
+
+ Release Details
+
+ Reference
+
+ HIDL
+
+ HAL
+
+ Trade Federation
+
+ Security Test Suite
+
+ Android Code Search
+
+ /
+
+ English
+
+ Deutsch
+
+ Español – América Latina
+
+ Français
+
+ Indonesia
+
+ Italiano
+
+ Polski
+
+ Português – Brasil
+
+ Tiếng Việt
+
+ Türkçe
+
+ Русский
+
+ עברית
+
+ العربيّة
+
+ فارسی
+
+ हिंदी
+
+ বাংলা
+
+ ภาษาไทย
+
+ 中文 – 简体
+
+ 中文 – 繁體
+
+ 日本語
+
+ 한국어
+
+ Sign in
+
+ Docs
+
+ Core topics
+
+ Overview
+
+ Architecture and Platform
+
+ Connectivity and Input
+
+ Media and Display
+
+ System health and Updates
+
+ Testing
+
+ Data storage and access
+
+ Docs
+
+ More
+
+ Overview
+
+ Architecture and Platform
+
+ Connectivity and Input
+
+ Media and Display
+
+ System health and Updates
+
+ Testing
+
+ Data storage and access
+
+ Android Code Search
+
+ Architecture
+ Overview
+ 
+ Hardware abstraction layer (HAL)
+ Overview
+ 
+ HIDL (deprecated)
+ OverviewInterfaces and packagesInterface hashingServices and data transferFast Message QueueUse Binder IPCHIDL MemoryBlockNetwork stack configuration toolsModel threadingConvert HAL modulesData typesSafe unionInterface versioningCode style guide
+ HIDL C++
+ OverviewPackagesInterfacesData typesFunctions
+ HIDL Java
+ OverviewData typesInterface methods and errorsExport constants
+ Other
+ HIDL framework backward compatibility verificationDynamically available HALsLegacy HALs (AOSP <=v7)
+ 
+ Kernel
+ OverviewKernel release notesStable kernel releases and updatesAndroid common kernelsGKI projectGKI developmentGKI versioning scheme
+ 
+ GKI release builds
+ Overviewandroid12-5.10 release buildsandroid13-5.10 release buildsandroid13-5.15 release buildsandroid14-5.15 release buildsandroid14-6.1 release buildsandroid15-6.6 release buildsandroid16-6.12 release buildsandroid17-6.18 release builds
+ 
+ Deprecated builds
+ android12-5.10 deprecated buildsandroid13-5.10 deprecated buildsandroid13-5.15 deprecated buildsandroid14-5.15 deprecated buildsandroid14-6.1 deprecated buildsandroid15-6.6 deprecated buildsandroid16-6.12 deprecated buildsandroid17-6.18 deprecated builds
+ 
+ GKI release builds (JSON)
+ android12-5.10 release buildsandroid13-5.10 release buildsandroid13-5.15 release buildsandroid14-5.15 release buildsandroid14-6.1 release buildsandroid15-6.6 release buildsandroid16-6.12 release buildsandroid17-6.18 release buildsGKI release processRequest a respinGKI 16-6.12 android-mainline errataMaintain a stable KMI
+ 
+ Kernel ABI monitoring
+ OverviewRun ABI monitoringWork with symbol lists
+ 
+ Modules
+ OverviewConfigure kernel features as GKI modulesVendor module guidelinesLoadable kernel modulesKernel module supportTest GKI modulesBoot time optimizationDebug featuresDevelop kernel code for GKIProxy Execution in AndroidAndroid kernel file system supportExtend the kernel with eBPFCollect kernel telemetry with eBPFUse DebugFS in Android 12FIPS 140-3 certifiable GKI crypto moduleEROFSAndroid kernel FAQKernel networking unit testsTransition from ION to DMA-BUF heaps (5.4 kernel)Incremental File System
+ 
+ Configuration
+ OverviewImplement system properties as APIsAdd system propertiesImplement Config File Schema API
+ 
+ Archive
+ OverviewConfigStoreCreate the HAL interfaceImplement the serviceClient-side useAdd ConfigStore classes and items
+ 
+ Device tree overlays
+ OverviewImplement DTOsDTO syntaxCompile and verifyUse multiple DTsDTB and DTBO partitionsOptimize DTO
+ 
+ Vendor NDK (<=AOSP 14)
+ OverviewEnable VNDKVNDK build system supportVNDK extensionsVNDK snapshot designGenerate VNDK snapshotsGenerate vendor snapshotsLinker namespaceDirectories, rules, and sepolicyRenderScriptABI stabilityPrebuilt ABI usages checker
+ 
+ Vendor interface object
+ OverviewManifestsCompatibility matrixesFCM lifecycleDevice manifest developmentMatch rulesAdditional resources
+ 
+ AIDL
+ OverviewAIDL languageAIDL backendsStable AIDLAIDL for HALsRun AIDL services dynamicallyAnnotations in AIDLFMQ with AIDLAIDL fuzzingAIDL style guide
+ 
+ Binder (Interprocess Communication)
+ OverviewHandle threadsPriority inheritanceHandle cached and frozen apps
+ 
+ Bootloader
+ OverviewCanonical boot reasonBoot image headerImplement bootconfigRecovery imagesDTB imagesImplement OTA updatesLock and unlock the bootloaderVersion information in AVB propertiesMove fastboot to userspace
+ 
+ Generic Bootloader
+ OverviewDeploy GBLGBL respin processGBL release builds
+ 
+ Partitions
+ OverviewPartition layoutVendor boot partitionsVendor and ODM DLKM partitionsShared system imageRamdisk partitionsGeneric boot partitionODM partitionsProduct partitionsImplement a GKI module partitionEnforce product partition interfacesTrusty OS partitions
+ 
+ 16 KB page size
+ OverviewUse Cuttlefish with 16 KB page size on ARM64Simulate Cuttlefish with 16 KB page size on x86-64Flash Pixel with 16 KB page size supportGet the page sizeOptimize for 16 KB page sizeSystem propertiesEnable 16 KB toggleEnable 16 KB backcompat optionVendor API level
+
+ Power
+ OverviewPower managementThermal mitigationPower stats HALApp power managementPlatform power management with DozePerformance managementApp background behavior trackersSupport batteryless devicesMeasure component powerMeasure device powerMeasure power valuesRoutine Battery SaverTV standbySystemSuspend service
+ 
+ Wattson
+ Power analysis overviewCollect and analyze traces
+
+ Settings
+ OverviewDesign guidelinesPatterns and componentsInformation architecturePersonalized settingsUniversal search
+
+ Fonts
+ Implement custom font fallback
+
+ What's new?
+
+ Release notes
+
+ Latest security bulletins
+
+ Latest Compatibility Definition Document (CDD)
+
+ Site updates
+
+ Getting Started
+
+ About
+
+ Start
+
+ Download
+
+ Builds
+
+ Test
+
+ Create
+
+ Contribute
+
+ Community
+
+ Tools, build, and related reference
+
+ Security
+
+ Overview
+
+ Bulletins
+
+ Features
+
+ Testing
+
+ Best Practices
+
+ Core Topics
+
+ Architecture
+
+ Audio
+
+ Camera
+
+ Connectivity
+
+ Data
+
+ Display
+
+ Fonts
+
+ Graphics
+
+ Interaction
+
+ Media
+
+ Performance
+
+ Permissions
+
+ Power
+
+ Runtime
+
+ Settings
+
+ Storage
+
+ Tests
+
+ Updates
+
+ Virtualization
+
+ Compatibility
+
+ Compatibility Definition Document (CDD)
+
+ Compatibility Test Suite (CTS)
+
+ Android Devices
+
+ Overview
+
+ Cuttlefish
+
+ Enterprise
+
+ TV
+
+ Automotive
+
+ Overview
+
+ Software Defined Vehicle
+
+ In-vehicle Infotainment
+
+ Release Details
+
+ Reference
+
+ HIDL
+
+ HAL
+
+ Trade Federation
+
+ Security Test Suite
+
+ Effective in 2026, to align with our trunk stable development model and ensure platform stability for the ecosystem, we will publish source code to AOSP in Q2 and Q4. For building and contributing to AOSP, use android-latest-release. The android-latest-release manifest branch will always reference the most recent release pushed to AOSP. For more information, see Changes to AOSP.
+
+ AOSP
+
+ Docs
+
+ Core topics
+
+ Architecture and Platform
+
+ Vendor and ODM DLKM partitions
+
+ Stay organized with collections
+
+ Save and categorize content based on your preferences.
+
+Android 11 introduces the concept of the Generic Kernel
+Image and the vendor boot partition. The vendor boot partition stores kernel
+modules compatible with GKI, and is loaded by first stage init. Kernel Modules
+prior to Android 11's release are also stored in
+vendor and ODM partitions, and are loaded by vendor processes.
+
+For Android 11 or higher, the kernel and all kernel
+modules can be updated independently from the rest of the partitions. To enable
+updates for kernel modules stored in the vendor partition (without a vendor
+partition update), move all vendor partition modules to a new partition called
+Vendor DLKM (dynamically loadable kernel module). You can then update this
+partition independently. Similarly, you can move all kernel modules stored in
+the ODM partition to a new partition called ODM DLKM. This partition can be
+updated independently as well.
+
+Partition location
+
+vendor_dlkm and odm_dlkm partitions are located in the super partition as
+another dynamic partition.
+
+vendor_dlkm contents in /vendor/lib/modules
+
+Vendor kernel modules
+modprobe config files
+A modules.load file
+
+odm_dlkm contents in /odm/lib/modules
+
+ODM kernel modules
+modprobe config files
+A modules.load file
+
+See Kernel Module
+Support for further
+details on kernel module config files.
+
+Build support
+
+Building vendor_dlkm and odm_dlkm is a similar process to building other
+dynamic partitions.
+
+vendor_dlkm build example
+
+Build vendor_dlkm as shown in the following examples.
+
+BoardConfig.mk
+BOARD_USES_VENDOR_DLKMIMAGE := true
+BOARD_VENDOR_DLKMIMAGE_FILE_SYSTEM_TYPE := ext4
+TARGET_COPY_OUT_VENDOR_DLKM := vendor_dlkm
+BOARD_<GROUP_NAME>_PARTITION_LIST += vendor_dlkm
+
+Replace <GROUP_NAME> with the appropriate name of the update
+group. The update group should be the group that the vendor partition is in.
+
+For A/B and Virtual A/B devices, device.mk
+AB_OTA_PARTITIONS += vendor_dlkm
+
+fstab
+
+Add the following entry for vendor_dlkm to fstab. Change flags according to
+the device. Use the CL Add vendor_dlkm to
+CF
+as an example.
+vendor_dlkm /vendor_dlkm ext4 noatime,ro,errors=panic wait,logical,first_stage_mount,slotselect,avb
+
+odm_dlkm build example
+
+Build odm_dlkm as shown in the following examples.
+
+BoardConfig.mk
+BOARD_USES_ODM_DLKIMAGE := true
+BOARD_ODM_DLKIMAGE_FILE_SYSTEM_TYPE := ext4
+TARGET_COPY_OUT_ODM_DLKM := odm_dlkm
+BOARD_<group_name>_PARTITION_LIST += odm_dlkm
+
+For A/B and Virtual A/B devices, device.mk
+AB_OTA_PARTITIONS += odm_dlkm
+
+fstab
+
+Add the following entry for odm_dlkm to fstab. Change flags according to the
+device. Use the CL Add odm_dlkm to
+CF
+as an example.
+odm_dlkm /odm_dlkm ext4 noatime,ro,errors=panic wait,logical,first_stage_mount,slotselect,avb
+
+Copy kernel modules into a partition
+
+To select the kernel modules you want to copy into the vendor_dlkm partition,
+list them in BOARD_VENDOR_KERNEL_MODULES.
+
+If you want to override the contents of modules.load, you can specify it in
+BOARD_VENDOR_KERNEL_MODULES_LOAD.
+
+At build time, modules listed in BOARD_VENDOR_KERNEL_MODULES are installed
+in $ANDROID_PRODUCT_OUT/vendor_dlkm/lib/modules. A symbolic link is
+created at /vendor/lib/modules that leads to /vendor_dlkm/lib/modules.
+
+Similarly, to select the kernel modules you want to copy into the odm_dlkm
+partition, list them in BOARD_ODM_KERNEL_MODULES. The platform build runs
+depmod on the modules and copies the depmod output files into the image.
+The build creates a modules.load file and stores it in the image.
+This file contains all of the modules listed in BOARD_ODM_KERNEL_MODULES.
+
+If you want to override the contents of modules.load, you can specify it in
+BOARD_ODM_KERNEL_MODULES_LOAD.
+
+At build time, modules listed in BOARD_ODM_KERNEL_MODULES is installed in
+$ANDROID_PRODUCT_OUT/odm_dlkm/lib/modules. A symbolic link is created at
+/odm/lib/modules that leads to /odm_dlkm/lib/modules.
+
+Always use /vendor/lib/modules and /odm/lib/modules for vendor
+and ODM kernel modules.
+
+Never use /vendor_dlkm/lib/modules. Devices without a vendor_dlkm
+partition install BOARD_VENDOR_KERNEL_MODULES to /vendor/lib/modules
+directly. This is problematic as /vendor_dlkm/lib/modules doesn't exist.
+
+Never use /odm_dlkm/lib/modules. Devices without an odm_dlkm partition
+install BOARD_ODM_KERNEL_MODULES to /odm/lib/modules directly. This is
+problematic as /odm_dlkm/lib/modules doesn't exist.
+
+Partition mounting and module loading
+
+During first_stage_init, the vendor_dlkm and odm_dlkm partitions are
+mounted in the /vendor_dlkm and /odm_dlkm directories, respectively. When
+this happens, symlinks at /vendor/lib/modules and /odm/lib/modules become
+available.
+
+A vendor process (like an .rc script) can then load the kernel modules based
+on the order specified in modules.load. The vendor process can also load the
+modules at a later time, if necessary.
+Note: These modules can have load-time dependencies on modules stored in (and
+loaded from) the vendor boot image.
+Related documentation
+
+For documentation regarding the creation of a vendor-boot partition (which
+contains the vendor RAMDisk), refer to Kernel Module
+Support.
+
+ Content and code samples on this page are subject to the licenses described in the Content License. Java and OpenJDK are trademarks or registered trademarks of Oracle and/or its affiliates.
+ Last updated 2026-10-09 UTC.
+
+ [[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-10-09 UTC."],[],[]]
+
+ Build
+
+ Android repository
+
+ Requirements
+
+ Downloading
+
+ Preview binaries
+
+ Factory images
+
+ Driver binaries
+
+ Connect
+
+ @Android on X
+
+ @AndroidDev on X
+
+ Android Blog
+
+ Google Security Blog
+
+ Platform on Google Groups
+
+ Building on Google Groups
+
+ Porting on Google Groups
+
+ Get help
+
+ Android Help Center
+
+ Pixel Help Center
+
+ www.android.com
+
+ Google Mobile Services
+
+ Stack Overflow
+
+ Issue Tracker
+
+ About Android
+
+ Community
+
+ Legal
+
+ License
+
+ Privacy
+
+ Site feedback
+
+ Manage cookies
+
+ English
+
+ Deutsch
+
+ Español – América Latina
+
+ Français
+
+ Indonesia
+
+ Italiano
+
+ Polski
+
+ Português – Brasil
+
+ Tiếng Việt
+
+ Türkçe
+
+ Русский
+
+ עברית
+
+ العربيّة
+
+ فارسی
+
+ हिंदी
+
+ বাংলা
+
+ ภาษาไทย
+
+ 中文 – 简体
+
+ 中文 – 繁體
+
+ 日本語
+
+ 한국어

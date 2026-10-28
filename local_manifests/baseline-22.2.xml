@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  纯上游基线 local manifest —— lineage-22.2
+
+  目的：只验证"未修改的 LineageOS 22.2 能否在 polaris 上编译"，不叠加任何自有代码：
+
+    - 设备树、公共设备树由 breakfast/roomservice 按 lineage-22.2 从 LineageOS 上游拉取；
+    - 这里只补两类上游 manifest 不包含、但构建必需的东西：
+        * 内核：LineageOS/android_kernel_xiaomi_sdm845，revision=lineage-22.2；
+        * vendor blobs：TheMuppets 两个仓库（polaris + sdm845-common），revision=lineage-22.2。
+    - 不包含 vendor/terminalos、TerminalHome 和设备树 fork。
+
+  注意：TheMuppets blob 仓库是官方 ROM 对应的二进制，不是"我们的修改"；基线的
+  "未修改"指不叠加自有源码与产品配置。
+
+  用法：
+    cp local_manifests/baseline-22.2.xml .repo/local_manifests/baseline.xml
+    repo sync
+    source build/envsetup.sh && breakfast polaris && brunch polaris
+-->
+<manifest>
+    <project name="LineageOS/android_kernel_xiaomi_sdm845"
+             path="kernel/xiaomi/sdm845"
+             revision="lineage-22.2" />
+    <project name="TheMuppets/proprietary_vendor_xiaomi_polaris"
+             path="vendor/xiaomi/polaris"
+             revision="lineage-22.2" />
+    <project name="TheMuppets/proprietary_vendor_xiaomi_sdm845-common"
+             path="vendor/xiaomi/sdm845-common"
+             revision="lineage-22.2" />
+</manifest>

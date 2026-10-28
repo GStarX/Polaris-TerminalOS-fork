@@ -1,0 +1,756 @@
+GKI versioning scheme  |  Android OS core topics  |  Android Open Source Project
+
+ Skip to main content
+
+ Docs
+
+ What's new?
+
+ Release notes
+
+ Latest security bulletins
+
+ Latest Compatibility Definition Document (CDD)
+
+ Site updates
+
+ Getting Started
+
+ About
+
+ Start
+
+ Download
+
+ Builds
+
+ Test
+
+ Create
+
+ Contribute
+
+ Community
+
+ Tools, build, and related reference
+
+ Security
+
+ Overview
+
+ Bulletins
+
+ Features
+
+ Testing
+
+ Best Practices
+
+ Core Topics
+
+ Architecture
+
+ Audio
+
+ Camera
+
+ Connectivity
+
+ Data
+
+ Display
+
+ Fonts
+
+ Graphics
+
+ Interaction
+
+ Media
+
+ Performance
+
+ Permissions
+
+ Power
+
+ Runtime
+
+ Settings
+
+ Storage
+
+ Tests
+
+ Updates
+
+ Virtualization
+
+ Compatibility
+
+ Compatibility Definition Document (CDD)
+
+ Compatibility Test Suite (CTS)
+
+ Android Devices
+
+ Overview
+
+ Cuttlefish
+
+ Enterprise
+
+ TV
+
+ Automotive
+
+ Overview
+
+ Software Defined Vehicle
+
+ In-vehicle Infotainment
+
+ Release Details
+
+ Reference
+
+ HIDL
+
+ HAL
+
+ Trade Federation
+
+ Security Test Suite
+
+ Android Code Search
+
+ /
+
+ English
+
+ Deutsch
+
+ Español – América Latina
+
+ Français
+
+ Indonesia
+
+ Italiano
+
+ Polski
+
+ Português – Brasil
+
+ Tiếng Việt
+
+ Türkçe
+
+ Русский
+
+ עברית
+
+ العربيّة
+
+ فارسی
+
+ हिंदी
+
+ বাংলা
+
+ ภาษาไทย
+
+ 中文 – 简体
+
+ 中文 – 繁體
+
+ 日本語
+
+ 한국어
+
+ Sign in
+
+ Docs
+
+ Core topics
+
+ Overview
+
+ Architecture and Platform
+
+ Connectivity and Input
+
+ Media and Display
+
+ System health and Updates
+
+ Testing
+
+ Data storage and access
+
+ Docs
+
+ More
+
+ Overview
+
+ Architecture and Platform
+
+ Connectivity and Input
+
+ Media and Display
+
+ System health and Updates
+
+ Testing
+
+ Data storage and access
+
+ Android Code Search
+
+ Architecture
+ Overview
+ 
+ Hardware abstraction layer (HAL)
+ Overview
+ 
+ HIDL (deprecated)
+ OverviewInterfaces and packagesInterface hashingServices and data transferFast Message QueueUse Binder IPCHIDL MemoryBlockNetwork stack configuration toolsModel threadingConvert HAL modulesData typesSafe unionInterface versioningCode style guide
+ HIDL C++
+ OverviewPackagesInterfacesData typesFunctions
+ HIDL Java
+ OverviewData typesInterface methods and errorsExport constants
+ Other
+ HIDL framework backward compatibility verificationDynamically available HALsLegacy HALs (AOSP <=v7)
+ 
+ Kernel
+ OverviewKernel release notesStable kernel releases and updatesAndroid common kernelsGKI projectGKI developmentGKI versioning scheme
+ 
+ GKI release builds
+ Overviewandroid12-5.10 release buildsandroid13-5.10 release buildsandroid13-5.15 release buildsandroid14-5.15 release buildsandroid14-6.1 release buildsandroid15-6.6 release buildsandroid16-6.12 release buildsandroid17-6.18 release builds
+ 
+ Deprecated builds
+ android12-5.10 deprecated buildsandroid13-5.10 deprecated buildsandroid13-5.15 deprecated buildsandroid14-5.15 deprecated buildsandroid14-6.1 deprecated buildsandroid15-6.6 deprecated buildsandroid16-6.12 deprecated buildsandroid17-6.18 deprecated builds
+ 
+ GKI release builds (JSON)
+ android12-5.10 release buildsandroid13-5.10 release buildsandroid13-5.15 release buildsandroid14-5.15 release buildsandroid14-6.1 release buildsandroid15-6.6 release buildsandroid16-6.12 release buildsandroid17-6.18 release buildsGKI release processRequest a respinGKI 16-6.12 android-mainline errataMaintain a stable KMI
+ 
+ Kernel ABI monitoring
+ OverviewRun ABI monitoringWork with symbol lists
+ 
+ Modules
+ OverviewConfigure kernel features as GKI modulesVendor module guidelinesLoadable kernel modulesKernel module supportTest GKI modulesBoot time optimizationDebug featuresDevelop kernel code for GKIProxy Execution in AndroidAndroid kernel file system supportExtend the kernel with eBPFCollect kernel telemetry with eBPFUse DebugFS in Android 12FIPS 140-3 certifiable GKI crypto moduleEROFSAndroid kernel FAQKernel networking unit testsTransition from ION to DMA-BUF heaps (5.4 kernel)Incremental File System
+ 
+ Configuration
+ OverviewImplement system properties as APIsAdd system propertiesImplement Config File Schema API
+ 
+ Archive
+ OverviewConfigStoreCreate the HAL interfaceImplement the serviceClient-side useAdd ConfigStore classes and items
+ 
+ Device tree overlays
+ OverviewImplement DTOsDTO syntaxCompile and verifyUse multiple DTsDTB and DTBO partitionsOptimize DTO
+ 
+ Vendor NDK (<=AOSP 14)
+ OverviewEnable VNDKVNDK build system supportVNDK extensionsVNDK snapshot designGenerate VNDK snapshotsGenerate vendor snapshotsLinker namespaceDirectories, rules, and sepolicyRenderScriptABI stabilityPrebuilt ABI usages checker
+ 
+ Vendor interface object
+ OverviewManifestsCompatibility matrixesFCM lifecycleDevice manifest developmentMatch rulesAdditional resources
+ 
+ AIDL
+ OverviewAIDL languageAIDL backendsStable AIDLAIDL for HALsRun AIDL services dynamicallyAnnotations in AIDLFMQ with AIDLAIDL fuzzingAIDL style guide
+ 
+ Binder (Interprocess Communication)
+ OverviewHandle threadsPriority inheritanceHandle cached and frozen apps
+ 
+ Bootloader
+ OverviewCanonical boot reasonBoot image headerImplement bootconfigRecovery imagesDTB imagesImplement OTA updatesLock and unlock the bootloaderVersion information in AVB propertiesMove fastboot to userspace
+ 
+ Generic Bootloader
+ OverviewDeploy GBLGBL respin processGBL release builds
+ 
+ Partitions
+ OverviewPartition layoutVendor boot partitionsVendor and ODM DLKM partitionsShared system imageRamdisk partitionsGeneric boot partitionODM partitionsProduct partitionsImplement a GKI module partitionEnforce product partition interfacesTrusty OS partitions
+ 
+ 16 KB page size
+ OverviewUse Cuttlefish with 16 KB page size on ARM64Simulate Cuttlefish with 16 KB page size on x86-64Flash Pixel with 16 KB page size supportGet the page sizeOptimize for 16 KB page sizeSystem propertiesEnable 16 KB toggleEnable 16 KB backcompat optionVendor API level
+
+ Power
+ OverviewPower managementThermal mitigationPower stats HALApp power managementPlatform power management with DozePerformance managementApp background behavior trackersSupport batteryless devicesMeasure component powerMeasure device powerMeasure power valuesRoutine Battery SaverTV standbySystemSuspend service
+ 
+ Wattson
+ Power analysis overviewCollect and analyze traces
+
+ Settings
+ OverviewDesign guidelinesPatterns and componentsInformation architecturePersonalized settingsUniversal search
+
+ Fonts
+ Implement custom font fallback
+
+ What's new?
+
+ Release notes
+
+ Latest security bulletins
+
+ Latest Compatibility Definition Document (CDD)
+
+ Site updates
+
+ Getting Started
+
+ About
+
+ Start
+
+ Download
+
+ Builds
+
+ Test
+
+ Create
+
+ Contribute
+
+ Community
+
+ Tools, build, and related reference
+
+ Security
+
+ Overview
+
+ Bulletins
+
+ Features
+
+ Testing
+
+ Best Practices
+
+ Core Topics
+
+ Architecture
+
+ Audio
+
+ Camera
+
+ Connectivity
+
+ Data
+
+ Display
+
+ Fonts
+
+ Graphics
+
+ Interaction
+
+ Media
+
+ Performance
+
+ Permissions
+
+ Power
+
+ Runtime
+
+ Settings
+
+ Storage
+
+ Tests
+
+ Updates
+
+ Virtualization
+
+ Compatibility
+
+ Compatibility Definition Document (CDD)
+
+ Compatibility Test Suite (CTS)
+
+ Android Devices
+
+ Overview
+
+ Cuttlefish
+
+ Enterprise
+
+ TV
+
+ Automotive
+
+ Overview
+
+ Software Defined Vehicle
+
+ In-vehicle Infotainment
+
+ Release Details
+
+ Reference
+
+ HIDL
+
+ HAL
+
+ Trade Federation
+
+ Security Test Suite
+
+ Effective in 2026, to align with our trunk stable development model and ensure platform stability for the ecosystem, we will publish source code to AOSP in Q2 and Q4. For building and contributing to AOSP, use android-latest-release. The android-latest-release manifest branch will always reference the most recent release pushed to AOSP. For more information, see Changes to AOSP.
+
+ AOSP
+
+ Docs
+
+ Core topics
+
+ Architecture and Platform
+
+ GKI versioning scheme
+
+ Stay organized with collections
+
+ Save and categorize content based on your preferences.
+
+This page describes the versioning scheme for Generic Kernel Images (GKIs). A
+Generic Kernel Image (GKI)
+has a unique identifier called the kernel release. The kernel release consists
+of the kernel module interface (KMI) version and the sublevel. The kernel
+release is specific to the image being released, whereas the KMI version
+represents the interface that a release is built from. A KMI version can support
+multiple kernel releases. A kernel release is tied to only one KMI version. In
+the unlikely event where the kernel module interface has to be changed, the KMI
+generation is iterated to reflect the change in KMI version.
+
+Summary of terms
+
+The following table summarizes important terms used on this page and
+for GKI updates.
+
+Name
+Symbol
+Example
+Description
+
+Kernel release 
+w.x.y-zzz-k-suffix
+5.4.42-android12-0-foo
+Unique identifier for a GKI release. This is the value
+returned by uname.
+
+KMI version
+w.x-zzz-k
+5.4-android12-0
+Describes the kernel module interface (KMI) between GKI and
+dynamically loadable kernel modules (DLKM).
+
+Sublevel
+y
+42
+Describes the release order of kernel releases within the
+same KMI version.
+
+The following table lists other related terms as a reference.
+
+Name
+Symbol
+Example
+Description
+
+w.x.y
+w.x.y
+5.4.42
+
+ For details, see Linux
+Kernel Makefiles (search for "KERNELRELEASE").
+ w.x.y is used directly throughout this document. This is also
+ commonly referred to as the three-part version number. The term used
+ in VINTF, kernel version, might cause confusion with other terms,
+ especially w.
+ This variable is referred to as kernel_version_tuple in libkver.
+ 
+ This tuple must not be decreased by any updates, including OTA or
+ mainline.
+
+Kernel branch
+zzz-w.x
+android12-5.4
+This term is used in 
+ Common kernel branch types.
+
+Version
+w
+5
+This term is not used in this document. This variable is referred to as
+version in libkver.
+
+Patch level
+x
+4
+This term is not used in this document. This variable is referred to as
+ patch_level in libkver.
+
+Android release
+zzz
+android12
+
+ This is the Android (dessert) release number that the kernel is associated
+ with.
+
+ When comparing the AndroidRelease field, the numeric part is
+ extracted from the string for comparison.
+
+ The Android release number must not be decreased by any updates, including
+ OTA or mainline.
+
+KMI generation
+k
+0
+
+ This is an additional number added to deal with unlikely
+ events. If a security bug fix requires changes to the KMI within the same
+ Android release, a KMI generation is increased.
+
+ The KMI generation number starts with 0.
+
+Versioning design
+
+Kernel release
+
+Definition
+
+For devices that ship with GKI, the kernel release is defined as follows:
+KernelRelease :=
+Version.PatchLevel.SubLevel-AndroidRelease-KmiGeneration-suffix
+w .x .y -zzz -k -something
+
+For more information, see Determining kernel release from a
+device.
+
+The following is an example of a kernel release.
+5.4.42-android12-0-00544-ged21d463f856
+
+Description
+
+The kernel release is the unique ID of a GKI release. If two GKI binaries have
+the same kernel release, they must be byte-wise identical.
+
+A kernel release consists of a KMI version, a sublevel, and a suffix. For
+the purposes of this document, the suffix after KMI generation is ignored.
+
+KMI version
+
+Definition
+
+The KMI version is defined as follows:
+KmiVersion :=
+Version.PatchLevel-AndroidRelease-KmiGeneration
+w .x -zzz -k
+
+Note that the sublevel, y isn't part of the KMI version. For the example
+in Kernel release, the KMI version is:
+5.4-android12-0
+
+Description
+
+The KMI version describes the kernel module interface (KMI) between GKI and
+dynamically loadable kernel modules (DLKM).
+
+If two kernel releases have the same KMI version, they implement the same kernel
+module interface. The DLKMs that are compatible with one are also compatible
+with the other.
+
+The KMI version must not be decreased by any OTA updates.
+
+Sublevel
+
+The sublevel, y, describes the release order of kernel releases within the
+same KMI version.
+
+For two kernel releases that have the same KMI version but have sublevel Y1 and
+Y2 respectively:
+
+If Y1 is less than or equal to Y2, a device running Y1 can receive an
+update to Y2.
+If Y1 is greater than Y2, a device running Y1 can't be updated to Y2.
+
+That is, if the KMI version doesn't change, the sublevel must not be decreased
+by any OTA update.
+
+Determine kernel release from a device
+
+The full kernel release can be found by executing uname -r, or
+uname(2)
+with the following code snippet:
+std::string get_kernel_release() {
+ struct utsname buf;
+ return uname(&buf) == 0 ? buf.release : "";
+}
+
+An example output is:
+5.4.42-android12-0-00544-ged21d463f856
+
+For the purpose of this document, anything after the KMI generation is ignored
+when extracting kernel information. More formally, the output of uname -r is
+parsed with the following regex
+(assuming zzz always starts with "android"):
+^(?P<w>\d+)[.](?P<x>\d+)[.](?P<y>\d+)-(?P<z>android\d+)-(?P<k>\d+).*$
+
+The ignored information can include information such as the
+ci.android.com build number, number of
+patches on top of the baseline kernel, and SHA hashes of the git commit.
+
+libkver
+
+The library, libkver, provides a C++ interface to parse the kernel release or a
+KMI version string. For a list of APIs that libkver exposes, see
+packages/modules/Gki/libkver/include/kver.
+
+VINTF checks
+
+For Android 11 or lower, the Android release part of the KMI version is
+specified manually in the device manifest by device manufacturers. For details,
+see VINTF kernel match rules.
+
+From Android S, the Android release part of the KMI version can be extracted
+from the kernel and injected into the device manifest at build time.
+
+Because kernel configuration requirements generally don't change, there's no
+need to encode k within the compatibility matrix. However, in the unlikely
+case where the kernel configuration requirement does need to be changed, ensure
+the following:
+
+The corresponding requirement from the compatibility matrix is removed.
+Additional VTS tests are added to check the new requirements conditional
+on KMI generation.
+
+Boot image version in OTA metadata
+
+Even if the boot image is updated through OTA, it must be
+wrapped in the OTA payload format, payload.bin. The OTA payload encodes a
+version field for each partition. When update_engine handles an OTA payload,
+it compares this field to ensure the partition is not downgraded.
+
+To avoid confusion, the version field for the boot partition in the OTA
+metadata is called boot image version.
+
+Because the ramdisk is always built from scratch, using the ramdisk
+timestamp is sufficient to describe the whole boot image. There's no need to
+encode kernel release in the boot image version, unless you are stitching an old
+boot image to a new kernel binary in the future.
+
+Before an OTA update, the OTA client checks the boot image version
+in the same way as any other partition.
+
+ Content and code samples on this page are subject to the licenses described in the Content License. Java and OpenJDK are trademarks or registered trademarks of Oracle and/or its affiliates.
+ Last updated 2026-10-09 UTC.
+
+ [[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-10-09 UTC."],[],[]]
+
+ Build
+
+ Android repository
+
+ Requirements
+
+ Downloading
+
+ Preview binaries
+
+ Factory images
+
+ Driver binaries
+
+ Connect
+
+ @Android on X
+
+ @AndroidDev on X
+
+ Android Blog
+
+ Google Security Blog
+
+ Platform on Google Groups
+
+ Building on Google Groups
+
+ Porting on Google Groups
+
+ Get help
+
+ Android Help Center
+
+ Pixel Help Center
+
+ www.android.com
+
+ Google Mobile Services
+
+ Stack Overflow
+
+ Issue Tracker
+
+ About Android
+
+ Community
+
+ Legal
+
+ License
+
+ Privacy
+
+ Site feedback
+
+ Manage cookies
+
+ English
+
+ Deutsch
+
+ Español – América Latina
+
+ Français
+
+ Indonesia
+
+ Italiano
+
+ Polski
+
+ Português – Brasil
+
+ Tiếng Việt
+
+ Türkçe
+
+ Русский
+
+ עברית
+
+ العربيّة
+
+ فارسی
+
+ हिंदी
+
+ বাংলা
+
+ ภาษาไทย
+
+ 中文 – 简体
+
+ 中文 – 繁體
+
+ 日本語
+
+ 한국어

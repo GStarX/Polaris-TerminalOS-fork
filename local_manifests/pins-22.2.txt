@@ -1,0 +1,19 @@
+# 交付线（Linux 4.9.337）构建输入 pin —— K2-04 结案口径：lineage-22.2
+#
+# 用途：构建前只读校验「工作树 HEAD == 本文件记录的 commit」，防止 sync 漂移导致
+#       构建输入与结案/验收记录不一致（K3-01「可复现构建」的 sha 校验部分）。
+# 校验脚本：scripts/verify-pins.sh（只读，不修改源码、不构建、不触碰设备）
+#
+# 生成依据（2026-10-28 实测）：
+#   - 自有仓库 3 项：GStarX/* 的 terminalos/lineage-22.2 分支
+#   - 内核 1 项：LineageOS/android_kernel_xiaomi_sdm845 的 lineage-22.2（Linux 4.9.337）
+#   - blobs 2 项：TheMuppets 两个仓库的 lineage-22.2（上游无 23.2 分支）
+# 维护：交付线升版或 pin 变更时必须同步改本文件，并在提交信息里写明原因与验证方式。
+#
+# 格式：<检出路径><TAB><完整 commit sha>   （# 开头为注释，空行忽略）
+device/xiaomi/polaris	a7f801743b9f8c399a3014eb5f6d1838aebf9710
+vendor/terminalos	d4559c341644b16649c3ab6195e73f7efe430134
+packages/apps/TerminalHome	ccedcc4a9f6e74245dd6dcc51570a46768d579cb
+kernel/xiaomi/sdm845	aa8adfe9bf212c6e93238a86980b4024da4f819a
+vendor/xiaomi/polaris	9e9707959acceea4b990cba733d259aab64c183e
+vendor/xiaomi/sdm845-common	b971b2ccd4cf66dede975cf645d01f4cbc203150

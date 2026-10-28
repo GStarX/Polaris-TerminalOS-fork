@@ -1,0 +1,42 @@
+[
+  {
+    "url": "https://source.android.com/docs/core/architecture/kernel/vendor-module-guidelines",
+    "name": "vendor_module_guidelines",
+    "status": 200,
+    "bytes": 226815,
+    "text_len": 29660,
+    "verified_tls": true
+  },
+  {
+    "url": "https://source.android.com/docs/core/architecture/api-flags",
+    "name": "api_flags",
+    "status": 200,
+    "bytes": 194312,
+    "text_len": 15044,
+    "verified_tls": true
+  },
+  {
+    "url": "https://source.android.com/docs/core/architecture/partitions/gki-partitions",
+    "name": "gki_partitions",
+    "status": 200,
+    "bytes": 198308,
+    "text_len": 13909,
+    "verified_tls": true
+  },
+  {
+    "url": "https://source.android.com/docs/core/architecture/partitions",
+    "name": "partitions_overview",
+    "status": 200,
+    "bytes": 198746,
+    "text_len": 17278,
+    "verified_tls": false
+  },
+  {
+    "url": "https://source.android.com/docs/core/architecture/kernel/modules",
+    "name": "kernel_module_sup_retry",
+    "status": 200,
+    "bytes": 190521,
+    "text_len": 13407,
+    "verified_tls": true
+  }
+]

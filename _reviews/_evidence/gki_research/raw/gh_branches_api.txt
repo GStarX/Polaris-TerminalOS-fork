@@ -1,0 +1,802 @@
+[
+  {
+    "name": "android11-5.4-lts",
+    "commit": {
+      "sha": "6c4d69746191c296d95b8a398ac28b5cc942ca3e",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/6c4d69746191c296d95b8a398ac28b5cc942ca3e"
+    },
+    "protected": false
+  },
+  {
+    "name": "android11-5.4",
+    "commit": {
+      "sha": "0a4bf073fa3fffa4289af31c9bed4311b7e20589",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/0a4bf073fa3fffa4289af31c9bed4311b7e20589"
+    },
+    "protected": false
+  },
+  {
+    "name": "android11-kiwi-5.4",
+    "commit": {
+      "sha": "5163e57865d9456f195d9cdd9cfc9832b5b9865f",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/5163e57865d9456f195d9cdd9cfc9832b5b9865f"
+    },
+    "protected": false
+  },
+  {
+    "name": "android12-5.4-lts",
+    "commit": {
+      "sha": "015fad180aaa1a89c9852ad61e58a0bcce6177c8",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/015fad180aaa1a89c9852ad61e58a0bcce6177c8"
+    },
+    "protected": false
+  },
+  {
+    "name": "android12-5.4",
+    "commit": {
+      "sha": "b2957a0ebc3b9949475a442f9e8ab64ccaa6e087",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/b2957a0ebc3b9949475a442f9e8ab64ccaa6e087"
+    },
+    "protected": false
+  },
+  {
+    "name": "android12-5.10-2024-11",
+    "commit": {
+      "sha": "94f94a2a3f363bdcb9428ba0b83904c6e54b2276",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/94f94a2a3f363bdcb9428ba0b83904c6e54b2276"
+    },
+    "protected": false
+  },
+  {
+    "name": "android12-5.10-2025-02",
+    "commit": {
+      "sha": "6aaee44d50609be8d40c91ffffd0c24741d8c924",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/6aaee44d50609be8d40c91ffffd0c24741d8c924"
+    },
+    "protected": false
+  },
+  {
+    "name": "android12-5.10-2025-05",
+    "commit": {
+      "sha": "71f3aedc8b92dec66ff028df25fe9ddfeafea88c",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/71f3aedc8b92dec66ff028df25fe9ddfeafea88c"
+    },
+    "protected": false
+  },
+  {
+    "name": "android12-5.10-2025-06",
+    "commit": {
+      "sha": "0da2761b0d573a9074ab1a5d3063c46a7a743861",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/0da2761b0d573a9074ab1a5d3063c46a7a743861"
+    },
+    "protected": false
+  },
+  {
+    "name": "android12-5.10-2025-09",
+    "commit": {
+      "sha": "5876d310563a8f1fbaf6ccb6cab512e850f0a919",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/5876d310563a8f1fbaf6ccb6cab512e850f0a919"
+    },
+    "protected": false
+  },
+  {
+    "name": "android12-5.10-2025-12",
+    "commit": {
+      "sha": "648e13791289125f4447184856d1b211f32d5daf",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/648e13791289125f4447184856d1b211f32d5daf"
+    },
+    "protected": false
+  },
+  {
+    "name": "android12-5.10-lts",
+    "commit": {
+      "sha": "298dc7902435c8ca8ff46f30d8fcb0074a894cb6",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/298dc7902435c8ca8ff46f30d8fcb0074a894cb6"
+    },
+    "protected": false
+  },
+  {
+    "name": "android12-5.10",
+    "commit": {
+      "sha": "9360e0b02a7f1595661f6a087ef4c439594475a7",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/9360e0b02a7f1595661f6a087ef4c439594475a7"
+    },
+    "protected": false
+  },
+  {
+    "name": "android12-kiwi-5.10",
+    "commit": {
+      "sha": "c3e5f0ce1487d99af2b7bfbee163fe5e891d4ee8",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/c3e5f0ce1487d99af2b7bfbee163fe5e891d4ee8"
+    },
+    "protected": false
+  },
+  {
+    "name": "android12-trusty-5.10",
+    "commit": {
+      "sha": "965c5bcac1fe560c973001599bd2364659dc788c",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/965c5bcac1fe560c973001599bd2364659dc788c"
+    },
+    "protected": false
+  },
+  {
+    "name": "android13-5.10-2022-05-exp",
+    "commit": {
+      "sha": "4dce9d7a65b14d5949b20ced210413d04d914053",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/4dce9d7a65b14d5949b20ced210413d04d914053"
+    },
+    "protected": false
+  },
+  {
+    "name": "android13-5.10-2024-11",
+    "commit": {
+      "sha": "2bd1bc72b1b94222d968663bf2b886ac9af6f2fd",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/2bd1bc72b1b94222d968663bf2b886ac9af6f2fd"
+    },
+    "protected": false
+  },
+  {
+    "name": "android13-5.10-2025-01",
+    "commit": {
+      "sha": "a046441b78f6d4d14dfed2a6226f56c1a700778f",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/a046441b78f6d4d14dfed2a6226f56c1a700778f"
+    },
+    "protected": false
+  },
+  {
+    "name": "android13-5.10-2025-03",
+    "commit": {
+      "sha": "129ea3dfb7c994a84030e32a31b3ebd1abbe44d8",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/129ea3dfb7c994a84030e32a31b3ebd1abbe44d8"
+    },
+    "protected": false
+  },
+  {
+    "name": "android13-5.10-2025-05",
+    "commit": {
+      "sha": "18fd921e573085efffc60403f6580ea685762218",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/18fd921e573085efffc60403f6580ea685762218"
+    },
+    "protected": false
+  },
+  {
+    "name": "android13-5.10-2025-07",
+    "commit": {
+      "sha": "75ffdd081f85facbae080541f9780a3657013b3e",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/75ffdd081f85facbae080541f9780a3657013b3e"
+    },
+    "protected": false
+  },
+  {
+    "name": "android13-5.10-2025-10",
+    "commit": {
+      "sha": "241c3233dc73d290ea2018bf3b77e5d131fb5aa4",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/241c3233dc73d290ea2018bf3b77e5d131fb5aa4"
+    },
+    "protected": false
+  },
+  {
+    "name": "android13-5.10-lts",
+    "commit": {
+      "sha": "ab3e1c0dd1ff17ac9e51b12bb4c67a62be3b205e",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/ab3e1c0dd1ff17ac9e51b12bb4c67a62be3b205e"
+    },
+    "protected": false
+  },
+  {
+    "name": "android13-5.10-sp",
+    "commit": {
+      "sha": "6bc28fdfeec3373198d11fae1c9663a598ddb05c",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/6bc28fdfeec3373198d11fae1c9663a598ddb05c"
+    },
+    "protected": false
+  },
+  {
+    "name": "android13-5.10",
+    "commit": {
+      "sha": "9536d991bb596a507f46aafe6b5f64fe9e599e78",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/9536d991bb596a507f46aafe6b5f64fe9e599e78"
+    },
+    "protected": false
+  },
+  {
+    "name": "android13-5.15-2022-05-exp",
+    "commit": {
+      "sha": "471dfd69fb39b630acd3d62ef90a136341040ac7",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/471dfd69fb39b630acd3d62ef90a136341040ac7"
+    },
+    "protected": false
+  },
+  {
+    "name": "android13-5.15-2024-11",
+    "commit": {
+      "sha": "246cdd50ff5c1646649a5f27fd80ed8e35b78f62",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/246cdd50ff5c1646649a5f27fd80ed8e35b78f62"
+    },
+    "protected": false
+  },
+  {
+    "name": "android13-5.15-2025-01",
+    "commit": {
+      "sha": "caaac54b16c1b32f845f5f9593db299999044866",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/caaac54b16c1b32f845f5f9593db299999044866"
+    },
+    "protected": false
+  },
+  {
+    "name": "android13-5.15-2025-03",
+    "commit": {
+      "sha": "cc737f93f31c669e34c340ef5a87b08366ce9d65",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/cc737f93f31c669e34c340ef5a87b08366ce9d65"
+    },
+    "protected": false
+  },
+  {
+    "name": "android13-5.15-2025-05",
+    "commit": {
+      "sha": "5ee07dba9703de3e2c823100eba29f34df13cdc2",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/5ee07dba9703de3e2c823100eba29f34df13cdc2"
+    },
+    "protected": false
+  },
+  {
+    "name": "android13-5.15-2025-07",
+    "commit": {
+      "sha": "ccf1e770f8a685bef6dbf9bb07b8ca5b4e067c74",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/ccf1e770f8a685bef6dbf9bb07b8ca5b4e067c74"
+    },
+    "protected": false
+  },
+  {
+    "name": "android13-5.15-2025-09",
+    "commit": {
+      "sha": "8c08791e195d6ba4758b9417474a6c3fe8c64b9e",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/8c08791e195d6ba4758b9417474a6c3fe8c64b9e"
+    },
+    "protected": false
+  },
+  {
+    "name": "android13-5.15-2025-12",
+    "commit": {
+      "sha": "648e13791289125f4447184856d1b211f32d5daf",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/648e13791289125f4447184856d1b211f32d5daf"
+    },
+    "protected": false
+  },
+  {
+    "name": "android13-5.15-arcvm",
+    "commit": {
+      "sha": "b26894471e7a8f8d1dc4c3c233e3e606540bbdd3",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/b26894471e7a8f8d1dc4c3c233e3e606540bbdd3"
+    },
+    "protected": false
+  },
+  {
+    "name": "android13-5.15-lts",
+    "commit": {
+      "sha": "8a8f52308945f4b0f1a168fa91bd7de0a76e59c4",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/8a8f52308945f4b0f1a168fa91bd7de0a76e59c4"
+    },
+    "protected": false
+  },
+  {
+    "name": "android13-5.15-sp",
+    "commit": {
+      "sha": "876d0386b08f8606f296d09dcee8ae334d426286",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/876d0386b08f8606f296d09dcee8ae334d426286"
+    },
+    "protected": false
+  },
+  {
+    "name": "android13-5.15",
+    "commit": {
+      "sha": "e6654bf2f6c2c3c7b6af8897baa2a86991d3b5ac",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/e6654bf2f6c2c3c7b6af8897baa2a86991d3b5ac"
+    },
+    "protected": false
+  },
+  {
+    "name": "android14-5.15-2023-05-exp",
+    "commit": {
+      "sha": "11a15a4dcfa8bdbf65fe2eaa52a036dea70822c2",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/11a15a4dcfa8bdbf65fe2eaa52a036dea70822c2"
+    },
+    "protected": false
+  },
+  {
+    "name": "android14-5.15-2024-11",
+    "commit": {
+      "sha": "8102af037c1a6ff2e8c4465b79d9717d9ea7b865",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/8102af037c1a6ff2e8c4465b79d9717d9ea7b865"
+    },
+    "protected": false
+  },
+  {
+    "name": "android14-5.15-2025-01",
+    "commit": {
+      "sha": "67d85a55fd3c090e1d8dfd455e24b267049a2fad",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/67d85a55fd3c090e1d8dfd455e24b267049a2fad"
+    },
+    "protected": false
+  },
+  {
+    "name": "android14-5.15-2025-03",
+    "commit": {
+      "sha": "7cc240503788326006b6f193a3468fb07a9e4583",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/7cc240503788326006b6f193a3468fb07a9e4583"
+    },
+    "protected": false
+  },
+  {
+    "name": "android14-5.15-2025-05",
+    "commit": {
+      "sha": "f258f18d09a29cfd01340c53c4acababffbe2e29",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/f258f18d09a29cfd01340c53c4acababffbe2e29"
+    },
+    "protected": false
+  },
+  {
+    "name": "android14-5.15-2025-07",
+    "commit": {
+      "sha": "8637ad4a0525e3da4d79d1ea3ef6c824bbed5a93",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/8637ad4a0525e3da4d79d1ea3ef6c824bbed5a93"
+    },
+    "protected": false
+  },
+  {
+    "name": "android14-5.15-2025-10",
+    "commit": {
+      "sha": "0b22e568d1010fcdafa62a4e644efef088965159",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/0b22e568d1010fcdafa62a4e644efef088965159"
+    },
+    "protected": false
+  },
+  {
+    "name": "android14-5.15-lts",
+    "commit": {
+      "sha": "9929332cf976b614e7b57fc2147fc857dd06df6c",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/9929332cf976b614e7b57fc2147fc857dd06df6c"
+    },
+    "protected": false
+  },
+  {
+    "name": "android14-5.15-pkvm-experimental",
+    "commit": {
+      "sha": "c0eff8770104c4847976d90dd3b0ae00bdf992cd",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/c0eff8770104c4847976d90dd3b0ae00bdf992cd"
+    },
+    "protected": false
+  },
+  {
+    "name": "android14-5.15-sp",
+    "commit": {
+      "sha": "96cfc3572fbee32c9e53370f1469e567b858901e",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/96cfc3572fbee32c9e53370f1469e567b858901e"
+    },
+    "protected": false
+  },
+  {
+    "name": "android14-5.15",
+    "commit": {
+      "sha": "a9ee5509a0c552cb7bd7846b03b538dc2cba7585",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/a9ee5509a0c552cb7bd7846b03b538dc2cba7585"
+    },
+    "protected": false
+  },
+  {
+    "name": "android14-6.1-2023-05-exp",
+    "commit": {
+      "sha": "197e8de785017d7c21bd59349705ac12ca3df2f9",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/197e8de785017d7c21bd59349705ac12ca3df2f9"
+    },
+    "protected": false
+  },
+  {
+    "name": "android14-6.1-2024-06-brcm",
+    "commit": {
+      "sha": "2808c08738731d587b02119757f6b317b16b2007",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/2808c08738731d587b02119757f6b317b16b2007"
+    },
+    "protected": false
+  },
+  {
+    "name": "android14-6.1-2024-10",
+    "commit": {
+      "sha": "1ebed42473ea1fc172814cc6f3f90d00fd6006a8",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/1ebed42473ea1fc172814cc6f3f90d00fd6006a8"
+    },
+    "protected": false
+  },
+  {
+    "name": "android14-6.1-2024-11",
+    "commit": {
+      "sha": "c8e84468933c209f23180750265180120414529a",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/c8e84468933c209f23180750265180120414529a"
+    },
+    "protected": false
+  },
+  {
+    "name": "android14-6.1-2024-12",
+    "commit": {
+      "sha": "3cc704aa7c8f6e5b8d6ea062d283ead1a93cf240",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/3cc704aa7c8f6e5b8d6ea062d283ead1a93cf240"
+    },
+    "protected": false
+  },
+  {
+    "name": "android14-6.1-2025-01",
+    "commit": {
+      "sha": "5a3e04d9b6d09e5d824c2e898c56036bb1b6620e",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/5a3e04d9b6d09e5d824c2e898c56036bb1b6620e"
+    },
+    "protected": false
+  },
+  {
+    "name": "android14-6.1-2025-02",
+    "commit": {
+      "sha": "990189f23bcf3bb2166a69c44fb0c115e33364af",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/990189f23bcf3bb2166a69c44fb0c115e33364af"
+    },
+    "protected": false
+  },
+  {
+    "name": "android14-6.1-2025-03",
+    "commit": {
+      "sha": "0cc282c6fd487e6be9ef142de50012b07b92d8a0",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/0cc282c6fd487e6be9ef142de50012b07b92d8a0"
+    },
+    "protected": false
+  },
+  {
+    "name": "android14-6.1-2025-04",
+    "commit": {
+      "sha": "e2e8d09bd388934d78b03418ebd61699778b4153",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/e2e8d09bd388934d78b03418ebd61699778b4153"
+    },
+    "protected": false
+  },
+  {
+    "name": "android14-6.1-2025-05",
+    "commit": {
+      "sha": "96e0a2cce381320ccbcdcdcbcdffee53ee7e1cec",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/96e0a2cce381320ccbcdcdcbcdffee53ee7e1cec"
+    },
+    "protected": false
+  },
+  {
+    "name": "android14-6.1-2025-06",
+    "commit": {
+      "sha": "6337dbdbee758f7ecde2b0b1ea8662826ac58f4d",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/6337dbdbee758f7ecde2b0b1ea8662826ac58f4d"
+    },
+    "protected": false
+  },
+  {
+    "name": "android14-6.1-2025-07",
+    "commit": {
+      "sha": "2403eaeca1017ed826b2c07594f3bb9b4bb695fb",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/2403eaeca1017ed826b2c07594f3bb9b4bb695fb"
+    },
+    "protected": false
+  },
+  {
+    "name": "android14-6.1-2025-08",
+    "commit": {
+      "sha": "6df4284544659903bca71eb3cf66b8359658a6ee",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/6df4284544659903bca71eb3cf66b8359658a6ee"
+    },
+    "protected": false
+  },
+  {
+    "name": "android14-6.1-2025-09",
+    "commit": {
+      "sha": "fc1d54ae71d90167ab350c3ebad1afae882599eb",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/fc1d54ae71d90167ab350c3ebad1afae882599eb"
+    },
+    "protected": false
+  },
+  {
+    "name": "android14-6.1-2025-12",
+    "commit": {
+      "sha": "648e13791289125f4447184856d1b211f32d5daf",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/648e13791289125f4447184856d1b211f32d5daf"
+    },
+    "protected": false
+  },
+  {
+    "name": "android14-6.1-lts",
+    "commit": {
+      "sha": "0c5c6d4624c87190f33e691a3b52c05b611c0a54",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/0c5c6d4624c87190f33e691a3b52c05b611c0a54"
+    },
+    "protected": false
+  },
+  {
+    "name": "android14-6.1-pkvm-experimental",
+    "commit": {
+      "sha": "eabd4fea01efb7c90727d7431351531ed6fede09",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/eabd4fea01efb7c90727d7431351531ed6fede09"
+    },
+    "protected": false
+  },
+  {
+    "name": "android14-6.1-sp",
+    "commit": {
+      "sha": "9135df0218371ea561ce4d1ff45c379befedf49b",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/9135df0218371ea561ce4d1ff45c379befedf49b"
+    },
+    "protected": false
+  },
+  {
+    "name": "android14-6.1",
+    "commit": {
+      "sha": "498f91c17b0822a09aede17d26a63bf8c6813725",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/498f91c17b0822a09aede17d26a63bf8c6813725"
+    },
+    "protected": false
+  },
+  {
+    "name": "android14-kiwi-6.1",
+    "commit": {
+      "sha": "9baf91a724816bde6b0088a755ab6c519b56e106",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/9baf91a724816bde6b0088a755ab6c519b56e106"
+    },
+    "protected": false
+  },
+  {
+    "name": "android14-trusty-5.15",
+    "commit": {
+      "sha": "bb1540be070e05779e61e7364fea38f44cb6f716",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/bb1540be070e05779e61e7364fea38f44cb6f716"
+    },
+    "protected": false
+  },
+  {
+    "name": "android15-6.6-2024-05-exp",
+    "commit": {
+      "sha": "648e13791289125f4447184856d1b211f32d5daf",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/648e13791289125f4447184856d1b211f32d5daf"
+    },
+    "protected": false
+  },
+  {
+    "name": "android15-6.6-2024-06-exp",
+    "commit": {
+      "sha": "43b305c7c976fed2440a714f4c118cc504bd5318",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/43b305c7c976fed2440a714f4c118cc504bd5318"
+    },
+    "protected": false
+  },
+  {
+    "name": "android15-6.6-2024-10",
+    "commit": {
+      "sha": "3e0578a30d7e35fed251da077ef40374191dcf4f",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/3e0578a30d7e35fed251da077ef40374191dcf4f"
+    },
+    "protected": false
+  },
+  {
+    "name": "android15-6.6-2024-11",
+    "commit": {
+      "sha": "f0c68161c0e91e1fd24d7d21a98e6534e728a0d0",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/f0c68161c0e91e1fd24d7d21a98e6534e728a0d0"
+    },
+    "protected": false
+  },
+  {
+    "name": "android15-6.6-2024-12",
+    "commit": {
+      "sha": "443be96c6b96d87b3fe34445d5aa7620ecc7c391",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/443be96c6b96d87b3fe34445d5aa7620ecc7c391"
+    },
+    "protected": false
+  },
+  {
+    "name": "android15-6.6-2025-01",
+    "commit": {
+      "sha": "18a026f7d05c55a9373b2db061d8573260a7d066",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/18a026f7d05c55a9373b2db061d8573260a7d066"
+    },
+    "protected": false
+  },
+  {
+    "name": "android15-6.6-2025-02",
+    "commit": {
+      "sha": "41978cd56da8895f9859f257e9c36405c234a4ea",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/41978cd56da8895f9859f257e9c36405c234a4ea"
+    },
+    "protected": false
+  },
+  {
+    "name": "android15-6.6-2025-03",
+    "commit": {
+      "sha": "162ecea43cb4059b7717e2d6c689f0274a1137db",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/162ecea43cb4059b7717e2d6c689f0274a1137db"
+    },
+    "protected": false
+  },
+  {
+    "name": "android15-6.6-2025-04",
+    "commit": {
+      "sha": "5c9f03c12a24d12ac808f45149f62ff37eb3dc2a",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/5c9f03c12a24d12ac808f45149f62ff37eb3dc2a"
+    },
+    "protected": false
+  },
+  {
+    "name": "android15-6.6-2025-05",
+    "commit": {
+      "sha": "25ff4cf0c2dccb65a61af6270a261d4eca12b62e",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/25ff4cf0c2dccb65a61af6270a261d4eca12b62e"
+    },
+    "protected": false
+  },
+  {
+    "name": "android15-6.6-2025-06",
+    "commit": {
+      "sha": "8647dfd625bda3d0f030fb149a498c3684332b26",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/8647dfd625bda3d0f030fb149a498c3684332b26"
+    },
+    "protected": false
+  },
+  {
+    "name": "android15-6.6-2025-07",
+    "commit": {
+      "sha": "a352c6faabe29d9e94460e2c4d318050af829856",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/a352c6faabe29d9e94460e2c4d318050af829856"
+    },
+    "protected": false
+  },
+  {
+    "name": "android15-6.6-2025-08",
+    "commit": {
+      "sha": "bcbc9f9e53c371873a7f1a8b12632b3b314b57c7",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/bcbc9f9e53c371873a7f1a8b12632b3b314b57c7"
+    },
+    "protected": false
+  },
+  {
+    "name": "android15-6.6-2025-09",
+    "commit": {
+      "sha": "dc68d925548abe1e4be061d2f6b7c0af5f532664",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/dc68d925548abe1e4be061d2f6b7c0af5f532664"
+    },
+    "protected": false
+  },
+  {
+    "name": "android15-6.6-2025-10",
+    "commit": {
+      "sha": "b3613c9c40503030741cf938201b2c63ae2c37ca",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/b3613c9c40503030741cf938201b2c63ae2c37ca"
+    },
+    "protected": false
+  },
+  {
+    "name": "android15-6.6-desktop",
+    "commit": {
+      "sha": "f2ce5ec8fb4f5ed596a874173a078253f820411e",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/f2ce5ec8fb4f5ed596a874173a078253f820411e"
+    },
+    "protected": false
+  },
+  {
+    "name": "android15-6.6-desktop-pkvm-ia-2024-15-11-v1",
+    "commit": {
+      "sha": "ab957086535d11209d7d6dd96172900d714fb5fb",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/ab957086535d11209d7d6dd96172900d714fb5fb"
+    },
+    "protected": false
+  },
+  {
+    "name": "android15-6.6-lts",
+    "commit": {
+      "sha": "c0dac9c7223add2fd3361464352f2b72e0ade985",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/c0dac9c7223add2fd3361464352f2b72e0ade985"
+    },
+    "protected": false
+  },
+  {
+    "name": "android15-6.6-partner_predev",
+    "commit": {
+      "sha": "7f989ef4fccc6254c01f3fdf3986de1f91feda5e",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/7f989ef4fccc6254c01f3fdf3986de1f91feda5e"
+    },
+    "protected": false
+  },
+  {
+    "name": "android15-6.6-pkvm_experimental",
+    "commit": {
+      "sha": "e70cae0cbb357f3d1bddfa53f577106df07a7297",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/e70cae0cbb357f3d1bddfa53f577106df07a7297"
+    },
+    "protected": false
+  },
+  {
+    "name": "android15-6.6-sp",
+    "commit": {
+      "sha": "4b48560cd07d354e0d6a4b21eba6602908f0ded9",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/4b48560cd07d354e0d6a4b21eba6602908f0ded9"
+    },
+    "protected": false
+  },
+  {
+    "name": "android15-6.6",
+    "commit": {
+      "sha": "e148935a1d484f8a9a0742acbb22ca966f8067df",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/e148935a1d484f8a9a0742acbb22ca966f8067df"
+    },
+    "protected": false
+  },
+  {
+    "name": "android16-6.12-2025-05-exp",
+    "commit": {
+      "sha": "318fd288f5897bd4bfdde5ba64cd16619c9f2c3a",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/318fd288f5897bd4bfdde5ba64cd16619c9f2c3a"
+    },
+    "protected": false
+  },
+  {
+    "name": "android16-6.12-2025-06",
+    "commit": {
+      "sha": "82efd98459a2779ae85cb9ee55f9e7b61a31bf7a",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/82efd98459a2779ae85cb9ee55f9e7b61a31bf7a"
+    },
+    "protected": false
+  },
+  {
+    "name": "android16-6.12-2025-07",
+    "commit": {
+      "sha": "e3b2afa06218d431b09d0398c25f30436e9704ed",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/e3b2afa06218d431b09d0398c25f30436e9704ed"
+    },
+    "protected": false
+  },
+  {
+    "name": "android16-6.12-2025-08",
+    "commit": {
+      "sha": "d01bd4be3dda574b0218c7dcecd2b008d3b81696",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/d01bd4be3dda574b0218c7dcecd2b008d3b81696"
+    },
+    "protected": false
+  },
+  {
+    "name": "android16-6.12-2025-09",
+    "commit": {
+      "sha": "e72e96ab123527f8fa363a72db7ea63a3318bc76",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/e72e96ab123527f8fa363a72db7ea63a3318bc76"
+    },
+    "protected": false
+  },
+  {
+    "name": "android16-6.12-2025-12",
+    "commit": {
+      "sha": "648e13791289125f4447184856d1b211f32d5daf",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/648e13791289125f4447184856d1b211f32d5daf"
+    },
+    "protected": false
+  },
+  {
+    "name": "android16-6.12-desktop",
+    "commit": {
+      "sha": "d102d78c52660dffb95debd6f69a5642d2db5454",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/d102d78c52660dffb95debd6f69a5642d2db5454"
+    },
+    "protected": false
+  },
+  {
+    "name": "android16-6.12-desktop-bluey",
+    "commit": {
+      "sha": "d9bb8c2c71e58fc370c7c5437a0e058361602981",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/d9bb8c2c71e58fc370c7c5437a0e058361602981"
+    },
+    "protected": false
+  },
+  {
+    "name": "android16-6.12-desktop-cl-dispatcher",
+    "commit": {
+      "sha": "ee35fccb8f791fddb8ff780e0b1adff5d17945f2",
+      "url": "https://api.github.com/repos/aosp-mirror/kernel_common/commits/ee35fccb8f791fddb8ff780e0b1adff5d17945f2"
+    },
+    "protected": false
+  }
+]

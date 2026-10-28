@@ -1,0 +1,949 @@
+Vendor module guidelines  |  Android OS core topics  |  Android Open Source Project
+
+ Skip to main content
+
+ Docs
+
+ What's new?
+
+ Release notes
+
+ Latest security bulletins
+
+ Latest Compatibility Definition Document (CDD)
+
+ Site updates
+
+ Getting Started
+
+ About
+
+ Start
+
+ Download
+
+ Builds
+
+ Test
+
+ Create
+
+ Contribute
+
+ Community
+
+ Tools, build, and related reference
+
+ Security
+
+ Overview
+
+ Bulletins
+
+ Features
+
+ Testing
+
+ Best Practices
+
+ Core Topics
+
+ Architecture
+
+ Audio
+
+ Camera
+
+ Connectivity
+
+ Data
+
+ Display
+
+ Fonts
+
+ Graphics
+
+ Interaction
+
+ Media
+
+ Performance
+
+ Permissions
+
+ Power
+
+ Runtime
+
+ Settings
+
+ Storage
+
+ Tests
+
+ Updates
+
+ Virtualization
+
+ Compatibility
+
+ Compatibility Definition Document (CDD)
+
+ Compatibility Test Suite (CTS)
+
+ Android Devices
+
+ Overview
+
+ Cuttlefish
+
+ Enterprise
+
+ TV
+
+ Automotive
+
+ Overview
+
+ Software Defined Vehicle
+
+ In-vehicle Infotainment
+
+ Release Details
+
+ Reference
+
+ HIDL
+
+ HAL
+
+ Trade Federation
+
+ Security Test Suite
+
+ Android Code Search
+
+ /
+
+ English
+
+ Deutsch
+
+ Español – América Latina
+
+ Français
+
+ Indonesia
+
+ Italiano
+
+ Polski
+
+ Português – Brasil
+
+ Tiếng Việt
+
+ Türkçe
+
+ Русский
+
+ עברית
+
+ العربيّة
+
+ فارسی
+
+ हिंदी
+
+ বাংলা
+
+ ภาษาไทย
+
+ 中文 – 简体
+
+ 中文 – 繁體
+
+ 日本語
+
+ 한국어
+
+ Sign in
+
+ Docs
+
+ Core topics
+
+ Overview
+
+ Architecture and Platform
+
+ Connectivity and Input
+
+ Media and Display
+
+ System health and Updates
+
+ Testing
+
+ Data storage and access
+
+ Docs
+
+ More
+
+ Overview
+
+ Architecture and Platform
+
+ Connectivity and Input
+
+ Media and Display
+
+ System health and Updates
+
+ Testing
+
+ Data storage and access
+
+ Android Code Search
+
+ Architecture
+ Overview
+ 
+ Hardware abstraction layer (HAL)
+ Overview
+ 
+ HIDL (deprecated)
+ OverviewInterfaces and packagesInterface hashingServices and data transferFast Message QueueUse Binder IPCHIDL MemoryBlockNetwork stack configuration toolsModel threadingConvert HAL modulesData typesSafe unionInterface versioningCode style guide
+ HIDL C++
+ OverviewPackagesInterfacesData typesFunctions
+ HIDL Java
+ OverviewData typesInterface methods and errorsExport constants
+ Other
+ HIDL framework backward compatibility verificationDynamically available HALsLegacy HALs (AOSP <=v7)
+ 
+ Kernel
+ OverviewKernel release notesStable kernel releases and updatesAndroid common kernelsGKI projectGKI developmentGKI versioning scheme
+ 
+ GKI release builds
+ Overviewandroid12-5.10 release buildsandroid13-5.10 release buildsandroid13-5.15 release buildsandroid14-5.15 release buildsandroid14-6.1 release buildsandroid15-6.6 release buildsandroid16-6.12 release buildsandroid17-6.18 release builds
+ 
+ Deprecated builds
+ android12-5.10 deprecated buildsandroid13-5.10 deprecated buildsandroid13-5.15 deprecated buildsandroid14-5.15 deprecated buildsandroid14-6.1 deprecated buildsandroid15-6.6 deprecated buildsandroid16-6.12 deprecated buildsandroid17-6.18 deprecated builds
+ 
+ GKI release builds (JSON)
+ android12-5.10 release buildsandroid13-5.10 release buildsandroid13-5.15 release buildsandroid14-5.15 release buildsandroid14-6.1 release buildsandroid15-6.6 release buildsandroid16-6.12 release buildsandroid17-6.18 release buildsGKI release processRequest a respinGKI 16-6.12 android-mainline errataMaintain a stable KMI
+ 
+ Kernel ABI monitoring
+ OverviewRun ABI monitoringWork with symbol lists
+ 
+ Modules
+ OverviewConfigure kernel features as GKI modulesVendor module guidelinesLoadable kernel modulesKernel module supportTest GKI modulesBoot time optimizationDebug featuresDevelop kernel code for GKIProxy Execution in AndroidAndroid kernel file system supportExtend the kernel with eBPFCollect kernel telemetry with eBPFUse DebugFS in Android 12FIPS 140-3 certifiable GKI crypto moduleEROFSAndroid kernel FAQKernel networking unit testsTransition from ION to DMA-BUF heaps (5.4 kernel)Incremental File System
+ 
+ Configuration
+ OverviewImplement system properties as APIsAdd system propertiesImplement Config File Schema API
+ 
+ Archive
+ OverviewConfigStoreCreate the HAL interfaceImplement the serviceClient-side useAdd ConfigStore classes and items
+ 
+ Device tree overlays
+ OverviewImplement DTOsDTO syntaxCompile and verifyUse multiple DTsDTB and DTBO partitionsOptimize DTO
+ 
+ Vendor NDK (<=AOSP 14)
+ OverviewEnable VNDKVNDK build system supportVNDK extensionsVNDK snapshot designGenerate VNDK snapshotsGenerate vendor snapshotsLinker namespaceDirectories, rules, and sepolicyRenderScriptABI stabilityPrebuilt ABI usages checker
+ 
+ Vendor interface object
+ OverviewManifestsCompatibility matrixesFCM lifecycleDevice manifest developmentMatch rulesAdditional resources
+ 
+ AIDL
+ OverviewAIDL languageAIDL backendsStable AIDLAIDL for HALsRun AIDL services dynamicallyAnnotations in AIDLFMQ with AIDLAIDL fuzzingAIDL style guide
+ 
+ Binder (Interprocess Communication)
+ OverviewHandle threadsPriority inheritanceHandle cached and frozen apps
+ 
+ Bootloader
+ OverviewCanonical boot reasonBoot image headerImplement bootconfigRecovery imagesDTB imagesImplement OTA updatesLock and unlock the bootloaderVersion information in AVB propertiesMove fastboot to userspace
+ 
+ Generic Bootloader
+ OverviewDeploy GBLGBL respin processGBL release builds
+ 
+ Partitions
+ OverviewPartition layoutVendor boot partitionsVendor and ODM DLKM partitionsShared system imageRamdisk partitionsGeneric boot partitionODM partitionsProduct partitionsImplement a GKI module partitionEnforce product partition interfacesTrusty OS partitions
+ 
+ 16 KB page size
+ OverviewUse Cuttlefish with 16 KB page size on ARM64Simulate Cuttlefish with 16 KB page size on x86-64Flash Pixel with 16 KB page size supportGet the page sizeOptimize for 16 KB page sizeSystem propertiesEnable 16 KB toggleEnable 16 KB backcompat optionVendor API level
+
+ Power
+ OverviewPower managementThermal mitigationPower stats HALApp power managementPlatform power management with DozePerformance managementApp background behavior trackersSupport batteryless devicesMeasure component powerMeasure device powerMeasure power valuesRoutine Battery SaverTV standbySystemSuspend service
+ 
+ Wattson
+ Power analysis overviewCollect and analyze traces
+
+ Settings
+ OverviewDesign guidelinesPatterns and componentsInformation architecturePersonalized settingsUniversal search
+
+ Fonts
+ Implement custom font fallback
+
+ What's new?
+
+ Release notes
+
+ Latest security bulletins
+
+ Latest Compatibility Definition Document (CDD)
+
+ Site updates
+
+ Getting Started
+
+ About
+
+ Start
+
+ Download
+
+ Builds
+
+ Test
+
+ Create
+
+ Contribute
+
+ Community
+
+ Tools, build, and related reference
+
+ Security
+
+ Overview
+
+ Bulletins
+
+ Features
+
+ Testing
+
+ Best Practices
+
+ Core Topics
+
+ Architecture
+
+ Audio
+
+ Camera
+
+ Connectivity
+
+ Data
+
+ Display
+
+ Fonts
+
+ Graphics
+
+ Interaction
+
+ Media
+
+ Performance
+
+ Permissions
+
+ Power
+
+ Runtime
+
+ Settings
+
+ Storage
+
+ Tests
+
+ Updates
+
+ Virtualization
+
+ Compatibility
+
+ Compatibility Definition Document (CDD)
+
+ Compatibility Test Suite (CTS)
+
+ Android Devices
+
+ Overview
+
+ Cuttlefish
+
+ Enterprise
+
+ TV
+
+ Automotive
+
+ Overview
+
+ Software Defined Vehicle
+
+ In-vehicle Infotainment
+
+ Release Details
+
+ Reference
+
+ HIDL
+
+ HAL
+
+ Trade Federation
+
+ Security Test Suite
+
+ Effective in 2026, to align with our trunk stable development model and ensure platform stability for the ecosystem, we will publish source code to AOSP in Q2 and Q4. For building and contributing to AOSP, use android-latest-release. The android-latest-release manifest branch will always reference the most recent release pushed to AOSP. For more information, see Changes to AOSP.
+
+ AOSP
+
+ Docs
+
+ Core topics
+
+ Architecture and Platform
+
+ Vendor module guidelines
+
+ Stay organized with collections
+
+ Save and categorize content based on your preferences.
+
+Use the following guidelines to increase the robustness and reliability of your
+vendor modules. Many guidelines, when followed, can help make it easier to
+determine the correct module load order and the order in which drivers must
+probe for devices.
+Note: Guidelines are listed in the order of importance and reflect the
+frequency of errors found in vendor modules.
+A module can be a library or a driver.
+
+Library modules are libraries that provide APIs for other modules to use.
+Such modules typically aren't hardware-specific. Examples of library modules
+include an AES encryption module, the remoteproc framework that's compiled
+as a module, and a logbuffer module. The module code in module_init() runs
+to set up data structures, but no other code runs unless triggered by an
+external module.
+Driver modules are drivers that probe for or bind to a specific type of
+device. Such modules are hardware-specific. Examples of driver modules include
+UART, PCIe, and video encoder hardware. Driver modules activate only when
+their associated device is present on the system.
+
+If the device isn't present, the only module code that runs is the
+module_init() code that registers the driver with the driver core
+framework.
+If the device is present and the driver successfully probes for or binds to
+that device, other module code might run.
+
+Use module init and exit correctly
+
+Driver modules must register a driver in module_init() and unregister a
+driver in module_exit(). One way to enforce these restrictions is to use
+wrapper macros, which avoids the direct use of module_init(), *_initcall(),
+or module_exit() macros.
+
+For modules that can be unloaded, use
+module_subsystem_driver(). Examples:
+module_platform_driver(), module_i2c_driver(), and module_pci_driver().
+For modules that can't be unloaded, use
+builtin_subsystem_driver() Examples:
+builtin_platform_driver(), builtin_i2c_driver(), and
+builtin_pci_driver().
+
+Note: You can build drivers with
+builtin_subsystem_driver()
+as modules, but you can't unload these drivers after they're loaded
+successfully.
+Some driver modules use module_init() and module_exit() because they
+register more than one driver. For a driver module that uses module_init() and
+module_exit() to register multiple drivers, try to combine the drivers into a
+single driver. For example, you could differentiate using the compatible
+string or the aux data of the device instead of registering separate drivers.
+Alternatively, you could split the driver module into two modules.
+
+Init and exit function exceptions
+
+Library modules don't register drivers and are exempt from restrictions on
+module_init() and module_exit() as they might need these functions to set up
+data structures, work queues, or kernel threads.
+
+Use the MODULE_DEVICE_TABLE macro
+
+Driver modules must include the MODULE_DEVICE_TABLE macro, which allows the
+user space to determine the devices supported by a driver module before loading
+the module. Android can use this data to optimize module loading, such as to
+avoid loading modules for devices that aren't present in the system. For
+examples on using the macro, refer to the upstream code.
+
+Avoid CRC mismatches due to forward-declared data types
+
+Don't include header files to get visibility into forward-declared data types.
+Some structs, unions, and other data types defined in a header file
+(header-A.h) can be forward declared in a different
+header file (header-B.h) that typically uses pointers to
+those data types. This code pattern means that the kernel is intentionally
+trying to keep the data structure private to the users of
+header-B.h.
+
+Users of header-B.h shouldn't include
+header-A.h to directly access the internals of these
+forward-declared data structures. Doing so causes CONFIG_MODVERSIONS CRC
+mismatch issues (which generates ABI compliance issues) when a different kernel
+(such as the GKI kernel) attempts to load the module.
+
+For example, struct fwnode_handle is defined in include/linux/fwnode.h, but
+is forward declared as struct fwnode_handle; in include/linux/device.h
+because the kernel is trying to keep the details of struct fwnode_handle
+private from the users of include/linux/device.h. In this scenario, don't
+add #include <linux/fwnode.h> in a module to gain access to members of
+struct fwnode_handle. Any design in which you have to include such header
+files indicates a bad design pattern.
+
+Don't directly access core kernel structures
+
+Directly accessing or modifying core kernel data structures can lead to
+undesirable behavior, including memory leaks, crashes, and broken compatibility
+with future kernel releases. A data structure is a core kernel data structure
+when it meets any of the following conditions:
+
+The data structure is defined under
+KERNEL-DIR/include/. For example, struct device and
+struct dev_links_info. Data structures defined in include/linux/soc are
+exempted.
+The data structure is allocated or initialized by the module but is made
+visible to the kernel by being passed, indirectly (through a pointer
+in a struct) or directly, as input in a function exported by the kernel. For
+example, a cpufreq driver module initializes the struct cpufreq_driver and
+then passes it as input to cpufreq_register_driver(). After this point, the
+cpufreq driver module shouldn't modify struct cpufreq_driver directly
+because calling cpufreq_register_driver() makes struct cpufreq_driver
+visible to the kernel.
+The data structure isn't initialized by your module. For example,
+struct regulator_dev returned by regulator_register().
+
+Access core kernel data structures only through functions exported by the
+kernel or through parameters explicitly passed as input to vendor hooks. If you
+don't have an API or vendor hook to modify parts of a core kernel data
+structure, it's probably intentional and you shouldn't modify the data structure
+from modules. For example, don't modify any fields inside struct device or
+struct device.links.
+
+To modify device.devres_head, use a devm_*() function such as
+devm_clk_get(), devm_regulator_get(), or devm_kzalloc().
+To modify fields inside struct device.links, use a device link API such as
+device_link_add() or device_link_del().
+
+Don't parse devicetree nodes with compatible property
+
+If a device tree (DT) node has a compatible property, a struct device is
+allocated for it automatically or when of_platform_populate() is called on
+the parent DT node (typically by the device driver of the parent device). The
+default expectation (except for some devices initialized early for the
+scheduler) is that a DT node with a compatible property has a struct device
+and a matching device driver. All other exceptions are already handled by the
+upstream code.
+
+In addition, fw_devlink (previously called of_devlink) considers DT nodes
+with the compatible property to be devices with an allocated struct device
+that's probed by a driver. If a DT node has a compatible property but the
+allocated struct device isn't probed, fw_devlink could block its consumer
+devices from probing or could block sync_state() calls from being called for
+its supplier devices.
+
+If your driver uses an of_find_*() function (such as of_find_node_by_name()
+or of_find_compatible_node()) to directly find a DT node that has a
+compatible property and then parse that DT node, fix the module by writing a
+device driver that can probe the device or remove the compatible property
+(possible only if it hasn't been upstreamed). To discuss alternatives, reach out
+to the Android Kernel Team at kernel-team@android.com and be prepared to
+justify your use cases.
+Note: The use of fw_devlink is mandatory for GKI.
+Use DT phandles to look up suppliers
+
+Refer to a supplier using a phandle (a reference or pointer to a DT node) in DT
+whenever possible. Using standard DT bindings and phandles to refer to suppliers
+enables fw_devlink (previously of_devlink) to automatically determine
+inter-device dependencies by parsing the DT at runtime. The kernel can then
+automatically probe devices in the correct order, removing the need for module
+load ordering or MODULE_SOFTDEP().
+Note: The following examples specify regulators, but the same guideline applies
+to supplier DT bindings such as clocks, iio-channels, interrupts,
+-gpios, pinctrl-, dmas, iommu, phys, extcon, and nvmem-cells.
+Legacy scenario (no DT support in ARM kernel)
+
+Previously, before DT support was added to ARM kernels, consumers such as touch
+devices looked up suppliers such as regulators using globally unique strings.
+For example, the ACME PMIC driver could register or advertise multiple
+regulators (such as acme-pmic-ldo1 to acme-pmic-ldo10) and a touch driver
+could look up a regulator using regulator_get(dev, "acme-pmic-ldo10").
+However, on a different board, the LDO8 might supply the touch device, creating
+a cumbersome system where the same touch driver needs to determine the correct
+look-up string for the regulator for each board that the touch device is used
+in.
+
+Current scenario (DT support in ARM kernel)
+
+After DT support was added to ARM kernels, consumers can identify suppliers in
+the DT by referring to the supplier's device tree node using a phandle.
+Consumers can also name the resource based on what it's used for instead of who
+supplies it. For example, the touch driver from the previous example could use
+regulator_get(dev, "core") and regulator_get(dev, "sensor") to get the
+suppliers that power the touch device's core and sensor. The associated DT for
+such a device is similar to the following code sample:
+touch-device {
+ compatible = "fizz,touch";
+ ...
+ core-supply = <&acme_pmic_ldo4>;
+ sensor-supply = <&acme_pmic_ldo10>;
+};
+
+acme-pmic {
+ compatible = "acme,super-pmic";
+ ...
+ acme_pmic_ldo4: ldo4 {
+ ...
+ };
+ ...
+ acme_pmic_ldo10: ldo10 {
+ ...
+ };
+};
+Note: *-supply is the standardized DT binding (or property) for referring to
+regulators that supply a device.
+Worst-of-both-worlds scenario
+
+Some drivers ported from older kernels include legacy behavior in the DT that
+takes the worst part of the legacy scheme and forces it on the newer scheme
+that's meant to make things easier. In such drivers, the consumer driver reads
+the string to use for lookup using a device-specific DT property, the supplier
+uses another supplier-specific property to define the name to be used for
+registering the supplier resource, then the consumer and supplier continue using
+the same old scheme of using strings to look up the supplier. In this
+worst-of-both-worlds scenario:
+
+The touch driver uses code similar to the following code:
+str = of_property_read(np, "fizz,core-regulator");
+core_reg = regulator_get(dev, str);
+str = of_property_read(np, "fizz,sensor-regulator");
+sensor_reg = regulator_get(dev, str);
+
+The DT uses code similar to the following:
+touch-device {
+ compatible = "fizz,touch";
+ ...
+ fizz,core-regulator = "acme-pmic-ldo4";
+ fizz,sensor-regulator = "acme-pmic-ldo4";
+};
+acme-pmic {
+ compatible = "acme,super-pmic";
+ ...
+ ldo4 {
+ regulator-name = "acme-pmic-ldo4"
+ ...
+ };
+ ...
+ acme_pmic_ldo10: ldo10 {
+ ...
+ regulator-name = "acme-pmic-ldo10"
+ };
+};
+
+Note: If your driver implements this worst-of-both-worlds scenario, fix it
+immediately to use phandles to look up suppliers.
+Don't modify framework API errors
+
+Framework APIs, such as regulator, clocks, irq, gpio, phys, and
+extcon, return -EPROBE_DEFER as an error return value to indicate that a
+device is attempting to probe but can't at this time, and the kernel should
+reattempt the probe later. To ensure that your device's .probe() function
+fails as expected in such cases, don't replace or remap the error value.
+Replacing or remapping the error value might cause -EPROBE_DEFER to be dropped
+and result in your device never getting probed.
+
+Use devm_*() API variants
+
+When the device acquires a resource using a devm_*() API, the resource is
+automatically released by the kernel if the device fails to probe, or probes
+successfully and is later unbound. This capability makes the error handling
+code in the probe() function cleaner because it doesn't require goto jumps
+to release the resources acquired by devm_*() and simplifies driver unbinding
+operations.
+
+Handle device-driver unbinding
+
+Be intentional about unbinding device drivers and don't leave the unbinding
+undefined because undefined doesn't imply disallowed. You must either fully
+implement device-driver unbinding or explicitly disable device-driver
+unbinding.
+Note: There are a few cases where not doing anything explicitly is OK because
+the kernel handles any needed operations.
+Implement device-driver unbinding
+
+When choosing to fully implement device-driver unbinding, unbind device drivers
+cleanly to avoid memory or resource leaks and security issues. You can bind a
+device to a driver by calling a driver's probe() function and unbind a device
+by calling the driver's remove() function. If no remove() function exists,
+the kernel can still unbind the device; the driver core assumes that no clean up
+work is needed by the driver when it unbinds from the device. A driver that's
+unbound from a device doesn't need to do any explicit clean up work when both of
+the following are true:
+
+All resources acquired by a driver's probe() function are through devm_*()
+APIs.
+The hardware device doesn't need a shutdown or quiescing sequence.
+
+In this situation, the driver core handles releasing all resources acquired
+through devm_*() APIs. If either of the preceding statements is untrue, the
+driver needs to perform cleanup (release resources and shut down or
+quiesce the hardware) when it unbinds from a device. To ensure that a device can
+unbind a driver module cleanly, use one of the following options:
+
+If the hardware doesn't need a shutdown or quiescing sequence, change the
+device module to acquire resources using devm_*() APIs.
+Implement the remove() driver operation in the same struct as the probe()
+function, then do the clean up steps using the remove() function.
+
+Explicitly disable device-driver unbinding (not recommended)
+
+When choosing to explicitly disable device-driver unbinding, you need to
+disallow unbinding and disallow module unloading.
+
+To disallow unbinding, set the suppress_bind_attrs flag to true in the
+driver's struct device_driver; this setting prevents the bind and unbind
+files from showing in the driver's sysfs directory. The unbind file is
+what allows user space to trigger the unbinding of a driver from its device.
+To disallow module unloading, ensure the module has [permanent] in lsmod.
+By not using module_exit() or module_XXX_driver(), the module is marked as
+[permanent].
+
+Don't load firmware from within the probe function
+
+Driver shouldn't load firmware from within the .probe() function as they might
+not have access to the firmware if the driver probes before the flash or
+permanent storage based file system is mounted. In such cases, the
+request_firmware*() API might block for a long time and then fail, which can
+slow the boot process unnecessarily. Instead, defer the loading of the firmware
+to when a client starts using the device. For example, a display driver could
+load the firmware when the display device is opened.
+
+Using .probe() to load firmware might be OK in some cases, such as in a clock
+driver that needs firmware to function but the device isn't exposed to user
+space. Other appropriate use cases are possible.
+
+Implement asynchronous probing
+
+Support and use asynchronous probing to take advantage of future enhancements,
+such as parallel module loading or device probing to speed up boot time, that
+might be added to Android in future releases. Driver modules that don't use
+asynchronous probing could reduce the effectiveness of such optimizations.
+
+To mark a driver as supporting and preferring asynchronous probing, set the
+probe_type field in the driver's struct device_driver member. The following
+example shows such support enabled for a platform driver:
+static struct platform_driver acme_driver = {
+ .probe = acme_probe,
+ ...
+ .driver = {
+ .name = "acme",
+ ...
+ .probe_type = PROBE_PREFER_ASYNCHRONOUS,
+ },
+};
+
+Making a driver work with asynchronous probing doesn't require special code.
+However, keep the following in mind when adding asynchronous probing support.
+
+Don't make assumptions about previously probed dependencies. Check directly or
+indirectly (most framework calls) and return -EPROBE_DEFER if one or more
+suppliers aren't ready yet.
+If you add child devices in a parent device's probe function, don't assume the
+child devices is probed immediately.
+If a probe fails, perform proper error handling and clean up (see Use
+devm_*() API variants).
+
+Don't use MODULE_SOFTDEP to order device probes
+
+The MODULE_SOFTDEP() function isn't a reliable solution for guaranteeing the
+order of device probes and mustn't be used for the following reasons.
+
+Deferred probe. When a module loads, the device probe might be deferred
+because one of its suppliers isn't ready. This can lead to a mismatch between
+the module load order and the device probe order.
+One driver, many devices. A driver module can manage a specific device
+type. If the system includes more than one instance of a device type and those
+devices each have a different probe order requirement, you can't respect those
+requirements using module load ordering.
+Asynchronous probing. Driver modules that perform asynchronous probing
+don't immediately probe a device when the module is loaded. Instead, a
+parallel thread handles device probing, which can lead to a mismatch between
+the module load order and the device probe order. For example, when an I2C
+main driver module performs asynchronous probing and a touch driver module
+depends on the PMIC that's on the I2C bus, even if the touch driver and the
+PMIC driver load in the correct order, the touch driver's probe might be
+attempted before the PMIC driver probe.
+
+If you have driver modules using the MODULE_SOFTDEP() function, fix them so
+they don't use that function. To help you, the Android team has upstreamed
+changes that enable the kernel to handle ordering problems without using
+MODULE_SOFTDEP(). Specifically, you can use fw_devlink to ensure probe
+ordering and (after all consumers of a device have probed) use the
+sync_state() callback to perform any necessary tasks.
+
+Use #if IS_ENABLED() instead of #ifdef for configurations
+
+Use #if IS_ENABLED(CONFIG_XXX) instead of #ifdef CONFIG_XXX to ensure that
+the code inside the #if block continues to compile if the config changes to a
+tristate config in the future. The differences are as follows:
+
+#if IS_ENABLED(CONFIG_XXX) evaluates to true when CONFIG_XXX is set to
+module (=m) or built-in (=y).
+#ifdef CONFIG_XXX evaluates to true when CONFIG_XXX is set to built-in
+(=y) , but doesn't when CONFIG_XXX is set to module (=m). Use this only
+when you're certain you want to do the same thing when the config is set to
+module or is disabled.
+
+Note: Use #if IS_ENABLED(CONFIG_XXX) even if the config is a boolean.
+Use the correct macro for conditional compiles
+Warning: This can get tricky for header files! Review the following details
+carefully.
+If a CONFIG_XXX is set to module (=m), the build system automatically
+defines CONFIG_XXX_MODULE. If your driver is controlled by CONFIG_XXX and
+you want to check if your driver is being compiled as a module, use the
+following guidelines:
+
+In the C file (or any source file that isn't a header file) for your driver,
+don't use #ifdef CONFIG_XXX_MODULE as it's unnecessarily restrictive and
+breaks if the config is renamed to CONFIG_XYZ. For any non-header source
+file that's compiled into a module, the build system automatically defines
+MODULE for the scope of that file. Therefore, to check if a C file (or any
+non-header source file) is being compiled as part of a module, use
+#ifdef MODULE (without the CONFIG_ prefix).
+In header files, the same check is tricker because header files aren't
+compiled directly into a binary but rather compiled as part of a C file (or
+other source files). Use the following rules for header files:
+
+For a header file that uses #ifdef MODULE, the result changes based on
+which source file is using it. This means the same header file in the same
+build can have different parts of its code compiled for different source
+files (module versus built-in or disabled). This can be useful when you want
+to define a macro that needs to expand one way for built-in code and expand
+in a different way for a module.
+For a header file that needs to compile in a piece of code when a specific
+CONFIG_XXX is set to module (regardless of whether the source file
+including it is a module), the header file must use
+#ifdef CONFIG_XXX_MODULE.
+
+ Content and code samples on this page are subject to the licenses described in the Content License. Java and OpenJDK are trademarks or registered trademarks of Oracle and/or its affiliates.
+ Last updated 2026-10-09 UTC.
+
+ [[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-10-09 UTC."],[],[]]
+
+ Build
+
+ Android repository
+
+ Requirements
+
+ Downloading
+
+ Preview binaries
+
+ Factory images
+
+ Driver binaries
+
+ Connect
+
+ @Android on X
+
+ @AndroidDev on X
+
+ Android Blog
+
+ Google Security Blog
+
+ Platform on Google Groups
+
+ Building on Google Groups
+
+ Porting on Google Groups
+
+ Get help
+
+ Android Help Center
+
+ Pixel Help Center
+
+ www.android.com
+
+ Google Mobile Services
+
+ Stack Overflow
+
+ Issue Tracker
+
+ About Android
+
+ Community
+
+ Legal
+
+ License
+
+ Privacy
+
+ Site feedback
+
+ Manage cookies
+
+ English
+
+ Deutsch
+
+ Español – América Latina
+
+ Français
+
+ Indonesia
+
+ Italiano
+
+ Polski
+
+ Português – Brasil
+
+ Tiếng Việt
+
+ Türkçe
+
+ Русский
+
+ עברית
+
+ العربيّة
+
+ فارسی
+
+ हिंदी
+
+ বাংলা
+
+ ภาษาไทย
+
+ 中文 – 简体
+
+ 中文 – 繁體
+
+ 日本語
+
+ 한국어

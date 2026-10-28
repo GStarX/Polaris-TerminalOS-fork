@@ -1,0 +1,94 @@
+name: validate
+
+# 轻量静态校验：任何 push / PR 都跑，几十秒级，不构建 ROM。
+# 真正的同步校验与构建见 sync-check.yml / build-rom.yml。
+
+on:
+  push:
+    branches-ignore:
+      - ci-status
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 校验 local manifest（XML 结构 + revision 白名单）
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import glob
+          import re
+          import xml.etree.ElementTree as ET
+
+          files = sorted(glob.glob('local_manifests/*.xml'))
+          assert files, 'no local manifests found'
+          allowed = re.compile(r'^(terminalos/lineage-22\.2|terminalos/lineage-23\.2|lineage-22\.2|lineage-23\.2)$')
+          for f in files:
+              root = ET.parse(f).getroot()
+              assert root.tag == 'manifest', f'{f}: root is not <manifest>'
+              projects = root.findall('project')
+              assert projects, f'{f}: no <project>'
+              for p in projects:
+                  rev = p.get('revision')
+                  assert rev and allowed.match(rev), f'{f}: unexpected revision {rev!r} for {p.get("name")}'
+                  assert p.get('path'), f'{f}: project {p.get("name")} has no path'
+              print(f'OK {f}: {len(projects)} projects')
+          PY
+
+      - name: Bash 语法检查
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          files=(scripts/*.sh .github/scripts/*.sh)
+          if (( ${#files[@]} == 0 )); then echo 'no scripts found'; exit 1; fi
+          for f in "${files[@]}"; do
+              bash -n "$f"
+              echo "OK $f"
+          done
+
+      - name: 静态安全检查（禁止刷机命令 / 必备文件存在）
+        run: |
+          set -euo pipefail
+          # 本仓库脚本不得包含刷机命令；真机操作只由首席执行
+          if grep -RIn -E 'fastboot[[:space:]]+(flash|erase|update)' scripts .github/scripts; then
+              echo 'ERROR: flashing command found in scripts'
+              exit 1
+          fi
+          for f in README.md docs/00_上游核验报告.md \
+                   docs/02_构建环境与依赖.md docs/03_任务清单_Phase0_基线_内核.md \
+                   docs/08_锁定模式与导航栏方案评估.md \
+                   docs/12_云构建_GitHub_Actions.md \
+                   acceptance/验收测试矩阵.md; do
+              test -f "$f" || { echo "ERROR: missing $f"; exit 1; }
+          done
+          echo 'static checks OK'
+
+      - name: 跨仓库分支存在性检查
+        run: |
+          set -euo pipefail
+          ok=0
+          check() {
+              local repo=$1 branch=$2
+              if git ls-remote --exit-code "https://github.com/GStarX/${repo}.git" "refs/heads/${branch}" >/dev/null 2>&1; then
+                  echo "OK   GStarX/${repo} ${branch}"
+              else
+                  echo "FAIL GStarX/${repo} ${branch} (missing)"; ok=1
+              fi
+          }
+          for repo in android_device_xiaomi_polaris android_vendor_terminalos android_packages_apps_TerminalHome; do
+              check "$repo" terminalos/lineage-22.2
+              check "$repo" terminalos/lineage-23.2
+          done
+          exit "$ok"

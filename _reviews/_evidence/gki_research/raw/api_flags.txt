@@ -1,0 +1,663 @@
+Vendor API level  |  Android OS core topics  |  Android Open Source Project
+
+ Skip to main content
+
+ Docs
+
+ What's new?
+
+ Release notes
+
+ Latest security bulletins
+
+ Latest Compatibility Definition Document (CDD)
+
+ Site updates
+
+ Getting Started
+
+ About
+
+ Start
+
+ Download
+
+ Builds
+
+ Test
+
+ Create
+
+ Contribute
+
+ Community
+
+ Tools, build, and related reference
+
+ Security
+
+ Overview
+
+ Bulletins
+
+ Features
+
+ Testing
+
+ Best Practices
+
+ Core Topics
+
+ Architecture
+
+ Audio
+
+ Camera
+
+ Connectivity
+
+ Data
+
+ Display
+
+ Fonts
+
+ Graphics
+
+ Interaction
+
+ Media
+
+ Performance
+
+ Permissions
+
+ Power
+
+ Runtime
+
+ Settings
+
+ Storage
+
+ Tests
+
+ Updates
+
+ Virtualization
+
+ Compatibility
+
+ Compatibility Definition Document (CDD)
+
+ Compatibility Test Suite (CTS)
+
+ Android Devices
+
+ Overview
+
+ Cuttlefish
+
+ Enterprise
+
+ TV
+
+ Automotive
+
+ Overview
+
+ Software Defined Vehicle
+
+ In-vehicle Infotainment
+
+ Release Details
+
+ Reference
+
+ HIDL
+
+ HAL
+
+ Trade Federation
+
+ Security Test Suite
+
+ Android Code Search
+
+ /
+
+ English
+
+ Deutsch
+
+ Español – América Latina
+
+ Français
+
+ Indonesia
+
+ Italiano
+
+ Polski
+
+ Português – Brasil
+
+ Tiếng Việt
+
+ Türkçe
+
+ Русский
+
+ עברית
+
+ العربيّة
+
+ فارسی
+
+ हिंदी
+
+ বাংলা
+
+ ภาษาไทย
+
+ 中文 – 简体
+
+ 中文 – 繁體
+
+ 日本語
+
+ 한국어
+
+ Sign in
+
+ Docs
+
+ Core topics
+
+ Overview
+
+ Architecture and Platform
+
+ Connectivity and Input
+
+ Media and Display
+
+ System health and Updates
+
+ Testing
+
+ Data storage and access
+
+ Docs
+
+ More
+
+ Overview
+
+ Architecture and Platform
+
+ Connectivity and Input
+
+ Media and Display
+
+ System health and Updates
+
+ Testing
+
+ Data storage and access
+
+ Android Code Search
+
+ Architecture
+ Overview
+ 
+ Hardware abstraction layer (HAL)
+ Overview
+ 
+ HIDL (deprecated)
+ OverviewInterfaces and packagesInterface hashingServices and data transferFast Message QueueUse Binder IPCHIDL MemoryBlockNetwork stack configuration toolsModel threadingConvert HAL modulesData typesSafe unionInterface versioningCode style guide
+ HIDL C++
+ OverviewPackagesInterfacesData typesFunctions
+ HIDL Java
+ OverviewData typesInterface methods and errorsExport constants
+ Other
+ HIDL framework backward compatibility verificationDynamically available HALsLegacy HALs (AOSP <=v7)
+ 
+ Kernel
+ OverviewKernel release notesStable kernel releases and updatesAndroid common kernelsGKI projectGKI developmentGKI versioning scheme
+ 
+ GKI release builds
+ Overviewandroid12-5.10 release buildsandroid13-5.10 release buildsandroid13-5.15 release buildsandroid14-5.15 release buildsandroid14-6.1 release buildsandroid15-6.6 release buildsandroid16-6.12 release buildsandroid17-6.18 release builds
+ 
+ Deprecated builds
+ android12-5.10 deprecated buildsandroid13-5.10 deprecated buildsandroid13-5.15 deprecated buildsandroid14-5.15 deprecated buildsandroid14-6.1 deprecated buildsandroid15-6.6 deprecated buildsandroid16-6.12 deprecated buildsandroid17-6.18 deprecated builds
+ 
+ GKI release builds (JSON)
+ android12-5.10 release buildsandroid13-5.10 release buildsandroid13-5.15 release buildsandroid14-5.15 release buildsandroid14-6.1 release buildsandroid15-6.6 release buildsandroid16-6.12 release buildsandroid17-6.18 release buildsGKI release processRequest a respinGKI 16-6.12 android-mainline errataMaintain a stable KMI
+ 
+ Kernel ABI monitoring
+ OverviewRun ABI monitoringWork with symbol lists
+ 
+ Modules
+ OverviewConfigure kernel features as GKI modulesVendor module guidelinesLoadable kernel modulesKernel module supportTest GKI modulesBoot time optimizationDebug featuresDevelop kernel code for GKIProxy Execution in AndroidAndroid kernel file system supportExtend the kernel with eBPFCollect kernel telemetry with eBPFUse DebugFS in Android 12FIPS 140-3 certifiable GKI crypto moduleEROFSAndroid kernel FAQKernel networking unit testsTransition from ION to DMA-BUF heaps (5.4 kernel)Incremental File System
+ 
+ Configuration
+ OverviewImplement system properties as APIsAdd system propertiesImplement Config File Schema API
+ 
+ Archive
+ OverviewConfigStoreCreate the HAL interfaceImplement the serviceClient-side useAdd ConfigStore classes and items
+ 
+ Device tree overlays
+ OverviewImplement DTOsDTO syntaxCompile and verifyUse multiple DTsDTB and DTBO partitionsOptimize DTO
+ 
+ Vendor NDK (<=AOSP 14)
+ OverviewEnable VNDKVNDK build system supportVNDK extensionsVNDK snapshot designGenerate VNDK snapshotsGenerate vendor snapshotsLinker namespaceDirectories, rules, and sepolicyRenderScriptABI stabilityPrebuilt ABI usages checker
+ 
+ Vendor interface object
+ OverviewManifestsCompatibility matrixesFCM lifecycleDevice manifest developmentMatch rulesAdditional resources
+ 
+ AIDL
+ OverviewAIDL languageAIDL backendsStable AIDLAIDL for HALsRun AIDL services dynamicallyAnnotations in AIDLFMQ with AIDLAIDL fuzzingAIDL style guide
+ 
+ Binder (Interprocess Communication)
+ OverviewHandle threadsPriority inheritanceHandle cached and frozen apps
+ 
+ Bootloader
+ OverviewCanonical boot reasonBoot image headerImplement bootconfigRecovery imagesDTB imagesImplement OTA updatesLock and unlock the bootloaderVersion information in AVB propertiesMove fastboot to userspace
+ 
+ Generic Bootloader
+ OverviewDeploy GBLGBL respin processGBL release builds
+ 
+ Partitions
+ OverviewPartition layoutVendor boot partitionsVendor and ODM DLKM partitionsShared system imageRamdisk partitionsGeneric boot partitionODM partitionsProduct partitionsImplement a GKI module partitionEnforce product partition interfacesTrusty OS partitions
+ 
+ 16 KB page size
+ OverviewUse Cuttlefish with 16 KB page size on ARM64Simulate Cuttlefish with 16 KB page size on x86-64Flash Pixel with 16 KB page size supportGet the page sizeOptimize for 16 KB page sizeSystem propertiesEnable 16 KB toggleEnable 16 KB backcompat optionVendor API level
+
+ Power
+ OverviewPower managementThermal mitigationPower stats HALApp power managementPlatform power management with DozePerformance managementApp background behavior trackersSupport batteryless devicesMeasure component powerMeasure device powerMeasure power valuesRoutine Battery SaverTV standbySystemSuspend service
+ 
+ Wattson
+ Power analysis overviewCollect and analyze traces
+
+ Settings
+ OverviewDesign guidelinesPatterns and componentsInformation architecturePersonalized settingsUniversal search
+
+ Fonts
+ Implement custom font fallback
+
+ What's new?
+
+ Release notes
+
+ Latest security bulletins
+
+ Latest Compatibility Definition Document (CDD)
+
+ Site updates
+
+ Getting Started
+
+ About
+
+ Start
+
+ Download
+
+ Builds
+
+ Test
+
+ Create
+
+ Contribute
+
+ Community
+
+ Tools, build, and related reference
+
+ Security
+
+ Overview
+
+ Bulletins
+
+ Features
+
+ Testing
+
+ Best Practices
+
+ Core Topics
+
+ Architecture
+
+ Audio
+
+ Camera
+
+ Connectivity
+
+ Data
+
+ Display
+
+ Fonts
+
+ Graphics
+
+ Interaction
+
+ Media
+
+ Performance
+
+ Permissions
+
+ Power
+
+ Runtime
+
+ Settings
+
+ Storage
+
+ Tests
+
+ Updates
+
+ Virtualization
+
+ Compatibility
+
+ Compatibility Definition Document (CDD)
+
+ Compatibility Test Suite (CTS)
+
+ Android Devices
+
+ Overview
+
+ Cuttlefish
+
+ Enterprise
+
+ TV
+
+ Automotive
+
+ Overview
+
+ Software Defined Vehicle
+
+ In-vehicle Infotainment
+
+ Release Details
+
+ Reference
+
+ HIDL
+
+ HAL
+
+ Trade Federation
+
+ Security Test Suite
+
+ Effective in 2026, to align with our trunk stable development model and ensure platform stability for the ecosystem, we will publish source code to AOSP in Q2 and Q4. For building and contributing to AOSP, use android-latest-release. The android-latest-release manifest branch will always reference the most recent release pushed to AOSP. For more information, see Changes to AOSP.
+
+ AOSP
+
+ Docs
+
+ Core topics
+
+ Architecture and Platform
+
+ Vendor API level
+
+ Stay organized with collections
+
+ Save and categorize content based on your preferences.
+
+Vendor API level refers to the version of the interface supported by the
+vendor partition. The interface is bidirectional; it describes the API
+that the vendor partition provides to the system partition (the hardware
+abstraction layer or HAL interface), and also the API that the vendor partition
+requires from the system partition (the low-level native developers kit or
+LLNDK interface).
+
+Vendor API level is also used to determine the Vendor Software Requirements
+(VSRs), which is a collection of functional and nonfunctional requirements that
+the software in the vendor partition must satisfy.
+
+The remainder of this page explains how system
+properties are used, depending on your Android version, to determine the vendor
+API level.
+
+Vendor freeze
+
+Android lets a vendor to freeze the vendor partition at a specific version of
+the VSR. The set
+of features that Android expects from the vendor partition is determined by the
+vendor API level associated with the vendor partition. At runtime, the behavior
+of the software running in the system partition adjusts to accommodate the
+vendor API level of the vendor partition. For example, the software in the
+system partition might not exercise new features if they aren't supported by
+the API level of the vendor partition.
+
+A vendor freeze is available only if you're creating an
+Android-compatible device.
+
+Determine vendor API level (Android 14 QPR3 and later)
+
+For Android 14 QPR3 and later, the vendor API level is released separately,
+meaning the SDK API level and vendor API level are out of sync.
+
+Because of the separate release schedules, for Android 14 QPR3 and later, the
+vendor API level is completely decoupled from the SDK API level. To ensure this
+decoupling is clear, the format of the vendor API level is a date formatted as
+YYYYMM (year and month) while the SDK level is an integer.
+
+Android 14 QPR3 and later contains the following system properties related to
+vendor API level:
+
+System property
+Format
+Description
+Initial setting
+
+ro.board.api_level
+YYYYMM
+The vendor API level that a chipset's software supports. This property is set for all chipsets.
+This is set by the build system automatically.
+
+ro.board.first_api_level
+YYYYMM
+The vendor API level that a chipset's software was first released with. This property is a function of chipset only and is set by SoC vendors if the SoC chipset is qualified for vendor freeze. After initial setting, this property should be considered final and not be modified. While strongly discouraged, an update may be permitted in rare, exceptional cases with a new vendor freeze qualification.
+SoC vendors set this setting using BOARD_SHIPPING_API_LEVEL.
+
+ro.product.first_api_level
+Integer
+The SDK API level that the device is initially launched with.
+This property is set by the OEM and then never updated, even after OS upgrades.
+
+ro.vendor.api_level
+YYYYMM
+The vendor API level that corresponds to ro.product.first_api_level. We set ro.vendor.api_level to the value of ro.board.api_level when ro.board.api_level is less than the vendor API level of ro.product.first_api_level only if the SoC chipset is qualified for vendor freeze.
+Described after this table.
+
+ro.board.api_frozen
+boolean
+This property is set to true if the vendor API level that ro.board.api_level represents is finalized.
+If this property isn't set, it defaults to false.
+
+ro.llndk.api_level
+YYYYMM
+The vendor API level of YYYYMM format that the current LLNDK in the system partition provides. The LLNDK is backward compatible, so any vendor image that is less than or equal to this API level can be flashed with this system image.
+This property is set in the system partition.
+
+Note: With the deprecation of VNDK, the ro.vndk.version property isn't part
+of Android 14 QPR3.
+The ro.vendor.api_level property is derived in one of the two following ways:
+
+If the chipset has qualified for vendor freeze:
+ro.vendor.api_level = min(
+ ro.board.api_level,
+ AVendorSupport_getVendorApiLevelOf(ro.product.first_api_level))
+
+If the chipset isn't under vendor freeze:
+ro.vendor.api_level =
+ AVendorSupport_getVendorApiLevelOf(ro.product.first_api_level)
+
+The AVendorSupport_getVendorApiLevelOf() method determines the corresponding
+vendor API level from an SDK API level. For example
+AVendorSupport_getVendorApiLevelOf(35), where 35 is the SDK API level of the
+major Android release in 2024 returns 202404, which is the rough date for
+Android 14 QPR3 when the current Vendor API level was set.
+
+Determine vendor API level (Android 13)
+
+The vendor API level follows the SDK API level, which is for the app-OS
+interface and is updated once a year when the new Android platform is released
+to AOSP.
+
+Android 13 contains the following system properties related to vendor API level:
+
+System property
+Format
+Description
+Initial setting
+
+ro.board.first_api_level
+Integer
+The vendor API level that a chipset's software was first released with. This is a function of chipset only, and can't be modified by either SoC vendors or OEMs. This property is set only for chipsets that qualify for the vendor freeze
+Value is established by setting BOARD_SHIPPING_API_LEVEL in the device.mk file.
+
+ro.board.api_level
+Integer
+The vendor API level that a chipset's software supports. This property is set only for the chipsets that qualify for vendor freeze.
+Initially, this property's value is set by the build system to the same value as ro.board.first_api_level, but can be updated if the vendor partition is upgraded.
+
+ro.product.first_api_level
+Integer
+The SDK API level that the device is initially launched with.
+This property is set by the OEM and then never updated, even after OS upgrades.
+
+ro.vendor.api_level
+Integer
+Same as the vendor API level description in the previous table.
+
+ro.vndk.version
+Integer
+The version of VNDK that the vendor partition is built against.
+This property is set in the vendor partition.
+
+ro.vendor.build.version.sdk
+Integer
+The SDK API level of the source tree where the vendor partition was built.
+
+ Content and code samples on this page are subject to the licenses described in the Content License. Java and OpenJDK are trademarks or registered trademarks of Oracle and/or its affiliates.
+ Last updated 2026-10-09 UTC.
+
+ [[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-10-09 UTC."],[],[]]
+
+ Build
+
+ Android repository
+
+ Requirements
+
+ Downloading
+
+ Preview binaries
+
+ Factory images
+
+ Driver binaries
+
+ Connect
+
+ @Android on X
+
+ @AndroidDev on X
+
+ Android Blog
+
+ Google Security Blog
+
+ Platform on Google Groups
+
+ Building on Google Groups
+
+ Porting on Google Groups
+
+ Get help
+
+ Android Help Center
+
+ Pixel Help Center
+
+ www.android.com
+
+ Google Mobile Services
+
+ Stack Overflow
+
+ Issue Tracker
+
+ About Android
+
+ Community
+
+ Legal
+
+ License
+
+ Privacy
+
+ Site feedback
+
+ Manage cookies
+
+ English
+
+ Deutsch
+
+ Español – América Latina
+
+ Français
+
+ Indonesia
+
+ Italiano
+
+ Polski
+
+ Português – Brasil
+
+ Tiếng Việt
+
+ Türkçe
+
+ Русский
+
+ עברית
+
+ العربيّة
+
+ فارسی
+
+ हिंदी
+
+ বাংলা
+
+ ภาษาไทย
+
+ 中文 – 简体
+
+ 中文 – 繁體
+
+ 日本語
+
+ 한국어

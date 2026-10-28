@@ -1,0 +1,169 @@
+TerminalOS 验收静态预检（static precondition checks）
+仓库根: C:\AiWork\Polaris-TerminalOS-repos
+时间: 2026-10-28T00:18:53
+  android_packages_apps_TerminalHome       HEAD=ccedcc4a9f6e74245dd6dcc51570a46768d579cb
+  android_vendor_terminalos                HEAD=d4559c341644b16649c3ab6195e73f7efe430134
+  android_device_xiaomi_polaris            HEAD=a7f801743b9f8c399a3014eb5f6d1838aebf9710
+
+[PASS] S01 T01/T02/T03/T13 HOME/维护组件声明契约
+       断言 17 条，失败 0 条
+       ok  manifest.MainActivity 存在
+       ok  HOME 过滤: ACTION_MAIN
+       ok  HOME 过滤: CATEGORY_HOME
+       ok  HOME 过滤: CATEGORY_DEFAULT
+       ok  exported=true
+       ok  launchMode=singleTask
+       ok  excludeFromRecents=true
+       ok  manifest.MaintenanceActivity 存在
+       ok  维护界面 exported=false
+       ok  AdminReceiver 声明
+       ok  AdminReceiver 绑定 BIND_DEVICE_ADMIN
+       ok  AdminReceiver 声明 device_admin 元数据
+       ok  BootReceiver 声明 BOOT_COMPLETED
+       ok  BootReceiver directBootAware=false
+       ok  只申请 RECEIVE_BOOT_COMPLETED（无 INTERNET）
+       ok  Termux 包可见性 <queries>
+       ok  targetSdkVersion 已声明
+       替代验证盲区：不能证明 aapt2 编译通过与系统解析结果；需构建产物 aapt2 dump + 实机
+[PASS] S02 T10      限流参数常量 (10min/5/4s/8s)
+       断言 6 条，失败 0 条
+       ok  RESTART_WINDOW_MS == 600000
+       ok  RESTART_MAX_FAILURES_IN_WINDOW == 5
+       ok  RESTART_MIN_INTERVAL_MS == 4000
+       ok  RESTART_QUICK_RETURN_THRESHOLD_MS == 8000
+       ok  TITLE_TAPS_TO_MAINTENANCE == 7
+       ok  TITLE_TAP_TIMEOUT_MS == 1500
+       替代验证盲区：常量对但逻辑可错；逻辑由 S03/S04 覆盖，运行行为仍需实机
+[PASS] S03 T10      限流窗口/冷静期/重置逻辑
+       断言 16 条，失败 0 条
+       ok  beginAutomaticAttempt 可解析
+       ok  窗口上限按 RESTART_MAX_FAILURES_IN_WINDOW 判定
+       ok  窗口耗尽返回 windowExhausted=true
+       ok  冷静期按 RESTART_MIN_INTERVAL_MS 计算
+       ok  冷静期返回可重试决策(windowExhausted=false)
+       ok  时钟回拨被处理
+       ok  允许时才写 lastAttempt
+       ok  recordLaunchFailed 可解析
+       ok  失败时间被追加
+       ok  失败窗口被持久化
+       ok  失败原因被记录
+       ok  resetForBoot 清空失败窗口
+       ok  resetForManualRetry 清空失败窗口
+       ok  手动重试保留冷静期（不立即连发）
+       ok  窗口按 RESTART_WINDOW_MS 裁剪
+       ok  getStatus 的 lockedOut 与上限一致
+       替代验证盲区：文本结构证明；时钟边界与 SharedPreferences 行为需 Robolectric/实机
+[PASS] S04 T10      8 秒快速返回接入限流
+       断言 8 条，失败 0 条
+       ok  onResume 调用 evaluateTermuxReturnIfNeeded
+       ok  evaluateTermuxReturnIfNeeded 可解析
+       ok  按 8 秒阈值判断
+       ok  快速返回记为失败重启（else 分支真实调用）
+       ok  停留足够久不计数
+       ok  启动成功记录起点时间
+       ok  启动前必须经限流许可
+       ok  未许可时不再启动（windowExhausted 分支 return）
+       替代验证盲区：不能证明 onResume 时序与 Termux 崩溃路径，需实机 force-stop 演练
+[PASS] S05 T13      PIN 只存 PBKDF2 派生值
+       断言 9 条，失败 0 条
+       ok  使用 PBKDF2WithHmacSHA256
+       ok  SALT_LENGTH_BYTES == 16
+       ok  PBKDF2_ITERATIONS == 120000
+       ok  定长比较用 MessageDigest.isEqual
+       ok  PIN 格式 4-12 位纯数字
+       ok  未把 PIN 明文写入 SharedPreferences
+       ok  派生结果用后清零
+       ok  PIN 存储用 commit() 同步落盘
+       ok  未设置 PIN 时不允许据此退出锁定
+       替代验证盲区：未证明 PBKDF2 在目标 ROM 可用；需实机首次设置/校验/重启后校验
+[PASS] S06 T13/T19  维护入口门禁与退出锁定流程
+       断言 11 条，失败 0 条
+       ok  onExitLockRequested 可解析
+       ok  退出锁定先要求已设置 PIN
+       ok  退出锁定先验证 PIN
+       ok  PIN 回调里才执行退出
+       ok  performExitLock 退出锁任务
+       ok  performExitLock 进入维护模式
+       ok  重新打开 Termux 重置限流窗口
+       ok  重新打开 Termux 清除维护模式
+       ok  改 PIN 前验证旧 PIN
+       ok  7 击进入维护入口
+       ok  点击超时重新计数
+       替代验证盲区：界面交互、PIN 对话框、锁任务下能否打开维护页需实机
+[PASS] S07 T03/T04/T06/T18 DO 门禁/白名单/特性位/非 DO 不伪装
+       断言 14 条，失败 0 条
+       ok  enterLockTask 可解析
+       ok  非 DO 直接返回、不调用 startLockTask
+       ok  非 DO 时 attempted=false（不伪装已锁定）
+       ok  白名单包含自身包
+       ok  白名单包含 Termux
+       ok  调用 setLockTaskPackages
+       ok  特性位 LOCK_TASK_FEATURE_SYSTEM_INFO
+       ok  特性位 LOCK_TASK_FEATURE_NOTIFICATIONS
+       ok  特性位 LOCK_TASK_FEATURE_HOME
+       ok  QUICK_SETTINGS 位经反射探测
+       ok  QUICK_SETTINGS 被拒时回退 baseFeatures
+       ok  HOME 接管用 addPersistentPreferredActivity
+       ok  HOME 过滤器带 CATEGORY_HOME
+       ok  非 DO 不尝试接管 HOME
+       替代验证盲区：DPM 真实授权、SYSTEM_SUPERVISION 角色、反射隐藏 API 是否可用需实机
+[PASS] S08 T05/T06  导航栏 overlay 与产品继承
+       断言 6 条，失败 0 条
+       ok  config_showNavigationBar=false
+       ok  PRODUCT_PACKAGES 含 TerminalHome
+       ok  PRODUCT_PACKAGES 含 Termux
+       ok  PRODUCT_PACKAGE_OVERLAYS 指向 vendor/terminalos/overlay
+       ok  产品继承 vendor/terminalos/terminalos.mk
+       ok  PRODUCT_NAME := terminalos_polaris
+       NOTE SKIP: 当前 overlay 无 config_allowedSupervisionRolePackages。这是 22.2 分支的预期形态（该资源只存在于 23.2）；23.2 分支（vendor@9a5d532）已带该条，需在 23.2 树上复查 S08。
+       替代验证盲区：overlay 是否被链接、手势提示条表现需构建产物 + 实机
+[PASS] S09 T02/T20  开机重置/初始化幂等/Termux presigned
+       断言 17 条，失败 0 条
+       ok  BOOT_COMPLETED 重置限流
+       ok  BOOT_COMPLETED 清除维护模式
+       ok  BOOT_COMPLETED 记录启动时间
+       ok  广播里不启动 Activity（避免竞态）
+       ok  首次初始化有标记文件幂等检查
+       ok  先建目录再写标志
+       ok  标记文件用 tmp+rename 原子写入
+       ok  不删除用户/系统数据
+       ok  不调用 pm/am/cmd 安装组件
+       ok  失败不阻塞开机（始终 exit 0）
+       ok  Termux 模块 presigned:true
+       ok  Termux 模块名与产品契约一致
+       ok  Termux APK 路径 prebuilt/Termux.apk
+       ok  跳过 dex 预优化（保持原始字节）
+       ok  fetch 脚本做 SHA256 校验
+       ok  fetch 脚本做大小校验
+       ok  脚本 SHA256 与 prebuilt 校验文件一致
+       替代验证盲区：first_boot.sh 未接入系统；Termux 首次启动与数据幂等需实机
+[PASS] S10 构建前置     资源引用与 XML 语法
+       断言 2 条，失败 0 条
+       ok  Java/manifest 资源引用全部存在
+       ok  全部 XML 语法合法
+       替代验证盲区：不能替代 Soong 编译；只抓引用级错误
+[PASS] S11 构建前置     文案占位符与实参匹配
+       断言 20 条，失败 0 条
+       ok  占位符索引连续 1..N: status_attempts_format
+       ok  占位符全部为位置参数: status_attempts_format
+       ok  占位符索引连续 1..N: status_last_failure_format
+       ok  占位符全部为位置参数: status_last_failure_format
+       ok  占位符索引连续 1..N: status_home_takeover_format
+       ok  占位符全部为位置参数: status_home_takeover_format
+       ok  占位符索引连续 1..N: status_quick_settings_format
+       ok  占位符全部为位置参数: status_quick_settings_format
+       ok  占位符索引连续 1..N: notice_limiter_exhausted
+       ok  占位符全部为位置参数: notice_limiter_exhausted
+       ok  占位符索引连续 1..N: notice_retry_cooldown
+       ok  占位符全部为位置参数: notice_retry_cooldown
+       ok  占位符索引连续 1..N: notice_launch_failed
+       ok  占位符全部为位置参数: notice_launch_failed
+       ok  占位符索引连续 1..N: toast_title_taps_remaining
+       ok  占位符全部为位置参数: toast_title_taps_remaining
+       ok  占位符索引连续 1..N: diagnostics_format
+       ok  占位符全部为位置参数: diagnostics_format
+       ok  getString 实参个数与占位符匹配
+       ok  String.format 实参个数与占位符匹配
+       替代验证盲区：不能替代 lint/编译；只抓数目/位置参数错配
+
+汇总：11 项检查，0 项失败

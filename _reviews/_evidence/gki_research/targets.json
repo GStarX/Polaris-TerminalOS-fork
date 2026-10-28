@@ -1,0 +1,7 @@
+[
+  ["vendor_module_guidelines", "https://source.android.com/docs/core/architecture/kernel/vendor-module-guidelines"],
+  ["api_flags", "https://source.android.com/docs/core/architecture/api-flags"],
+  ["gki_partitions", "https://source.android.com/docs/core/architecture/partitions/gki-partitions"],
+  ["partitions_overview", "https://source.android.com/docs/core/architecture/partitions"],
+  ["kernel_module_sup_retry", "https://source.android.com/docs/core/architecture/kernel/modules"]
+]
