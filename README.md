@@ -57,11 +57,11 @@ LineageOS 自定义 ROM 项目。
 
 | 阶段 | 内容 | 状态 |
 | --- | --- | --- |
-| Phase 0 | 设备身份、Bootloader、分区、恢复路径核验 | **未执行**（需真机，只由首席操作；设备据称当前运行 iOS16 移植系统） |
-| Phase 1 | 云构建：先 `lineage-22.2`（官方支持基线），再 23.2 实验 | **22.2 云同步 + 结构校验已全绿**（run `40541735974`，见 docs/13）；整包构建等待 ≥350 GB 的 runner |
+| Phase 0 | 设备身份、Bootloader、分区、恢复路径核验 | **已执行**：polaris、已解锁、单槽、GLOBAL/国行确认、可恢复；详见 [docs/15](docs/15_真机零构建验证记录.md) |
+| Phase 1 | 云构建 + 真机基线：先 `lineage-22.2`，再 23.2 实验 | **22.2 官方镜像已真机跑通**（docs/15）；云同步/结构校验全绿（run `40541735974`，docs/13）；整包构建等待 ≥350 GB runner |
 | Phase 1K | 内核审计与 4.19 / 5.4 / 5.10+ 候选评估 | **未开始**（计划见 `docs/09`） |
-| Phase 2 | Termux + TerminalHome 预置与自启动 | 代码已提交；**待云构建** |
-| Phase 3 | 锁定模式、导航栏隐藏、快捷设置保留 | 方案已写；22.2 缺锁任务 QS API，需最小框架补丁（`docs/08`） |
+| Phase 2 | Termux + TerminalHome 预置与自启动 | **ADB 部署真机验证通过**：开机自动进 Termux、重启保持、崩溃恢复、DO 锁任务（docs/15）；ROM 预置待整包构建 |
+| Phase 3 | 锁定模式、导航栏隐藏、快捷设置保留 | 锁任务真机通过（Home/最近任务出不去）；**导航栏隐藏需 ROM 静态 overlay（RRO 被系统拒绝）；QS 磁贴需 22.2 框架补丁**（docs/15、docs/08） |
 | Phase 4 | 精简与稳定性 | 未开始 |
 | Phase 5 | 发布、升级、回滚 | 版本与记录模板已写；Release 由 CI 可选发布 |
 
@@ -114,6 +114,8 @@ LineageOS 自定义 ROM 项目。
 - [`docs/12_云构建_GitHub_Actions.md`](docs/12_云构建_GitHub_Actions.md) —— 云构建/runner/首次跑 22.2 流程
 - [`docs/13_首次云构建记录.md`](docs/13_首次云构建记录.md) —— 真实云运行记录（run id、通过/失败项）
 - [`acceptance/验收测试矩阵.md`](acceptance/验收测试矩阵.md) —— T01–T15
+- [`docs/15_真机零构建验证记录.md`](docs/15_真机零构建验证记录.md) —— 官方 22.2 + ADB 部署真机验证（T01–T13 实测）
+- [`evidence/2026-10-28/`](evidence/2026-10-28/) —— 真机验证截图与日志证据
 
 ## 边界与安全约定
 

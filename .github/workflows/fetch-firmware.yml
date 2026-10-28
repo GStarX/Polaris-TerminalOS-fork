@@ -1,0 +1,106 @@
+name: fetch-firmware
+
+# 临时中转工作流：由 GitHub runner（通常海外网络）下载小米 MIUI 固件包，
+# 只抽取 firmware-update/ 目录后回传，避免本地到小米 CDN 被限速。
+#
+# 输入：
+#   mode: probe = 只测速（32MB range）；full = 完整下载 + 抽取 + 打小包上传 artifact
+#   url:  MIUI 固件 zip 地址（默认国行 V12.0.3.0.QDGCNXM）
+#   expect_size: 期望字节数（0 = 不校验）
+#
+# 注意：本工作流只下载公开固件，不接触设备、不构建 ROM。
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'probe = 测速；full = 下载并抽取 firmware-update'
+        type: choice
+        default: probe
+        options: [probe, full]
+      url:
+        description: 'MIUI 固件 zip 地址'
+        type: string
+        default: 'https://bn.d.miui.com/V12.0.3.0.QDGCNXM/miui_MIMIX2S_V12.0.3.0.QDGCNXM_cd55623678_10.0.zip'
+      expect_size:
+        description: '期望字节数（0=不校验）'
+        type: string
+        default: '2210473503'
+
+permissions:
+  contents: read
+
+jobs:
+  fetch:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 240
+    env:
+      MODE: ${{ inputs.mode }}
+      URL: ${{ inputs.url }}
+      EXPECT_SIZE: ${{ inputs.expect_size }}
+    steps:
+      - name: 显示参数与环境
+        run: |
+          echo "mode=$MODE"
+          echo "url=$URL"
+          echo "expect_size=$EXPECT_SIZE"
+          df -h /
+          curl --version | head -n1
+
+      - name: 打通到小米 CDN 的连通性
+        run: |
+          set -euo pipefail
+          host=$(echo "$URL" | sed -E 's#^https?://([^/]+)/.*#\1#')
+          echo "host=$host"
+          getent hosts "$host" || true
+          curl -sIL --max-time 60 "$URL" | head -n 20
+
+      - name: 测速 probe（32MB range）
+        if: ${{ env.MODE == 'probe' }}
+        run: |
+          set -euo pipefail
+          for range in 0-33554431; do
+            out=$(curl -sL --max-time 180 --range "$range" -o /tmp/probe.bin \
+                  -w 'http=%{http_code} bytes=%{size_download} secs=%{time_total} speed_Bps=%{speed_download}' "$URL" || true)
+            echo "range=$range $out"
+            ls -l /tmp/probe.bin || true
+          done
+
+      - name: 完整下载 + 抽取 firmware-update
+        if: ${{ env.MODE == 'full' }}
+        run: |
+          set -euo pipefail
+          mkdir -p work
+          echo "downloading..."
+          curl -L --fail --retry 5 --retry-delay 5 --connect-timeout 60 \
+               -o work/miui.zip "$URL"
+          size=$(stat -c%s work/miui.zip)
+          echo "downloaded bytes: $size"
+          if [ "$EXPECT_SIZE" != "0" ] && [ "$size" != "$EXPECT_SIZE" ]; then
+            echo "ERROR: size mismatch, expected $EXPECT_SIZE"; exit 1
+          fi
+          sha256sum work/miui.zip | tee work/miui.zip.sha256
+          unzip -l work/miui.zip | grep -E 'firmware-update/' | head -n 40
+          mkdir -p work/firmware-update
+          unzip -o -q work/miui.zip 'firmware-update/*' -d work/out
+          ls -lh work/out/firmware-update/
+          du -sh work/out/firmware-update/
+          (
+            cd work/out/firmware-update
+            sha256sum * > SHA256SUMS.txt
+            cat SHA256SUMS.txt
+          )
+          (cd work/out && zip -qr ../polaris-firmware-qdgcnxm.zip firmware-update)
+          ls -lh work/polaris-firmware-qdgcnxm.zip
+          sha256sum work/polaris-firmware-qdgcnxm.zip
+
+      - name: 上传固件小包（artifact）
+        if: ${{ env.MODE == 'full' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: polaris-firmware-qdgcnxm
+          path: |
+            work/polaris-firmware-qdgcnxm.zip
+            work/miui.zip.sha256
+          retention-days: 14
+          if-no-files-found: error

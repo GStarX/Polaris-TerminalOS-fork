@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 隐藏底部导航条；仅作为 RRO 实验目标，见同目录 AndroidManifest.xml 说明 -->
+    <bool name="config_showNavigationBar">false</bool>
+</resources>

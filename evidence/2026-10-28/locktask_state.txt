@@ -1,0 +1,3 @@
+﻿  LockTaskController:
+    mLockTaskModeState=LOCKED
+    mLockTaskPackages (userId:packages)=

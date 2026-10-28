@@ -68,8 +68,9 @@
 | P2-02 | `android_packages_apps_TerminalHome` 应用（HOME、拉起 Termux、限流重启、维护入口、Lock Task 控制） | GITHUB + 注入官 | ready（代码已提交，未编译） | 仓库 + 代码审查记录 |
 | P2-03 | 设备树 `terminalos_polaris` 产品配置 | GITHUB | ready（已提交，未编译） | `terminalos/lineage-23.2` 分支 |
 | P2-04 | 编译验证（`lunch terminalos_polaris-userdebug` + `brunch`） | 主机官 | blocked | 构建日志；依赖构建机 |
-| P2-05 | 实机：解锁后自动进 Termux、重启不丢、崩溃有限恢复（T01/T02/T10/T11/T12） | 首席 | blocked | 实机记录 |
+| P2-05 | 实机：解锁后自动进 Termux、重启不丢、崩溃有限恢复（T01/T02/T10/T11/T12） | GITHUB（真机执行） | **通过**（2026-10-28，官方 22.2 + ADB 部署；证据 docs/15） | `docs/15` + `evidence/2026-10-28/` |
 | P2-06 | 首次初始化幂等性验证（重复执行不破坏用户数据） | 首席 | blocked | 记录 |
+| P2-07 | 维护入口可触发性（7 连击在自动拉起流程下不可达） | 注入官 | **待修** | `docs/15` §4、docs/11 D-23 |
 
 **验收**：刷入后可自动进入 Termux；重启仍进入；Termux 异常时进入维护界面而不是无限重启。
 
@@ -78,9 +79,9 @@
 | ID | 任务 | 负责人 | 状态 | 交付/证据 |
 | --- | --- | --- | --- | --- |
 | P3-01 | Device Owner / Lock Task 方案评审（含 QUICK_SETTINGS 特性、维护解锁） | 方案甲 + 复核官 | ready | `docs/08` 评审结论 |
-| P3-02 | 导航栏/手势提示条隐藏方案验证（overlay `config_showNavigationBar`） | 注入官 | blocked | 编译 + 实机结果 |
-| P3-03 | 锁定模式下快捷面板逐项测试（T06/T07/T08） | 首席 + 测试官 | blocked | 记录 |
-| P3-04 | 管理员维护入口验证（T09/T13） | 首席 | blocked | 记录 |
+| P3-02 | 导航栏/手势提示条隐藏方案验证（overlay `config_showNavigationBar`） | 注入官 | **已验证结论**：运行时 RRO 被系统拒绝、immersive 无效 → 必须 ROM 静态 overlay（docs/15 §3 T05） | `docs/15` + docs/11 D-21 |
+| P3-03 | 锁定模式下快捷面板逐项测试（T06/T07/T08） | GITHUB（真机执行） | **部分通过**：通知栏可展开；**无 QS 磁贴**（T07/T08 需框架补丁） | `docs/15` §3、docs/11 D-22 |
+| P3-04 | 管理员维护入口验证（T09/T13） | 首席 | **T13 未通过**：维护入口不可达（设计缺口） | docs/15 §4、docs/11 D-23 |
 | P3-05 | 若标准 API 不足：最小 SystemUI/框架补丁设计与评审 | 方案甲 | todo | 仅在 P3-01 结论为"不足"时启动 |
 
 ## Phase 4：精简与稳定性

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Termux 终端 kiosk 的导航栏隐藏 RRO 覆盖（实验）。
+
+  目标包：android（framework-res），资源 config_showNavigationBar=false。
+
+  重要结论（已核验源码）：lineage-22.2 的 frameworks/base 没有 <overlayable> 声明文件，
+  因此运行时 RRO 很可能被系统拒绝安装/启用。这个 APK 的存在意义是**实机验证该结论**：
+  若 `adb install` 或 `cmd overlay enable` 失败，就证明"隐藏导航栏"必须走 ROM 静态 overlay。
+
+  构建：.github/scripts/build-rro-overlay-apk.sh apk-overlays/navbar navbar-overlay
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.terminalos.overlay.navbar">
+    <overlay
+        android:isStatic="false"
+        android:priority="1"
+        android:targetPackage="android" />
+    <application
+        android:hasCode="false"
+        android:label="TerminalOS navbar overlay (experimental)" />
+</manifest>

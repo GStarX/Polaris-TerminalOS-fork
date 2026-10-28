@@ -1,0 +1,90 @@
+name: build-apk
+
+# 零构建阶段用的独立 APK 构建（不需要 400GB 整包源码树，免费托管 runner 即可）：
+#   1) TerminalHome.apk  —— 从 android_packages_apps_TerminalHome 仓库源码构建，debug 签名
+#   2) navbar-overlay.apk —— RRO 实验包（验证运行时 overlay 能否隐藏导航栏）
+#   3) Termux.apk        —— 官方 v0.118.3 arm64（下载 + sha256 校验，原样打包）
+#
+# 触发：workflow_dispatch，或 push 到 ci/apk* 分支。
+# 产物：artifact `terminalos-apks`（含 sha256sums.txt）。
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'ci/apk*'
+
+permissions:
+  contents: read
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      TERMUX_URL: 'https://github.com/termux/termux-app/releases/download/v0.118.3/termux-app_v0.118.3%2Bgithub-debug_arm64-v8a.apk'
+      TERMUX_SHA256: '72fdb596045116bf5ba1b5bdf5b26fddb9acc0bd074ad9f2da9eb0ae85e83a4e'
+      TERMUX_SIZE: '35106607'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 安装 JDK 17 与 Android SDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: 安装 Android SDK 组件
+        run: |
+          set -euo pipefail
+          yes | "${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager" --licenses >/dev/null 2>&1 || true
+          "${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager" \
+            "platforms;android-35" "build-tools;35.0.0" | tail -n 5
+          ls -d "${ANDROID_HOME}/platforms/android-35" "${ANDROID_HOME}/build-tools/35.0.0"
+
+      - name: 拉取 TerminalHome 源码（terminalos/lineage-22.2）
+        run: |
+          set -euo pipefail
+          git clone --depth 1 --branch terminalos/lineage-22.2 \
+            https://github.com/GStarX/android_packages_apps_TerminalHome.git src/TerminalHome
+          ls src/TerminalHome
+
+      - name: 构建 TerminalHome.apk（debug 签名，单 APK 安装用）
+        run: |
+          set -euo pipefail
+          chmod +x .github/scripts/build-terminalhome-apk.sh
+          bash .github/scripts/build-terminalhome-apk.sh src/TerminalHome out/apks
+
+      - name: 构建 navbar-overlay.apk（RRO 实验）
+        run: |
+          set -euo pipefail
+          chmod +x .github/scripts/build-rro-overlay-apk.sh
+          bash .github/scripts/build-rro-overlay-apk.sh apk-overlays/navbar navbar-overlay out/apks
+
+      - name: 下载并校验官方 Termux APK
+        run: |
+          set -euo pipefail
+          mkdir -p out/apks
+          curl -L --fail --retry 5 --retry-delay 3 -o out/apks/Termux.apk "$TERMUX_URL"
+          size=$(stat -c%s out/apks/Termux.apk)
+          echo "termux size=$size (expect $TERMUX_SIZE)"
+          [ "$size" = "$TERMUX_SIZE" ]
+          echo "$TERMUX_SHA256  out/apks/Termux.apk" | sha256sum -c -
+          "$ANDROID_HOME/build-tools/35.0.0/aapt2" dump badging out/apks/Termux.apk | head -n 3
+
+      - name: 汇总产物
+        run: |
+          set -euo pipefail
+          cd out/apks
+          rm -rf build-terminalhome build-navbar-overlay
+          sha256sum *.apk > sha256sums.txt
+          cat sha256sums.txt
+          ls -lh
+
+      - name: 上传 APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: terminalos-apks
+          path: out/apks/
+          retention-days: 14
+          if-no-files-found: error

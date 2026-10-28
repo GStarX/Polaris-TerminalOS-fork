@@ -1,0 +1,4 @@
+﻿  Device Owner: 
+    admin=ComponentInfo{org.terminalos.terminalhome/org.terminalos.terminalhome.AdminReceiver}
+      testOnlyAdmin=false
+  Device Owner Type: 0
