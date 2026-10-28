@@ -1,0 +1,44 @@
+# 2026-10-29 只读复核：锁任务白名单 / 锁任务栈 / DPM lockTask 策略
+# 设备：Xiaomi MIX 2S (polaris)，serial 7c06f250
+# 构建：LineageOS 22.2-20261022-NIGHTLY-polaris（userdebug, SDK 35）
+# 采集时间：2026-10-29T00:14:26+08:00（设备 uptime 870.92 s，约 14.5 分钟前重启）
+#
+# 背景：evidence/2026-10-28/locktask_state.txt（97 B）只有 3 行，最后一行停在
+#   "mLockTaskPackages (userId:packages)="，列表值缺失。
+#   原因不是 dump 截断，而是抓取命令按关键字过滤：
+#   关键字含 LockTaskController|mLockTaskModeState|mLockTaskPackages；
+#   值行 "u0:[com.termux, org.terminalos.terminalhome]" 不含这些关键字，被同一过滤丢弃；
+#   "mLockTaskModeTasks=" 行同样不含关键字，也被丢弃。
+#   用同一模式复跑，精确得到这 3 行（LF 93 B / CRLF 96 B；旧文件 97 B = UTF-8 BOM(3 B) + 行尾符差异）。
+#   因此旧文件不能证明"白名单为空"。
+
+# 命令：adb shell "dumpsys activity | grep -A 6 'LockTaskController'"
+  LockTaskController:
+    mLockTaskModeState=LOCKED
+    mLockTaskModeTasks=
+      #0 Task{c17aed6 #16 type=home A=10185:org.terminalos.terminalhome nonResizable}
+      #1 Task{5345fe2 #17 type=standard A=10184:com.termux}
+    mLockTaskPackages (userId:packages)=
+      u0:[com.termux, org.terminalos.terminalhome]
+
+# 命令：adb shell "dumpsys device_policy | grep -A 5 'DefaultPolicyKey lockTask'"
+      DefaultPolicyKey lockTask
+        Per-admin Policy:
+          EnforcingAdmin { mPackageName= org.terminalos.terminalhome, mComponentName= ComponentInfo{org.terminalos.terminalhome/org.terminalos.terminalhome.AdminReceiver}, mAuthorities= [enterprise], mUserId= 0, mIsRoleAuthority= false, mIsSystemAuthority= false, mSystemEntity = null }
+            LockTaskPolicy {mPackages= com.termux, org.terminalos.terminalhome; mFlags= 7 }
+        Resolved Policy (TopPriority):
+          LockTaskPolicy {mPackages= com.termux, org.terminalos.terminalhome; mFlags= 7 }
+
+# 命令：adb shell "dumpsys activity activities | grep 'topResumedActivity'"
+    topResumedActivity=ActivityRecord{74969261 u0 com.termux/.app.TermuxActivity t17}
+
+# 命令：adb shell "dumpsys window | grep -E 'mCurrentFocus|mFocusedApp'"
+  mCurrentFocus=Window{4d511e9 u0 AtchDlg:com.termux/com.termux.app.TermuxActivity}
+  mFocusedApp=ActivityRecord{74969261 u0 com.termux/.app.TermuxActivity t17}
+
+# 结论：
+#   1) 白名单确实已设置：u0:[com.termux, org.terminalos.terminalhome]；DPM 侧同一列表，
+#      mFlags=7（SYSTEM_INFO=1 | NOTIFICATIONS=2 | HOME=4），与 TerminalHome 日志一致。
+#   2) 锁任务栈含 home Task#16（TerminalHome）与 standard Task#17（Termux），前台为 Termux。
+#      旧证据的 mLockTaskModeState=LOCKED 成立；T03/T04 证据链补强。
+#   3) 本次抓取距重启约 14.5 分钟，白名单/锁任务在重启后仍生效（T02/T18 的现场佐证）。

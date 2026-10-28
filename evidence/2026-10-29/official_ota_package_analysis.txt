@@ -1,0 +1,40 @@
+# 2026-10-29：官方 LineageOS 22.2 整包 OTA 结构分析（本地读包，不刷机）
+# 用途：判定"补丁 ROM 走哪条刷入路径"时，确认 OTA/sideload 会不会动 /data、会不会写 boot/vbmeta/recovery。
+# 包：lineage-22.2-20261022-nightly-polaris-signed.zip
+#     sha256 = acbab44a4e277523493e92314c8e9b2591839449e8c13f290c334a0375f56cd8（本机实测，与已记录一致）
+# 方法：读 zip 中央目录 + META-INF/com/google/android/updater-script（只读分析）
+
+# --- zip 关键条目（共 27 项，摘录） ---
+# 动态分区数据：system.new.dat.br / vendor.new.dat.br / product.new.dat.br / system_ext.new.dat.br / odm.new.dat.br
+# 对应 transfer.list：system / vendor / product / system_ext / odm
+# boot.img        67,092,480 B
+# recovery.img    67,108,864 B   ← updater-script 未引用（不写入 recovery 分区）
+# vbmeta.img       8,192 B
+# dynamic_partitions_op_list  996 B / unsparse_super_empty.img 4,772 B
+# META-INF/com/google/android/updater-script 3,089 B
+# META-INF/com/android/otacert 1,342 B（LineageOS 发布证书）
+# metadata: ota-type=BLOCK，pre-device=polaris，post-sdk-level=35，post-security-patch-level=2026-10-01
+
+# --- updater-script 关键行（原文摘录，行号对应文件） ---
+# 1: assert(getprop("ro.product.device") == "polaris" ...)
+# 2: assert(xiaomi.verify_trustzone("XF.5.0.1-00161") == "1" ...)  # 需 Android 10 版 MIUI 固件
+# 7-9:   map_partition("vendor"); map_partition("product"); map_partition("system_ext");
+# 10:    backuptool.sh backup ...（addon.d 备份，不涉及 /data 用户数据）
+# 17:    update_dynamic_partitions(package_extract_file("dynamic_partitions_op_list"), ...)
+# 23-52: block_image_update(...) 依次写 system / vendor / product / odm / system_ext
+# 60:    backuptool.sh restore ...
+# 61:    package_extract_file("boot.img", "/dev/block/bootdevice/by-name/boot")
+# 64:    package_extract_file("vbmeta.img", "/dev/block/bootdevice/by-name/vbmeta")
+# 全文没有 format()/wipe/erase 或写入 /data、userdata 的语句。
+
+# --- 结论（供刷入路径决策） ---
+# 1) 官方 OTA sideload 只重写逻辑分区 + boot + vbmeta，不动 /data
+#    → /data 里的 Device Owner 状态（device_policies.xml）与 data 应用都保留。
+# 2) recovery.img 虽在包内，但 updater-script 不写它；OTA sideload 不会替换当前 recovery。
+#    因此"刷一次自制 recovery"是一次性的，后续 sideload 不会把它覆盖回官方 recovery
+#    （除非另行 fastboot flash recovery 官方镜像）。
+# 3) 包内 otacert 为 LineageOS 发布证书，官方 recovery 按内置 /res/keys 验签；
+#    自编译（test-keys）整包无法通过官方 recovery 验签
+#    → 切换自编译 ROM 需先刷入与包同签名来源的 recovery（自制 recovery），再 sideload。
+# 4) 该分析是"包结构"证据，不是"已实机验证 DO 跨 OTA 保留"；首次刷自制整包后
+#    需在设备上跑 `dpm list-owners` / `dumpsys device_policy` 复核 DO 仍在。

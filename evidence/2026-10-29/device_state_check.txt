@@ -1,0 +1,59 @@
+# 2026-10-29 只读设备现场检查（供 docs/06 记录表 / docs/15 补充）
+# 设备：Xiaomi MIX 2S (polaris)，serial 7c06f250
+# 采集：2026-10-29T00:14:26–00:15:31+08:00，全部为 adb 只读命令，无 settings/刷写写入
+# 采集环境：Windows + platform-tools（C:\AiWork\MIX2S\platform-tools\adb.exe）
+
+# --- adb devices -l ---
+7c06f250               device product:lineage_polaris model:Mi_MIX_2S device:polaris transport_id:5
+
+# --- 构建 / 启动状态 ---
+ro.lineage.version=22.2-20261022-NIGHTLY-polaris
+ro.build.version.release=15 / ro.build.version.sdk=35 / ro.build.type=userdebug
+ro.build.version.security_patch=2026-10-01
+uname -a: Linux localhost 4.9.337-perf-gaa8adfe9bf21 #1 SMP PREEMPT Thu Oct 22 07:48:41 UTC 2026 aarch64
+  （aa8adfe9bf21 = LineageOS/android_kernel_xiaomi_sdm845 lineage-22.2 HEAD）
+ro.boot.verifiedbootstate=orange / ro.boot.veritymode=enforcing / ro.boot.dynamic_partitions=true
+ro.boot.super_partition=system（retrofit 动态分区：物理 system 分区作 super）
+sys.boot_completed=1 / uptime 870.92 s（约 14.5 分钟前重启过）
+分区映射：boot=sde45 / recovery=sda19 / userdata=sda21 / system(super)=sde48 / vbmeta=sde8
+mapper 映射：system=dm-0 / vendor=dm-1 / product=dm-2 / odm=dm-3 / system_ext=dm-4
+/data = /dev/block/sda21 ext4，224G，已用 496M（212G 可用）
+ro.crypto.state=encrypted / ro.crypto.type=file（FBE）
+
+# --- 锁任务 / 前台（完整摘录见 locktask_state_full.txt）---
+mLockTaskModeState=LOCKED
+mLockTaskPackages u0:[com.termux, org.terminalos.terminalhome]
+topResumedActivity=ActivityRecord{74969261 u0 com.termux/.app.TermuxActivity t17}
+mWakefulness=Awake；mKeyguardShowing=false
+
+# --- Device Owner ---
+Device Owner: admin=ComponentInfo{org.terminalos.terminalhome/org.terminalos.terminalhome.AdminReceiver}
+package=org.terminalos.terminalhome；isOrganizationOwnedDevice=true；User ID: 0
+Enabled Device Admins: org.terminalos.terminalhome/.AdminReceiver，testOnlyAdmin=false
+policies: force-lock；Device Owner Type: 0
+
+# --- 电量（dumpsys battery，00:14）---
+level=100 / scale=100；status=2（charging）；health=2（good）
+AC powered=true；USB powered=false；voltage=4392mV；temperature=340（34.0°C）
+charge counter=3116066uAh；maximum capacity=3127000uAh；design capacity=3400000uAh
+max charging current=1150000uA；max charging voltage=5000000uV
+
+# --- Wi-Fi / 网络 ---
+settings: wifi_on=1，airplane_mode_on=0，mobile_data=0，bluetooth_on=1
+cmd wifi status: Wifi is enabled / Wifi is not connected
+dumpsys wifi: Supplicant state=DISCONNECTED；已保存网络 "1807-1" 为 DSBLE（disabled），无当前连接
+即：Wi-Fi 开关开着但当前没有连上任何网络；移动数据关闭。
+
+# --- 安装包（当前均为 /data 应用）---
+org.terminalos.terminalhome  versionName=0.1.0
+  codePath=/data/app/~~it6NeMr-SFDh5qwjTnyz6A==/org.terminalos.terminalhome-.../
+  firstInstallTime=lastUpdateTime=2026-10-22 15:49:06
+  signatures=PackageSignatures{version:3, signatures:[dc3aa52a]}（debug 签名）
+com.termux  versionName=0.118.3
+  codePath=/data/app/~~3B1UQGZJJmagveUddkZb2g==/com.termux-.../
+  firstInstallTime=lastUpdateTime=2026-10-22 15:49:05
+
+# --- 其他 ---
+settings: device_provisioned=1，user_setup_complete=1
+persist.sys.timezone=Asia/Shanghai
+ro.boot.hwc=GLOBAL；ro.boot.cert=M1803D5XA
