@@ -118,3 +118,15 @@ proot-distro install https://mirrors.tuna.tsinghua.edu.cn/ubuntu-cdimage/ubuntu-
 - 下载速度样本只有 TUNA 一次（1.82 MB/s），不能代表其它镜像/时段。
 - daocloud / 1ms.run 只验证到 manifest digest 一致，未验证 layer 拉取与 proot-distro 客户端兼容性。
 - Docker Hub tag/digest 会随官方重建变化；本文 digest 为 2026-10-29 快照，重建后需重取并更新本文件。
+
+## 7. 2026-10-29 独立复验（GITHUB，git push 通道）
+
+| 项 | 复验结果 |
+| --- | --- |
+| `ubuntu-base-26.04-base-arm64.tar.gz` | 官方 `SHA256SUMS` 现值 `b2b46a37…74cab`；从 TUNA 下载本体 **35,094,845 B**，本地 sha256 **逐位一致** |
+| `ubuntu-base-26.04.1-base-arm64.tar.gz` | 官方清单值 `5a190679…219fd`（未下载本体） |
+| `ubuntu-26.04-server-cloudimg-arm64-root.tar.xz` | 官方清单值 `482791c2…64134`（未下载本体） |
+| `proot-distro` | GitHub API：`v5.10.3`，`2026-10-25T15:31:13Z`，`prerelease=false` |
+| Docker Hub `ubuntu:26.04` index digest | Hub API 与 Registry v2 `Docker-Content-Digest` 头两处一致：`sha256:0e73b714…db0dd` |
+
+编号：本文由 `docs/17_..._镜像与国内源.md` 改名为 18 后保留，原 `docs/17_proot_Ubuntu26.04_来源校验.md`（内容重复）已删除；材料类文档只保留这一份。**仍未做**：Termux 实机拉取/安装/启动未执行，设备未触碰。
