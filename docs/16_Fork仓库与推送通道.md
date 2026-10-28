@@ -152,6 +152,10 @@ git push fork fork-work:main
 3. **切换凭据**：新 PAT 存为 DSH secret，更新 github MCP server 的 env 引用；用新 token 验证：`GET /user/repos` 只应列出 fork（无旧仓），旧仓写入应 403。
 4. **留痕**：docs/16 记执行时间、新 token 名称/范围、旧 token 作废时间；结果交首席复核。
 
+**执行记录（2026-10-29）**：
+- 用户已授权（2026-10-29 约 00:50 +08）。GITHUB 已执行归档：`PATCH /repos/GStarX/Polaris-TerminalOS {"archived":true}` → `archived=true`；写探针返回 `403 Repository was archived so is read-only`；旧仓 `main` 保持 `15eb676`，可逆（`archived=false`）。
+- token 轮换：**待用户操作**。当前 `github` MCP server 不是「共享 capability」（`list_capabilities` 为空），token 在 DSH 的 MCP/secret 配置里；需用户新建 fine-grained PAT（只授权 `Polaris-TerminalOS-fork`，Contents=Read/Write + Metadata=Read）并在 DSH 设置里替换，替换后由 GITHUB 验证：`GET /user/repos` 只剩 fork、旧仓写 403。
+
 ### E2 关闭（2026-10-29）
 
 - **关闭条件已满足**：主机官已按首席要求在群里发出「【E2 通道说明 · 主机官，按首席要求提交】」——通道=团队共用 GitHub MCP contents API（`create_or_update_file`/`push_files`，token 用户 `GStarX`）；时间线=`591ef1d` 2026-10-27T17:00:12Z、`8d44fb7` 17:00:26Z、`93900546` 17:01:37Z（前两者为基线祖先）、`15eb676` 2026-10-28T16:24:16Z（唯一 E2 偏移）。
