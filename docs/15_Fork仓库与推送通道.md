@@ -40,6 +40,8 @@
 
 **判等只认入库 blob**：用 `git ls-files -s` / `git rev-parse HEAD:<path>` / `git cat-file blob`，不要用 `git hash-object -- <path>`——后者会按 `.gitattributes`（本仓 `_reviews/_evidence/.gitattributes` 为 `* -text`）和 `core.autocrlf` 做转换，量到的不是入库字节，跨仓比对会误报差异。
 
+验收要同时记 **mode**：blob 相等不代表可执行位正确。本次导入曾把 10 个脚本丢成 `100644`（旧仓 9 个 `100755` + `verify-pins.sh`），纯 blob 对账完全看不出来，是 `7acb84e` 单独修回来的。记账双键之外再加一项：**blob + mode**。
+
 ## 3. 推送通道（本机实测）
 
 - `github.com:443`：本机不通（21 秒超时）。
@@ -72,4 +74,6 @@ git push fork fork-work:main
 ## 5. 已验证的云端运行
 
 - `validate`：`79123a4` push 后两次运行均 `success`（2026-10-28T14:15:25Z、14:16:28Z）。
+- 端到端推送证据（不是通道探测）：`3a97015`、`79123a4`、`433c1e4`（本文档修订）均在本机用 `git push` 经上述 SSH 通道推上云端，推送回显分别为 `[new branch] main -> main`、`79123a4..c12e1f1`、`7acb84e..433c1e4`；本地 `C:\AiWork\tmp\fork-seed` 的 reflog 可查。
+- 复验命令（任何人可跑）：`ssh -p 443 -i ~/.ssh/id_ed25519_dsh -T git@ssh.github.com`，应返回 `Hi GStarX/Polaris-TerminalOS-fork!`（deploy key 作用域只此一仓，旧仓会拒）。
 - `sync-check` / `build-rom`：workflow 已在仓库中且为 active；**`build-rom` 从未真正跑过整包**，云端目前只有 validate / sync-check 的绿，没有整包产物。
