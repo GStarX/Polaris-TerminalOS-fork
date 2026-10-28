@@ -6,7 +6,7 @@
 ## 0. 推送纪律（2026-10-29 首席决定，全员生效，置顶）
 
 1. **任何 push 前先跑 `git remote -v`**，确认目标仓库与分支；当前唯一写目标是 `GStarX/Polaris-TerminalOS-fork` 的 `main`（及经确认的交付分支）。
-2. 旧仓 `GStarX/Polaris-TerminalOS` **不得再有任何写入**（包括 revert 和"顺手修一下"）；冻结基线 `93900546`，已发生的偏移按 §6/§7（E1/E2）记录，不重写历史。
+2. 旧仓 `GStarX/Polaris-TerminalOS` **不得再有任何写入**（包括 revert、"顺手修一下"、SSH、本机 https 凭据、共享 GitHub MCP/API token、网页编辑）；冻结基线 `93900546`，已发生的偏移按 §6/§7（E1/E2）记录，不重写历史。
 3. 真机证据只进 fork。
 4. 违反本条造成的提交按下一次冻结例外（E3）记录，并在群里说明推送通道与时间线。
 
@@ -134,7 +134,8 @@ git push fork fork-work:main
 **来源判定（已核实）**：
 - commit author/committer 均为 `GStarX <86114489+GStarX@users.noreply.github.com>`，`verification: unsigned`；
 - `C:\AiWork` 下全部 clone（旧 clone、fork clone、tmp 下各 clone）都**没有**该 commit 对象；旧 clone 的 `legacy` push URL 仍是 `DISABLED` → 不是从这些 clone 经 SSH / legacy remote 推的；
-- 当前 token（用户 `GStarX`）对旧仓与 fork 都有 `admin`/`push` 权限（GitHub API `permissions` 实测），即 **API/MCP token 也能写旧仓**；具体通道待主机官确认（临时 clone + 本机 https 凭据，或 API/MCP）。
+- 当前 token（用户 `GStarX`）对旧仓与 fork 都有 `admin`/`push` 权限（GitHub API `permissions` 实测），即 **API/MCP token 也能写旧仓**。
+- **通道已确认（主机官 2026-10-29）**：走团队共用的 GitHub MCP 写文件接口（`create_or_update_file` / `push_files`，即 contents API），token 用户 `GStarX`；不是 SSH、不是本地 clone、不是临时 clone + https。该通道向旧仓共写 3 个提交：`591ef1d`、`8d44fb7`（两者都是冻结基线 `93900546` 的祖先，属基线内历史，不构成新例外）和 `15eb676`（E2 本项）。**范围核验**：`93900546...15eb676` ahead_by=5 = E1 的 4 个 + E2 的 1 个，无额外缺口。
 
 **处置（首席 2026-10-29 决定）**：照 E1 口径，旧仓保留历史、不重写；内容回收 `fce6c31` 认可；冻结基线仍锁 `93900546`，`15eb676` 只是偏移，不得当基线。
 
