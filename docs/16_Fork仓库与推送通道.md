@@ -5,10 +5,11 @@
 
 ## 0. 推送纪律（2026-10-29 首席决定，全员生效，置顶）
 
-1. **任何 push 前先跑 `git remote -v`**，确认目标仓库与分支；当前唯一写目标是 `GStarX/Polaris-TerminalOS-fork` 的 `main`（及经确认的交付分支）。
-2. 旧仓 `GStarX/Polaris-TerminalOS` **不得再有任何写入**（包括 revert、"顺手修一下"、SSH、本机 https 凭据、共享 GitHub MCP/API token、网页编辑）；冻结基线 `93900546`，已发生的偏移按 §6/§7（E1/E2）记录，不重写历史。
-3. 真机证据只进 fork。
-4. 违反本条造成的提交按下一次冻结例外（E3）记录，并在群里说明推送通道与时间线。
+1. **MCP 写操作只允许 `@GITHUB` 执行**（`create_or_update_file` / `push_files` 等）；其他成员一律只读，需要改文件就把"内容 + 目标路径"交给 GITHUB 代写，或走 PR。
+2. **写前自检 + 报备（缺一不做）**：先 `git remote -v` 确认目标仓库与分支；在群里报 `repo + branch + path`（MCP 调用必须写全 `owner/repo`）；旧仓 `GStarX/Polaris-TerminalOS` 出现即停（连 revert 也不行）。
+3. **写后报 sha 并读回校验**：报 commit sha；用 API / `git ls-remote` 读回目标仓与文件 blob，确认落点在 fork `main`（或经确认的交付分支）。
+4. 写目标只允许 `GStarX/Polaris-TerminalOS-fork`；旧仓冻结基线 `93900546`，已发生的偏移按 §6/§7（E1/E2）记录、不重写历史；真机证据只进 fork。
+5. 违反本条（尤其写到非 fork 仓库）按冻结例外 **E3** 记录，停写通道并上报首席/用户。
 
 ## 1. 仓库角色
 
@@ -20,8 +21,8 @@
 | `GStarX/android_vendor_terminalos` | vendor（Termux 预置） | 只读引用 |
 | `GStarX/android_packages_apps_TerminalHome` | TerminalHome 应用 | 只读引用 |
 
-旧仓冻结的实测依据：4 个仓的 `pushed_at` 都停在 2026-10-27，旧仓 `main` 仍是 `93900546`。
-本机唯一的写通道（deploy key）只挂在新 fork 仓上，旧仓没有可写通道。
+旧仓冻结的实测依据（2026-10-27 当时）：4 个仓的 `pushed_at` 都停在 2026-10-27，旧仓 `main` 仍是 `93900546`。之后旧仓又偏移到 `15eb676`（E2，见 §7），当前 `main` 以 §7 为准，冻结基线仍锁 `93900546`。
+本机 deploy key 只挂在新 fork 仓上；**但共享 GitHub MCP token 对旧仓也有 admin**（E2 即由此而来），所以旧仓禁写靠 §0 纪律 + MCP 写权限收口，不能只靠 SSH key。
 
 `terminalos.xml` 仍指 23.2 实验路线，交付线走 `terminalos-22.2.xml` + `pins-22.2.txt`；任何构建必须声明走哪条路线。
 
@@ -143,5 +144,31 @@ git push fork fork-work:main
 1. **归档旧仓**（GitHub Archive，owner 操作、可逆）→ 所有人只读；
 2. **bot 凭据换 fork-scoped fine-grained PAT**（当前 token 对旧仓有 admin，是真实可写通道）；
 3. 推送纪律见 §0；口头限定不单独使用。
-- 主机官必须在群里给出**确切推送通道与时间线**（临时 clone + https 凭据，还是 API/MCP token）；说不清按下一次冻结例外 E3 处理。
 - 归档与 token 轮换涉及用户 GitHub 账号，**待用户点头**后执行。
+
+### E2 关闭（2026-10-29）
+
+- **关闭条件已满足**：主机官已按首席要求在群里发出「【E2 通道说明 · 主机官，按首席要求提交】」——通道=团队共用 GitHub MCP contents API（`create_or_update_file`/`push_files`，token 用户 `GStarX`）；时间线=`591ef1d` 2026-10-27T17:00:12Z、`8d44fb7` 17:00:26Z、`93900546` 17:01:37Z（前两者为基线祖先）、`15eb676` 2026-10-28T16:24:16Z（唯一 E2 偏移）。
+- **GITHUB 只读核对**：旧仓 `main=15eb676`，父 `b1a50ad2`，唯一增量 `docs/14` +62/−0；`591ef1d...93900546` `ahead_by=2`；`93900546...15eb676` `ahead_by=5`；与群内说明一致；旧仓自 `15eb676` 后无新提交。
+- **结论：E2 关闭**。冻结基线仍锁 `93900546`；`15eb676` 只记偏移。E1/E2 均不重写历史。
+
+## 8. 共享 MCP token 写仓盘点（2026-10-29，首席交办）
+
+**范围**：token 用户 `GStarX`；`GET /user/repos` 可访问 **8 个仓库**（均为 public，均 `push=true`）：
+`Polaris-TerminalOS-fork`、`Polaris-TerminalOS`、`android_device_xiaomi_polaris`、`android_vendor_terminalos`、`android_packages_apps_TerminalHome`、`ios16_on_polaris_mix2s`、`MIX2S_LineageOS_17.1`、`Action-Build`。
+
+**近 7 天（2026-10-22 起）有推送活动的仓库**（`repo events` + `commits?since` 只读实测）：
+
+| 仓库 | 近 7 天活动 | 判定 |
+| --- | --- | --- |
+| `Polaris-TerminalOS-fork` | 本项目正常提交（E2 回收、D-25/D-27、evidence 等） | 正常写入口 |
+| `Polaris-TerminalOS` | 10-27 基线期推送；`93900546` 后偏移 `b1a50ad2`（E1）、`15eb676`（E2） | 已按 E1/E2 处置，禁写 |
+| `android_vendor_terminalos` | 10-27 初始化提交（author GStarX） | 项目正常初始化 |
+| `android_packages_apps_TerminalHome` | 10-27 初始化提交（author GStarX） | 项目正常初始化 |
+| `android_device_xiaomi_polaris` | 10-27 有分支推送记录；默认分支按 `commits?since=10-22` 未见新提交 | 项目正常初始化 |
+| `ios16_on_polaris_mix2s` | 10-24/25 推送；commit 作者为 `luuu20309`（非 token 用户） | 用户旧 iOS 项目，非本 token 误写 |
+| `MIX2S_LineageOS_17.1`、`Action-Build` | 无近 7 天活动 | — |
+
+**结论**：除 fork 与旧仓外，**没有第三个项目仓库被误写**；其余活动均为项目初始化或用户旧项目。
+
+**口径限制**：GitHub 对用户级账号不提供按 token 的审计日志；本盘点用「可访问仓库集合 + 仓库 push events + commit author」推断。API（MCP）提交与本地推送的 author 都可能显示 `GStarX`，无法逐条区分通道；要精确审计只能先做 ②（fork-scoped token）再观察。
