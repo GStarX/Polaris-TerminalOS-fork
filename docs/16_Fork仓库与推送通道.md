@@ -182,3 +182,8 @@ git push fork fork-work:main
 **结论**：除 fork 与旧仓外，**没有第三个项目仓库被误写**；其余活动均为项目初始化或用户旧项目。
 
 **口径限制**：GitHub 对用户级账号不提供按 token 的审计日志；本盘点用「可访问仓库集合 + 仓库 push events + commit author」推断。API（MCP）提交与本地推送的 author 都可能显示 `GStarX`，无法逐条区分通道；要精确审计只能先做 ②（fork-scoped token）再观察。
+## 8. 2026-10-29 validate 回归与修复
+
+D-27 引入 `local_manifests/terminalos-22.2-sha.xml` 后，`validate` 的 manifest 白名单**只认分支名**（`terminalos/lineage-22.2` 等），40 位 commit SHA 被拒，导致 16:45–16:52Z 连续 3 次 `failure`（run `40729024820`/`40729154832`/`40730206305`，失败步骤均为「校验 local manifest（XML 结构 + revision 白名单）」）。
+
+修复口径：白名单**按文件名分流**——`*-sha.xml` 的 `revision` 必须是 40 位小写 hex，且必须在 `pins-22.2.txt` 里出现（不一致即失败）；其余 manifest 仍只允许分支名。这样 D-27 的 SHA 锁定既不被旧规则否掉，也不会让任何 manifest 绕过校验。

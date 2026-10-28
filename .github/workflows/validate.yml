@@ -35,14 +35,33 @@ jobs:
           files = sorted(glob.glob('local_manifests/*.xml'))
           assert files, 'no local manifests found'
           allowed = re.compile(r'^(terminalos/lineage-22\.2|terminalos/lineage-23\.2|lineage-22\.2|lineage-23\.2)$')
+          # D-27: *-sha.xml locks the delivery line to 40-char commit SHAs; other manifests stay branch-only.
+          sha_re = re.compile(r'^[0-9a-f]{40}$')
+          pinned_shas = set()
+          try:
+              with open('local_manifests/pins-22.2.txt', encoding='utf-8') as fh:
+                  for line in fh:
+                      line = line.strip()
+                      if not line or line.startswith('#'):
+                          continue
+                      parts = line.split()
+                      if len(parts) >= 2:
+                          pinned_shas.add(parts[1])
+          except FileNotFoundError:
+              pinned_shas = set()
           for f in files:
+              sha_locked = f.endswith('-sha.xml')
               root = ET.parse(f).getroot()
               assert root.tag == 'manifest', f'{f}: root is not <manifest>'
               projects = root.findall('project')
               assert projects, f'{f}: no <project>'
               for p in projects:
                   rev = p.get('revision')
-                  assert rev and allowed.match(rev), f'{f}: unexpected revision {rev!r} for {p.get("name")}'
+                  if sha_locked:
+                      assert rev and sha_re.match(rev), f'{f}: revision must be a 40-char commit sha, got {rev!r} for {p.get("name")}'
+                      assert not pinned_shas or rev in pinned_shas, f'{f}: {p.get("name")} revision {rev[:12]} not in pins-22.2.txt'
+                  else:
+                      assert rev and allowed.match(rev), f'{f}: unexpected revision {rev!r} for {p.get("name")}'
                   assert p.get('path'), f'{f}: project {p.get("name")} has no path'
               print(f'OK {f}: {len(projects)} projects')
           PY
