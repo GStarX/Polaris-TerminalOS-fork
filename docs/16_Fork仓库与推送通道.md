@@ -3,6 +3,13 @@
 > 生效时间：2026-10-28。本文是"仓库写入口"的口径来源，取代此前"只能走 GitHub API 提交"的做法。
 > 修订：2026-10-28 第 2 版，修正文件计数、补"取云端版本"的副作用与待迁清单关闭状态、修正推送命令前提。
 
+## 0. 推送纪律（2026-10-29 首席决定，全员生效，置顶）
+
+1. **任何 push 前先跑 `git remote -v`**，确认目标仓库与分支；当前唯一写目标是 `GStarX/Polaris-TerminalOS-fork` 的 `main`（及经确认的交付分支）。
+2. 旧仓 `GStarX/Polaris-TerminalOS` **不得再有任何写入**（包括 revert 和"顺手修一下"）；冻结基线 `93900546`，已发生的偏移按 §6/§7（E1/E2）记录，不重写历史。
+3. 真机证据只进 fork。
+4. 违反本条造成的提交按下一次冻结例外（E3）记录，并在群里说明推送通道与时间线。
+
 ## 1. 仓库角色
 
 | 仓库 | 角色 | 规则 |
@@ -129,9 +136,11 @@ git push fork fork-work:main
 - `C:\AiWork` 下全部 clone（旧 clone、fork clone、tmp 下各 clone）都**没有**该 commit 对象；旧 clone 的 `legacy` push URL 仍是 `DISABLED` → 不是从这些 clone 经 SSH / legacy remote 推的；
 - 当前 token（用户 `GStarX`）对旧仓与 fork 都有 `admin`/`push` 权限（GitHub API `permissions` 实测），即 **API/MCP token 也能写旧仓**；具体通道待主机官确认（临时 clone + 本机 https 凭据，或 API/MCP）。
 
-**处置（按 E1 口径，待首席确认）**：旧仓保留历史、不重写；内容已逐字节回收进 fork（`fce6c31`，`docs/14` blob `243e3acd`，与旧仓同 blob）。冻结基线仍锁 `93900546`，`15eb676` 只是新偏移，不得当基线。
+**处置（首席 2026-10-29 决定）**：照 E1 口径，旧仓保留历史、不重写；内容回收 `fce6c31` 认可；冻结基线仍锁 `93900546`，`15eb676` 只是偏移，不得当基线。
 
-**防再发（待首席/用户定）**：
-1. 归档旧仓（GitHub Archive，owner 操作、可逆）→ 所有人只读，最彻底；
-2. 给 bot 用的 GitHub token 换成只授权 fork 的 fine-grained PAT（当前 token 对旧仓有 admin，是真实可写通道）；
-3. 主机官说明本次推送用的确切命令/通道；写 clone 只允许 `C:\AiWork\Polaris-TerminalOS-fork`。
+**防再发（首席选 ①+②；③不单独使用）**：
+1. **归档旧仓**（GitHub Archive，owner 操作、可逆）→ 所有人只读；
+2. **bot 凭据换 fork-scoped fine-grained PAT**（当前 token 对旧仓有 admin，是真实可写通道）；
+3. 推送纪律见 §0；口头限定不单独使用。
+- 主机官必须在群里给出**确切推送通道与时间线**（临时 clone + https 凭据，还是 API/MCP token）；说不清按下一次冻结例外 E3 处理。
+- 归档与 token 轮换涉及用户 GitHub 账号，**待用户点头**后执行。
