@@ -98,3 +98,57 @@ bash ~/ubuntu.sh -- git --version
 bash ~/ubuntu.sh -- apt-get update
 # 重启后复查：rootfs、启动器、APT、网络，以及 R1/R2 的属主与标签
 ```
+## 9. 命令回填（2026-11-01）
+
+### 9.1 已验证、可直接执行的命令
+
+```sh
+# 属主/权限（R1）：dpkg 解包类安装后必须立刻做
+chown -R u0_a184:u0_a184 /data/data/com.termux
+chmod 700 /data/data/com.termux
+chmod 771 /data/data/com.termux/files
+chmod 700 /data/data/com.termux/files/usr
+chmod 700 /data/data/com.termux/files/home
+
+# 属主/权限与标签抽查（R3）
+ls -ld  /data/data/com.termux /data/data/com.termux/files \
+        /data/data/com.termux/files/usr /data/data/com.termux/files/home
+ls -ldZ /data/data/com.termux /data/data/com.termux/files \
+        /data/data/com.termux/files/usr /data/data/com.termux/files/home
+
+# 单路径标签修正（R2，禁止 -R）
+chcon u:object_r:app_data_file:s0:c184,c256,c512,c768 <path>
+
+# 重启前后检查（R3-④/R4）
+logcat -b events -d | grep -i pm_critical_info
+
+# 启动与组件复核（首席实测通过）
+ls -l ~/ubuntu.sh
+bash ~/ubuntu.sh -- cat /etc/os-release
+bash ~/ubuntu.sh -- node -v
+bash ~/ubuntu.sh -- git --version
+bash ~/ubuntu.sh -- apt-get update
+```
+
+### 9.2 待首席回填的原始命令
+
+以下步骤已在设备上执行并通过，但**原始命令行文本**尚未回填，本文不臆造：
+
+| 步骤 | 状态 |
+| --- | --- |
+| TUNA 下载 `ubuntu-base-26.04.1-base-arm64.tar.gz` 的完整命令 | 待回填 |
+| rootfs 解压到 `~/ubuntu-26.04` 的命令 | 待回填 |
+| proot 安装方式（`pkg install proot` 还是 `dpkg-deb -x` 解 Termux 包） | 待回填（属主事故即出在此步） |
+| TUNA apt 源的写入方式 | 待回填 |
+| `~/ubuntu.sh` 启动器内容 | 待回填 |
+
+## 10. 重启验收记录（2026-10-31，首席实测）
+
+| 检查项 | 结果 |
+| --- | --- |
+| rootfs 重启后仍存在 | ✅ `~/ubuntu-26.04` 887 MB |
+| 启动器重启后仍存在 | ✅ `~/ubuntu.sh` |
+| uptime 确认真的重启 | ✅ 64 s |
+| `pm_critical_info` prepare 失败 | ✅ 无 |
+| apt / 网络 | ✅ TUNA HTTPS 正常 |
+| 数据丢失 | ✅ 无 |
