@@ -1,2 +1,4 @@
 # F01 证据必须按原字节入库（报告里的 sha256 是判据依据），禁止换行归一化。
 F01_evidence_2026-10-29.txt -text
+# 候选清单按原字节入库（报告里的 sha256 是判据依据）。
+SLIM_CANDIDATES_C_O5.md -text
