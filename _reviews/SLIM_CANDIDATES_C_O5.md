@@ -27,15 +27,32 @@
 
 **证据强度声明（必须先讲清）**：包名、数量、分层比例来自**设备实测**；每个包「作用/依赖/删了会坏什么」来自 Android 15 平台结构 + 上游 `mk` 交叉，**未逐包在设备上验证**。所以 B 档不是保守，是**尚未证伪**——A 档也必须过一遍 T 项才能记为完成。
 
-**命名层必须分开，否则禁删名单会写错**（GITHUB 的红线更正只对了一半）：
+**命名层必须分开，否则禁删名单与 filter-out 都会写错**（GITHUB 只说了「TrebuchetQuickStep」，那是模块名；设备层必须写包名）：
 
-| 上游模块名 | 设备实际包名 |
-| --- | --- |
-| `TrebuchetQuickStep` / `TrebuchetQuickStepGo` | **`com.android.launcher3`**（Trebuchet 沿用 Launcher3 包名） |
-| `LineageSettingsProvider` | `org.lineageos.lineagesettings` + `lineageos.platform` |
-| `LineageParts` | `org.lineageos.lineageparts` |
-| `LineageBlackTheme` | `org.lineageos.overlay.customization.blacktheme` |
-| `ThemePicker` / `ThemesStub` | `com.android.customization.themes` |
+| 上游模块名 | 设备实际包名 | 来自哪份 product |
+| --- | --- | --- |
+| `TrebuchetQuickStep` / `TrebuchetQuickStepGo` / `TrebuchetOverlay` | `com.android.launcher3` / `com.android.launcher3.overlay` / `com.android.launcher3.auto_generated_rro_product__` | `common_mobile.mk` |
+| `LatinIME` | `com.android.inputmethod.latin` | `common_mobile.mk` |
+| `AvatarPicker` | `com.android.avatarpicker` | `common_mobile.mk` |
+| `Backgrounds` | `org.lineageos.backgrounds` | `common_mobile.mk` |
+| `Glimpse` | `org.lineageos.glimpse`（+ `org.lineageos.glimpse.frameworksbaseoverlay`） | `common_mobile.mk` |
+| `QuickAccessWallet` | `com.android.systemui.plugin.globalactions.wallet` | `common_mobile.mk` |
+| `ThemePicker` / `ThemesStub` | `com.android.customization.themes` | `common_mobile.mk` |
+| `LineageBlackTheme` | `org.lineageos.overlay.customization.blacktheme` | `common_mobile.mk` |
+| `IconPack*Overlay`（24 个） | `com.android.theme.icon_pack.{filled,rounded,circular,kai,sam,victor}.{android,launcher,settings,systemui}` | `common_mobile.mk` |
+| `IconShape*Overlay`（7 个） | `com.android.theme.icon.{teardrop,vessel,pebble,roundedrect,square,squircle,taperedrect}` | `common_mobile.mk` |
+| `Jelly` / `ExactCalculator` | `org.lineageos.jelly` / `com.android.calculator2` | `common.mk` |
+| `LineageParts` / `LineageSettingsProvider` / `SimpleSettingsConfig` | `org.lineageos.lineageparts` / `org.lineageos.lineagesettings` + `lineageos.platform` / `org.lineageos.settingsconfig` | `common.mk` |
+| `LineageSetupWizard` / `Updater` | `org.lineageos.setupwizard` / `org.lineageos.updater` | `common.mk` |
+| `Camelot` / `Etar` / `Twelve` / `Recorder` / `Profiles` / `Seedvault` | `org.lineageos.camelot` / `org.lineageos.etar` / `org.lineageos.twelve` / `org.lineageos.recorder` / `org.lineageos.profiles` / `com.stevesoltys.seedvault` | `common_mobile_full.mk` |
+| `Aperture`（受 `PRODUCT_NO_CAMERA` 控制）/ `AudioFX`（受 `TARGET_EXCLUDES_AUDIOFX` 控制） | `org.lineageos.aperture` / `org.lineageos.audiofx` | `common_mobile_full.mk` |
+| `FontLatoOverlay` / `FontRubikOverlay` | `org.lineageos.overlay.font.lato` / `org.lineageos.overlay.font.rubik` | `common_mobile_full.mk`（`external/google-fonts`） |
+| `messaging`（telephony.mk 小写模块） | `com.android.messaging` | `telephony.mk`（未逐字核，待补） |
+
+**来源链已逐文件核实**（原始 mk，非转述）：
+`terminalos_polaris.mk:19 → lineage_polaris.mk:10 → vendor/lineage/config/common_full_phone.mk → common_mobile_full.mk → common_mobile.mk → common.mk`，另 `lineage_polaris.mk:7 → device.mk`。
+
+**三个包的来源未定位**（复核官的「不进首批」直接适用）：`com.android.deskclock`、`com.android.gallery3d`、`com.google.android.apps.googlecamera.fishfood` **不在** `common.mk` / `common_mobile.mk` / `common_mobile_full.mk` / `common_full_phone.mk` 任何一份的 `PRODUCT_PACKAGES` 里。剩余两个可能来源本地没有仓，未核：`device/xiaomi/sdm845-common/sdm845.mk`（`device.mk:41` 继承）与 `vendor/xiaomi/polaris/polaris-vendor.mk`（`device.mk:12` 继承，blob 预置）。→ 镜像层不批；设备层可删，但 `fishfood` 属相机包，删前先确认 Aperture 不受影响。
 
 镜像层写模块名，设备层写包名。两边混写会让 `pm` / `filter-out` 都对不上。
 
@@ -52,6 +69,21 @@
 cmd package install-existing <包名>     # 恢复 uninstall --user 0
 pm enable <包名>                        # 恢复 disable-user
 ```
+
+### 1.1 两个口径不能混记（设备层 ≠ 镜像层首批）
+
+| 口径 | 范围 | 判据 | 执行 |
+| --- | --- | --- | --- |
+| 设备层 | A 档 43 条（§2） | §5「设备层」5 条 | 首席，adb |
+| 镜像层首批 | 复核官裁定 5 组：`Jelly`、`ExactCalculator`、`Glimpse`(+overlay)、`LineageBlackTheme`、`QuickAccessWallet` | §5「镜像层」4 条 + 复核官 4 条硬判据 | 主机官写 mk，需 runner 构建 |
+
+两者不是同一份清单：设备层删了不减镜像，镜像层才能永久精简。验收账必须分开记。
+
+**filter-out 三条硬事实（读上游 mk 原文所得，直接影响写法）**
+
+1. `TrebuchetOverlay` 是**独立模块**（`common_mobile.mk`）——删桌面必须 `TrebuchetQuickStep` + `TrebuchetOverlay` 一起 filter-out，只删前者会留下 overlay 校验失败。
+2. `common.mk` 里有 `$(call enforce-product-packages-exist-internal, ..., product_manifest.xml rild Calendar Launcher3 Launcher3Go Launcher3QuickStep Launcher3QuickStepGo ...)`：这些名字被**豁免**存在性校验，所以 filter-out 桌面不会被它拦住；但该校验本身存在，任何新增删除都要先过。
+3. `common.mk` 有 `PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/lineage/overlay/no-rro` 与 `vendor/crowdin/overlay`——佐证复核官第 2 条：RRO 的 target 删了而 overlay 留着，会触发 RRO 校验失败。
 
 ## 2. A 档 · 安全删（建议首批执行）
 
@@ -152,7 +184,7 @@ pm enable <包名>                        # 恢复 disable-user
 
 RRO 专组统一回退：`cmd package install-existing <包名>`。**每次只删 1 个 RRO**，删完切一次主题、重启一次、看一次桌面与系统界面，再动下一个。
 
-
+## 4. C 档 · 禁删（红线）
 
 **框架与核心**：`android`、`android.ext.shared`、`android.ext.services`、`lineageos.platform`、`com.android.systemui`、`com.android.settings`、`com.android.settings.intelligence`、`com.android.webview`、`com.android.shell`、`com.android.packageinstaller`、`com.android.permissioncontroller`、`com.android.keychain`、`com.android.certinstaller`、`com.android.inputdevices`、`com.android.location.fused`、`com.android.statementservice`、`com.android.role.notes.enabled`、`com.android.modulemetadata`（暂列）
 
