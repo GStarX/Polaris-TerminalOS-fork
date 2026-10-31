@@ -75,3 +75,28 @@
 - 设备侧 `npm i -g` 的实际结果、node-pty 是否需要现编、sherpa-onnx 是否可用；
 - 锁任务（kiosk）模式下 Termux 侧 `am start` 的权限；
 - 查看器 App 尚未实现，五步验收链路未跑过。
+## 8. 安装与启动实测（2026-11-01，首席上报；GITHUB 未独立复核）
+
+| 项 | 实测值 |
+| --- | --- |
+| 安装方式 | `npm i -g @deepseek-ai/dsh@0.2.1-rc.5`（Ubuntu 26.04.1 proot 内） |
+| 包数量 / 耗时 | **621 个包 / 约 1 分钟** |
+| 版本自检 | `dsh --version` 正常；`dsh web --help` 正常 |
+| 启动命令 | `dsh --profile web --host 127.0.0.1 --port 8899 --no-open` |
+| **首启耗时** | **约 75 秒**（前约 60 s CPU 忙，之后才监听） |
+| 启动日志 | `dsh web: http://127.0.0.1:8899/?token=<redacted>` |
+| token 落盘 | `/data/local/tmp/dsh/url.txt`；**每次启动 token 都变**，查看器每次必须读新鲜的 |
+| 跨侧访问验证 | Android 侧 `curl` 带 token → **200 / 37,971 B / `<title>DeepSeek Harness</title>`** |
+| 常驻性 | proot + node 进程持续存活 |
+
+由此定两条工程约束：
+1. **就绪等待上限 ≥120 s**，按 30 s 超时会误判启动失败（首启 75 s）。
+2. **token 是动态的**：查看器不得缓存上一次的 URL；每次由 Termux 侧从 `url.txt` 取最新值经 intent 传入。
+
+安全：`url.txt` 含有效 token，属敏感文件——**不入库、不贴群、不写进任何文档**；建议其权限收紧到 600（待主机官在脚本里落实，本文不作"已落实"）。
+
+## 9. 未验证清单更新
+
+- ✅ 已关闭：设备侧 `npm i -g` 结果（见 §8，621 包 / 1 分钟 / 命令自检通过）。
+- ❓ 仍未单独核实：`node-pty` 是走预编译还是现编（安装 1 分钟内完成，未见编译失败，但没单独查证）、`sherpa-onnx` 实际可用性。
+- ❓ 仍未验证：锁任务模式下 Termux 侧 `am start` 权限、查看器 App 五步验收链路、页面内登录后 token/会话行为。
