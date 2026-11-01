@@ -11,6 +11,10 @@
     用户授权「只改自己账号下的仓库，不动上游」。为此本条交付线的两处构建输入改指自有 fork：
       - frameworks/base  -> GStarX/android_frameworks_base（terminalos/lineage-22.2，起点 e1d69875）
       - kernel/xiaomi/sdm845 -> GStarX/android_kernel_xiaomi_sdm845（terminalos/lineage-22.2，起点 aa8adfe9）
+      - vendor/terminalos -> GStarX/android_vendor_terminalos-fork（terminalos/lineage-22.2，起点 d4559c3）
+        注意：仓库名带 -fork 后缀。此前写成 android_vendor_terminalos 会按 remote 解析到**旧仓**，
+        以后 terminalos.mk 的 filter-out 改动落在 fork 上、构建却从旧仓取 vendor，会「改了没生效」。
+        分支名与 commit 不变（d4559c3），所以本条同样不改变源码内容。
     两个 fork 的起点 commit 与上游 lineage-22.2 **完全相同**，所以本条变更不改变任何源码内容，
     只改变「从哪里取」，为 S/SS/Z（framework）与 K（kernel defconfig）裁剪提供可写落点。
     frameworks/base 在上游 default.xml 里已注册为 LineageOS/android_frameworks_base，
@@ -31,7 +35,7 @@
              path="device/xiaomi/polaris"
              remote="terminalos"
              revision="terminalos/lineage-22.2" />
-    <project name="android_vendor_terminalos"
+    <project name="android_vendor_terminalos-fork"
              path="vendor/terminalos"
              remote="terminalos"
              revision="terminalos/lineage-22.2" />
