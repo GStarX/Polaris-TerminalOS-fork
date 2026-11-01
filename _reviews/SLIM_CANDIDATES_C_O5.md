@@ -129,6 +129,44 @@ pm enable <包名>                        # 恢复 disable-user
 | `org.calyxos.backup.contacts` | 联系人备份 | 同上 |
 | `com.android.sharedstoragebackup` | 共享存储备份 | 备份范围缩小 |
 
+### 2.1 执行进度与剩余批次（截至 2026-11-01，首席设备实测）
+
+**已删 16 项（系统包 228 → 212，重启后保持）**，与本文档的对应关系：A 档 15 项 + §3A 的 RRO 1 项（`blacktheme`）。
+
+```
+org.lineageos.camelot                        com.android.egg
+com.android.calculator2                      com.android.printspooler
+org.lineageos.glimpse                        com.android.dreams.basic
+org.lineageos.overlay.customization.blacktheme   com.android.dreams.phototable
+com.android.printservice.recommendation      com.android.bips
+com.android.hotwordenrollment.okgoogle       com.android.hotwordenrollment.xgoogle
+com.android.cts.ctsshim                      com.android.cts.priv.ctsshim
+com.android.companiondevicemanager           com.android.bluetoothmidiservice
+```
+
+**剩余 A 档 28 项**（按包计；`globalactions.wallet` 已移出，见下）：
+
+| 批次 | 内容 | 数量 | 说明 |
+| --- | --- | --- | --- |
+| **第 1 批** | `simappdialog`、`htmlviewer`、`calllogbackup`、`backupconfirm`、`wallpaperbackup`、`virtualmachine.res`、`uwb.resources`、`sharedstoragebackup` | 8 | 纯系统管线，无可见功能变化 |
+| **第 2 批** | `devicelockcontroller` + `org.lineageos.glimpse.frameworksbaseoverlay` | 1+1 | 前者基线里本就 disabled；后者因 `glimpse` 主包已删成孤儿 |
+| **第 3 批** | `gallery3d`、`DeviceAsWebcam`、`avatarpicker`、`backgrounds`、`fishfood`、`internal.display.cutout.emulation.*`（5 个） | 10 | 有可见影响，逐项抽验；删 `gallery3d` 后设备将**没有图库**（`glimpse` 已删） |
+| **冻结** | `jelly`（默认浏览器）、`deskclock`、`recorder`、`audiofx`、`twelve`、`etar`、`messaging`、`seedvault`、`calyxos.backup.contacts` | 9 | 功能类，等用户/首席决定 |
+
+**改判**：`com.android.systemui.plugin.globalactions.wallet`（模块 `QuickAccessWallet`）从 A 档降为 **B 档**——它是 SystemUI 动态插件，删了不一定崩但属系统组件，先进设备层批次。接受 GITHUB 的提醒。
+
+**批次执行强化（针对已查明的根因：删完立刻重启、状态未落盘）**：
+
+```
+adb root
+adb shell 'pm uninstall --user 0 <pkg1>; pm uninstall --user 0 <pkg2>; ...'
+adb shell sync                                   # 强制刷盘，补上「等 10s」之外的保险
+adb shell stat -c '%y %n' /data/system/users/0/package-restrictions.xml
+adb shell dumpsys package <pkg> | grep -A3 'User 0'   # 期望 installed=false
+adb reboot
+# 启动后复验：--user 0 查不到、-u -s 仍能查到、锁任务/HOME 正常
+```
+
 ## 3. B 档 · 需测（每条单独动、单独回归）
 
 | 包名 | 作用 | 风险点 / 测什么 |
