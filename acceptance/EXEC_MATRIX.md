@@ -47,11 +47,11 @@ Phase 5：T14、T15
 ### 1.1 静态预检夹具
 
 ```bash
-# 全部检查（当前结果：11 项检查 / 126 条断言 / 0 失败）
+# 全部检查（当前结果：11 项检查 / 131 条断言 / 0 失败）
 python acceptance/static_checks.py --root C:\AiWork\Polaris-TerminalOS-repos
 # 单跑某一项，如 PIN 安全
 python acceptance/static_checks.py --root C:\AiWork\Polaris-TerminalOS-repos --check S05 --verbose
-# 变异自检：注入 11 个真实缺陷，要求全部由 PASS 变 FAIL（当前 11/11 检出）
+# 变异自检：注入 12 个真实缺陷，要求全部由 PASS 变 FAIL（当前 12/12 检出）
 python acceptance/static_checks.py --root C:\AiWork\Polaris-TerminalOS-repos --mutation-test
 # 存证：--log 由脚本写 UTF-8（不要用 PowerShell 重定向，会写成 UTF-16）
 python acceptance/static_checks.py --root C:\AiWork\Polaris-TerminalOS-repos --verbose \
@@ -66,22 +66,22 @@ python acceptance/static_checks.py --root C:\AiWork\Polaris-TerminalOS-repos --v
 | S04 | T10 | `onResume` 调用判定、8 s 阈值比较、**else 分支真实调用** `recordLaunchFailed`、启动成功记录起点、启动前必须过限流 | 不能证明 onResume 时序与 Termux 崩溃路径，需实机 force-stop 演练 |
 | S05 | T13 | PBKDF2WithHmacSHA256、16 B salt、120000 次、`MessageDigest.isEqual`、4–12 位数字、无明文 `putString`、派生值清零、`commit()` 落盘、NOT_SET 语义 | 未证明 PBKDF2 在目标 ROM 可用；需实机设置/校验/重启后校验 |
 | S06 | T13/T19 | 退出锁定先要求 PIN 并先验证、PIN 回调内才执行、退出锁任务 + 进维护模式、手动重试重置窗口、改 PIN 验旧、7 击入口与超时重计 | 界面交互、PIN 对话框、锁任务下能否打开维护页需实机 |
-| S07 | T03/T04/T06/T18 | 非 DO 直接返回不 `startLockTask`、`attempted=false` 不伪装、白名单含自身+Termux、三个基础特性位、QUICK_SETTINGS 反射+被拒回退、`addPersistentPreferredActivity` + HOME 过滤、非 DO 不接管 HOME | DPM 真实授权、SYSTEM_SUPERVISION 角色、反射隐藏 API 是否放行需实机 |
+| S07 | T03/T04/T06/T18 | 非 DO 直接返回不 `startLockTask`、`attempted=false` 不伪装、白名单含自身+Termux、三个基础特性位、**未启用 OVERVIEW（防逃逸）**、QUICK_SETTINGS 反射+被拒回退、`addPersistentPreferredActivity` + HOME 过滤、非 DO 不接管 HOME | DPM 真实授权、SYSTEM_SUPERVISION 角色、反射隐藏 API 是否放行需实机 |
 | S08 | T05/T06 | `config_showNavigationBar=false`、`PRODUCT_PACKAGES` 含 TerminalHome/Termux、overlay 路径、产品继承与 `PRODUCT_NAME` | overlay 是否被链接、手势提示条表现需构建产物 + 实机；23.2 白名单条需同步后复查（当前 SKIP 原因见 §0.3） |
 | S09 | T02/T20 | BootReceiver 重置/清维护模式/记录时间/不启 Activity、first_boot.sh 幂等与原子标记、无 rm -rf、无 pm/am 安装、始终 exit 0、Termux presigned + 跳过 preopt、fetch 脚本 SHA256/大小双校验且与 `.sha256` 文件一致 | `first_boot.sh` 尚未接入任何开机流程；Termux 首次启动与数据幂等需实机 |
 | S10 | 构建前置 | Java/manifest 的 `R.*`/`@xxx/yyy` 引用全部存在；全部 XML 语法合法 | 不能替代 Soong 编译，只抓引用级错误 |
 | S11 | 构建前置 | 占位符索引连续 1..N、全为位置参数、`getString`/`String.format` 实参个数匹配 | 不能替代 lint/编译，只抓数目/位置参数错配 |
 
 **证据**
-- 基线：`acceptance/_evidence/2026-10-28_static_checks_baseline.txt`（11 项 / 126 断言 / 0 失败）
-- 变异：`acceptance/_evidence/2026-10-28_static_checks_mutation.txt`（11 个变异 / 11 检出 / 0 漏检）
+- 基线：`acceptance/_evidence/2026-11-01_static_checks_baseline.txt`（11 项 / 131 断言 / 0 失败；2026-11-01 加入 S07 OVERVIEW 断言后重跑；10-28 版保留作历史）
+- 变异：`acceptance/_evidence/2026-11-01_static_checks_mutation.txt`（12 个变异 / 12 检出 / 0 漏检；10-28 版为 11 个变异，保留作历史）
 
 ### 1.2 A 类剩余可做项（未做，限期到 Phase 3 前）
 
 | ID | 动作 | 判据 |
 | --- | --- | --- |
 | A-01 | 23.2 树（device `d124800`/vendor `9a5d532`/home `ccedcc4`）同步后复跑 `S01–S11`，重点看 `S08` 的 `config_allowedSupervisionRolePackages` 断言 | 11 项全 PASS，且 `S08` 无 SKIP |
-| A-02 | 对 23.2 树重跑 `--mutation-test`（锚点文本可能因分支差异失效，失效则更新锚点，不得删检查） | 11/11 检出 |
+| A-02 | 对 23.2 树重跑 `--mutation-test`（锚点文本可能因分支差异失效，失效则更新锚点，不得删检查） | 12/12 检出 |
 | A-03 | 用 `aapt2` 能解析的静态方式预检 manifest（若构建机上已有 aapt2，B 段第 1 步顺手做） | 见 §3 B-01 |
 
 ### 1.3 A 类不能替代的（说清楚，防止假通过）
@@ -128,13 +128,15 @@ python acceptance/static_checks.py --root C:\AiWork\Polaris-TerminalOS-repos --v
 - **判据（通过）**：Home 后前台只可能是 TerminalHome（允许列表内 HOME），不能进入 Launcher3/其它应用；返回手势不能把 Termux 之外的应用带到前台；`mLockTaskModeState` 非 `NONE`。
 - **判据（失败）**：任一动作进入普通桌面/设置/最近任务；`mLockTaskModeState=NONE` 却显示"已锁定"（伪装）。
 - **反例校验**：只在"没有其它可切换应用"的情况下观察 Home 不算通过——必须确认 Launcher3QuickStep 仍存在且被抑制（`pm list packages | grep launcher` 有包，但 Home 不落到它）。
-- **替代验证**：S07（DO 门禁、白名单、特性位、非 DO 不伪装）。**盲区**：DPM 真实授权与 HOME 解析。
+- **批次回归**：A1/A3（§6）任一红则 T03 直接判失败，不必再试按键。
+- **替代验证**：S07（DO 门禁、白名单、特性位、OVERVIEW 未启用、非 DO 不伪装）。**盲区**：DPM 真实授权与 HOME 解析。
 
 ### T04 最近任务 —— 分类 C（DO）
 
 - **动作**：`adb shell input keyevent KEYCODE_APP_SWITCH`（187）→ 截图 → `adb shell dumpsys activity recents | head -40`；再 `adb shell am start -n com.android.settings/.Settings` 试探能否离开（应被锁任务拦截）；`adb shell input keyevent BACK` 多次。
 - **判据（通过）**：最近任务界面不可用或被限制在允许列表内，无法切到非授权应用；Settings 不能进入或进入后被立即拉回。
 - **判据（失败）**：能切到 Settings/Launcher/其它应用；或最近任务里出现 Termux 之外的应用并可切换。
+- **批次回归**：A1 必须为 7 且**不含 OVERVIEW 位 8**（§6）；出现 8 直接判"最近任务可逃逸"。
 - **替代验证**：S07（未开启 `LOCK_TASK_FEATURE_OVERVIEW`）。**盲区**：实际任务栈行为。
 
 ### T05 底部导航 —— 分类 D（overlay 需要构建产物）
@@ -157,6 +159,7 @@ python acceptance/static_checks.py --root C:\AiWork\Polaris-TerminalOS-repos --v
 - **关键诊断（必须记录，决定归因）**：logcat 是否出现 `探测到 Android 16 锁任务快捷设置特性位`：
   - 出现 → 反射成功，问题在角色/系统策略；
   - 出现 `当前系统没有 LOCK_TASK_FEATURE_QUICK_SETTINGS 字段` → **隐藏 API 反射被限制或系统版本不符**，这是实现问题，不是设备问题，需换实现方案（不能记"设备不支持"结案）。
+- **批次回归**：A1/A2（§6）。22.2 期望 `mFlags=7`；23.2 且角色获批期望 `mFlags=135`（7=基础三特性、128=QUICK_SETTINGS）；被拒回退为 7 时 logcat 必须有拒绝记录，否则判"静默回退"失败。
 - **替代验证**：S07（反射+回退结构）、S08（23.2 白名单）。**盲区**：角色授予、系统策略、隐藏 API 可达性。
 
 ### T07 亮度 —— 分类 C/D
@@ -277,6 +280,7 @@ B 类**不能**判 T01–T20 任何一项通过；只用于"产物里确实带�
 - **动作**：在 Termux 前台下拉通知面板（若与快捷设置同一手势，记录是哪个层级）；`adb shell dumpsys notification | head -40`；截图；尝试从通知点击进入 Settings（应不能离开锁定）。
 - **判据**：面板行为（允许/禁止/受限）被**明确记录**，且不与锁定冲突（不能借此离开终端）。
 - **失败判据**：能借通知进入设置/其它应用；或面板导致 SystemUI 崩溃。
+- **批次回归**：A1/A2 缺 `NOTIFICATIONS`（2）时面板必然拉不下来，直接判失败并归因"特性被精简裁掉"（§6）。
 - **替代验证**：S07（`LOCK_TASK_FEATURE_NOTIFICATIONS` 已开启、无 OVERVIEW）。**盲区**：真实面板层级与点击路径。
 
 ### T18 Device Owner 持久性 —— 分类 C/D
@@ -284,6 +288,7 @@ B 类**不能**判 T01–T20 任何一项通过；只用于"产物里确实带�
 - **动作**：`adb shell dumpsys device_policy | sed -n '/Device Owner/,+8p'` 记录；`adb reboot`；再记录；检查锁定状态（`dumpsys activity activities | grep -i LockTask`）与维护界面"Device Owner：是"；可选：升级（T14）后再记录。
 - **判据**：重启、升级后 DO 身份与锁定/白名单配置保持；状态行不显示"未启用（非 Device Owner）"。
 - **失败判据**：重启后 DO 丢失；或显示 DO 但锁任务未生效（伪装）。
+- **批次回归**：重启后再跑 A1/A3（§6），DO 保持 + 特性位仍为登记值，才算"精简没有破坏持久性"。
 - **替代验证**：S07。**盲区**：系统对 DO 的持久化与升级迁移。
 
 ### T19 维护模式闭环 —— 分类 C/D
@@ -365,7 +370,67 @@ adb exec-out screencap -p > screencap-01.png
 4. 锁任务内打开系统设置/维护页是否被 `stopLockTask` 时序挡住，只有实机能测（T19 风险点）。
 5. 隐藏 API 反射（`LOCK_TASK_FEATURE_QUICK_SETTINGS`）在目标 ROM 上是否放行未验证；这是 T06 的**首要未验证假设**，已写入判据与 logcat 诊断关键字。
 
-## 6. 工单映射（给首席排期用）
+## 6. 精简批次回归门槛（A1–A3，每批删包后必跑）
+
+> 来源：注入官 `_reviews/TERMUX_INPUT_CONFIG_CANDIDATE.md` §8.4（2026-11-01 输入层结项时定稿），首席 2026-10-29/11-01 真机基线。测试官把它并进验收矩阵，并**按 ROM 基线登记期望值**——否则"精简"裁掉 HOME/NOTIFICATIONS 特性后会静默失去退出后路与输入法切换能力。
+
+### 6.1 三条机器可判断言
+
+```sh
+# A1) 系统侧实际特性位（服务名是 dumpsys activity；`dumpsys locktask` 不存在）
+adb shell dumpsys activity | grep -i -A2 'LockTaskPolicy'
+#    22.2 基线期望：mFlags=7 = SYSTEM_INFO(1) | NOTIFICATIONS(2) | HOME(4)
+
+# A2) 应用侧下发的特性集合（证明"应用想开的"和"系统实际收下的"一致）
+adb logcat -d -s TerminalHome.Kiosk:V | grep '锁任务特性已启用'
+#    期望：SYSTEM_INFO | NOTIFICATIONS | HOME
+
+# A3) 退出后路：从 Termux 按 Home 必须回到 TerminalHome
+adb shell dumpsys activity | grep -i 'mLockTaskModeState'   # 期望 LOCKED
+adb shell dumpsys activity activities | grep -i home
+#    判据：能定位到 home 目标 = org.terminalos.terminalhome；同时 mLockTaskModeState=LOCKED
+```
+
+- **A1 与 A2 必须同时绿**：只有 A2 绿 = 应用下发被系统改写（可能是被拒后回退）；只有 A1 绿而 logcat 无记录 = 证据链不完整（logcat 被清或进程被杀），不能判通过。
+- A1 位值含义（AOSP `DevicePolicyManager.LOCK_TASK_FEATURE_*`）：`SYSTEM_INFO=1`、`NOTIFICATIONS=2`、`HOME=4`、**`OVERVIEW=8`（出现即"最近任务可逃逸"）**、`GLOBAL_ACTIONS=16`、`KEYGUARD=32`、`QUICK_SETTINGS=128`（仅 23.2）。
+- A3 的 dumpsys 字段名/格式随版本可能不同（`#0 home=` / `RootTask #0` 等），以当次原始输出为准，把该行原文抄进证据；判据是"能定位到 home 目标组件"，不是"必须出现某个固定前缀"。**此格式我侧未独立验证（未验证项 U1）。**
+
+### 6.2 期望值按 ROM 基线登记（禁止跨基线混判）
+
+| 基线 | 代码下发集合 | 期望 `mFlags` | 备注 |
+| --- | --- | --- | --- |
+| 22.2 / Android 15（当前零构建交付） | 7（无 QUICK_SETTINGS 位，反射探测不到） | **7** | 首席 2026-10-29 实测基线 `mFlags=7` + `LOCKED` |
+| 23.2 / Android 16 且 SYSTEM_SUPERVISION 角色获批 | 7 \| 128 = 135 | **135** | 若被拒会回退为 7，此时 logcat 必须有拒绝记录；T06–T08 判"未通过"，不是回归 |
+| 23.2 但角色未获批 | 7（回退路径） | **7** + 拒绝日志 | 缺拒绝日志 → 判"静默回退"失败 |
+
+A1 判据是"**等于登记值**"，不是 `≥7`：多出 8/16/32 都是回退；135/7 必须按构建基线选取，跨基线比较判无效。
+
+### 6.3 每批必跑的五步门槛（首席执行，测试官供清单）
+
+1. **批次记录**：`adb shell pm list packages | wc -l`（前后各一次）、批次号、时间、ROM/基线。
+2. **A1 + A2 + A3**：三条都绿才继续下一批；任一红 → 立即回滚该批、记失败，**不得记成通过**。
+3. **锁屏状态**：`locksettings get-disabled` 期望 `true`，回退命令 `locksettings set-disabled false` 写进批次记录。
+4. **内存基线**：重启后静置 5–10 分钟再采（`dumpsys meminfo` / `cat /proc/meminfo`）；刚开机快照不能用于归因（首席 11-01 已踩过该坑）。
+5. **证据**：`commands.txt`（三条命令原样输出）+ `pkg-count.txt`；失败附 `reason.txt` 与回滚记录；目录命名沿用 §5.1。
+
+### 6.4 门槛与 T 项判定的关系（门槛 ≠ 通过）
+
+- A1 是 T03/T04 的**最早失败门槛**：缺 4 或出现 8，可直接判 T03/T04 失败；但 A1 绿**不能**代替按键试验。
+- A1/A2 是 T17 前置：缺 NOTIFICATIONS(2) 时通知面板拉不下来，判失败并归因"特性被裁"。
+- A3 是 T03/T05/T19 的退出后路门槛：A3 红时任何"锁任务已生效"的结论都不成立。
+- 三条全绿 ≠ 对应 T 项通过：行为判定仍按 §2 执行卡。
+
+### 6.5 静态对应（可变异验证）
+
+`S07` 已加断言「未启用 OVERVIEW（防最近任务逃逸）」，并新增变异 M12（把 `| LOCK_TASK_FEATURE_OVERVIEW` 加进 `baseFeatures`）验证断言会红：12/12 检出。它只证明**代码没写下发 OVERVIEW**，不证明系统实际位值——A1 仍是唯一系统侧证据。
+
+### 6.6 未验证项
+
+- **U1**：A3 的 dumpsys 字段/格式未在我侧独立验证（设备输出只有首席可见）；首次执行时把原始行抄进证据。
+- **U2**：A2 依赖 TAG `TerminalHome.Kiosk` 与中文日志文本；若日志文案改动会失效，届时改为按"锁任务特性已启用"语义行匹配，**不得删断言**。
+- **U3**：每批"包数前后差 = 本批删除数"未验证（可能存在依赖连带卸载/重装），差异必须记入批次记录，禁止静默。
+
+## 7. 工单映射（给首席排期用）
 
 | 用例 | 阶段 | 前置工单 | 阻塞原因 |
 | --- | --- | --- | --- |
@@ -376,7 +441,10 @@ adb exec-out screencap -p > screencap-01.png
 | T14 | Phase 5 | P5-02/P5-03 | 构建 + 一次真实 OTA |
 | T15 | Phase 0/5 | P0-01..05 | 设备 |
 | T20 | Phase 2 | 需先接入 first_boot（P2-06 设计） | 实现缺失 |
+| 精简批次（每批删包） | 当前（零构建阶段） | 方案甲 SLIM 清单 + 首席执行 | 每批必跑 §6 A1–A3 + 内存基线；任一红即回滚 |
 
 ---
 
-**变更记录**：2026-10-28 测试官创建；把 T01–T15 主矩阵与 T16–T20 扩展项全部落到执行卡，形成 A/B/C/D 分类、命令、相对增量判据、反例清单与证据规范；配套静态预检 126 条断言全绿、11 个变异全部检出。
+**变更记录**
+- 2026-10-28 测试官创建：T01–T15 主矩阵与 T16–T20 扩展项落到执行卡，形成 A/B/C/D 分类、命令、相对增量判据、反例清单与证据规范；静态预检 126 条断言全绿、11 个变异全部检出。
+- 2026-11-01 并入输入层回归门槛：新增 §6（A1–A3，来自注入官 `_reviews/TERMUX_INPUT_CONFIG_CANDIDATE.md` §8.4），按 22.2/23.2 基线登记 `mFlags` 期望值（7 / 135）；`S07` 增加「未启用 OVERVIEW」断言、变异 M12；T03/T04/T06/T17/T18 增加"批次回归"判定入口。当前 131 条断言全绿、12/12 变异检出。

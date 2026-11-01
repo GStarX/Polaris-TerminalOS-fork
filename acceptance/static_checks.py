@@ -389,6 +389,11 @@ def s07_kiosk_contract(ctx: Ctx, r: Result):
     for flag in ("LOCK_TASK_FEATURE_SYSTEM_INFO", "LOCK_TASK_FEATURE_NOTIFICATIONS",
                  "LOCK_TASK_FEATURE_HOME"):
         r.check("特性位 %s" % flag, features is not None and flag in features)
+    # 精简批次回归 A1 的静态对应：任何"裁特性"都从 setLockTaskFeatures 的位集合开始，
+    # OVERVIEW 一开最近任务就能逃逸；这里保证代码里根本没启用它。
+    kiosk_code = strip_java_comments(text)
+    r.check("未启用 OVERVIEW（防最近任务逃逸）",
+            "LOCK_TASK_FEATURE_OVERVIEW" not in kiosk_code)
     r.check("QUICK_SETTINGS 位经反射探测",
             "LOCK_TASK_FEATURE_QUICK_SETTINGS" in text and "getField(" in text)
     r.check("QUICK_SETTINGS 被拒时回退 baseFeatures",
@@ -670,6 +675,11 @@ MUTATIONS = [
      'TERMUX_SHA256="72fdb596045116bf5ba1b5bdf5b26fddb9acc0bd074ad9f2da9eb0ae85e83a4e"',
      'TERMUX_SHA256="72fdb596045116bf5ba1b5bdf5b26fddb9acc0bd074ad9f2da9eb0ae85e83a4f"',
      "校验值错一位（下载校验失效/误报）"),
+    ("M12", "S07", HOME_REPO, "src/org/terminalos/terminalhome/KioskController.java",
+     "                | DevicePolicyManager.LOCK_TASK_FEATURE_HOME;",
+     "                | DevicePolicyManager.LOCK_TASK_FEATURE_HOME\n"
+     "                | DevicePolicyManager.LOCK_TASK_FEATURE_OVERVIEW;",
+     "精简裁特性时顺手打开 OVERVIEW（最近任务可逃逸，A1 门槛失效）"),
 ]
 
 

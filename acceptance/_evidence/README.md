@@ -10,19 +10,21 @@
 
 | 文件 | 内容 | 结果 |
 | --- | --- | --- |
-| `2026-10-28_static_checks_baseline.txt` | `static_checks.py --verbose` 全量静态预检 | 11 项检查 / 126 条断言 / 0 失败 |
-| `2026-10-28_static_checks_mutation.txt` | `--mutation-test`：注入 11 个真实缺陷，要求对应检查由 PASS 变 FAIL | 11 个变异 / 11 检出 / 0 漏检 |
+| `2026-10-28_static_checks_baseline.txt` | 首版静态预检（历史记录，勿删） | 11 项检查 / 126 条断言 / 0 失败 |
+| `2026-10-28_static_checks_mutation.txt` | 首版变异自检（历史记录） | 11 个变异 / 11 检出 / 0 漏检 |
+| `2026-11-01_static_checks_baseline.txt` | 加入 S07「未启用 OVERVIEW」断言后重跑 | 11 项检查 / 131 条断言 / 0 失败 |
+| `2026-11-01_static_checks_mutation.txt` | 加入 M12（OVERVIEW 位注入）后重跑 | 12 个变异 / 12 检出 / 0 漏检 |
 
-两条日志头部都记录了被测仓库的 HEAD（home `ccedcc4`、vendor `d4559c3`、device `a7f8017`，均为 `terminalos/lineage-22.2` 工作树），用于日后复现时对齐源码。
+日志头部记录了被测仓库的 HEAD（2026-10-28 版为 home `ccedcc4`、vendor `d4559c3`、device `a7f8017`，均为 `terminalos/lineage-22.2` 工作树；11-01 版为当时工作树实际 HEAD），用于事后对齐源码。证据只新增不覆盖。
 
 ## 重新生成
 
 ```bash
 cd C:\AiWork\Polaris-TerminalOS
 python acceptance/static_checks.py --root C:\AiWork\Polaris-TerminalOS-repos --verbose ^
-  --log acceptance/_evidence/2026-10-28_static_checks_baseline.txt
+  --log acceptance/_evidence/2026-11-01_static_checks_baseline.txt
 python acceptance/static_checks.py --root C:\AiWork\Polaris-TerminalOS-repos --mutation-test ^
-  --log acceptance/_evidence/2026-10-28_static_checks_mutation.txt
+  --log acceptance/_evidence/2026-11-01_static_checks_mutation.txt
 ```
 
 证据文件一律由脚本以 **UTF-8 无 BOM** 写入（`--log` 参数），不走 shell 重定向——Windows PowerShell 的重定向会写出 UTF-16/BOM，git 会把它当二进制。
