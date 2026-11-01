@@ -4,16 +4,21 @@
 #       构建输入与结案/验收记录不一致（K3-01「可复现构建」的 sha 校验部分）。
 # 校验脚本：scripts/verify-pins.sh（只读，不修改源码、不构建、不触碰设备）
 #
-# 生成依据（2026-10-28 实测）：
-#   - 自有仓库 3 项：GStarX/* 的 terminalos/lineage-22.2 分支
-#   - 内核 1 项：LineageOS/android_kernel_xiaomi_sdm845 的 lineage-22.2（Linux 4.9.337）
+# 生成依据（2026-11-01 复核；2026-10-28 初版）：
+#   - 自有仓库 4 项：GStarX/* 的 terminalos/lineage-22.2
+#       device/xiaomi/polaris、vendor/terminalos、packages/apps/TerminalHome、
+#       frameworks/base（2026-11-01 新增，起点 = 上游 lineage-22.2 e1d69875）
+#   - 内核 1 项：GStarX/android_kernel_xiaomi_sdm845 的 terminalos/lineage-22.2
+#       （2026-11-01 起改走自有 fork；commit 仍为 aa8adfe9，与上游 lineage-22.2 同一 commit）
 #   - blobs 2 项：TheMuppets 两个仓库的 lineage-22.2（上游无 23.2 分支）
+# 合计 7 项。
 # 维护：交付线升版或 pin 变更时必须同步改本文件，并在提交信息里写明原因与验证方式。
 #
 # 格式：<检出路径><TAB><完整 commit sha>   （# 开头为注释，空行忽略）
 device/xiaomi/polaris	a7f801743b9f8c399a3014eb5f6d1838aebf9710
 vendor/terminalos	d4559c341644b16649c3ab6195e73f7efe430134
 packages/apps/TerminalHome	ccedcc4a9f6e74245dd6dcc51570a46768d579cb
+frameworks/base	e1d69875104b9004b7a8bcbd2af590af8f7fd41a
 kernel/xiaomi/sdm845	aa8adfe9bf212c6e93238a86980b4024da4f819a
 vendor/xiaomi/polaris	9e9707959acceea4b990cba733d259aab64c183e
 vendor/xiaomi/sdm845-common	b971b2ccd4cf66dede975cf645d01f4cbc203150
