@@ -1,0 +1,14 @@
+# TerminalOS: 后台服务自启 —— 交给单实例守护进程 tos_supervisor.sh 统一管理
+if ! pgrep -f "tos_supervisor.sh" >/dev/null 2>&1; then
+  nohup "$HOME/tos_supervisor.sh" >/dev/null 2>&1 &
+fi
+
+# TerminalOS: 启动 Termux 交互式会话时自动进入 Ubuntu（手动退出后回 Termux，不重进）
+case $- in
+  *i*) ;;
+  *) return 0 2>/dev/null || exit 0 ;;
+esac
+if [ -z "${TOS_UBUNTU_STARTED:-}" ] && [ -x "$HOME/ubuntu.sh" ]; then
+  export TOS_UBUNTU_STARTED=1
+  "$HOME/ubuntu.sh"
+fi
